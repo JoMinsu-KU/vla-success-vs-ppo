@@ -1,0 +1,42 @@
+# 모델 가중치·체크포인트 (HuggingFace 캐시나 외부 저장소에 둔다)
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+# 롤아웃·궤적·평가 원자료 (용량이 커서 저장소에 넣지 않는다. 7.4절 계층 저장)
+data/
+rollouts/
+trajectories/
+*.npz
+*.h5
+*.hdf5
+*.mp4
+*.tfrecord*
+
+# 실행 로그와 실험 추적
+runs/
+logs/
+outputs/
+wandb/
+*.log
+
+# 외부 코드 클론 (gen-robot/RL4VLA 등은 커밋 해시만 기록)
+third_party/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+*.egg-info/
+
+# 편집기·OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
