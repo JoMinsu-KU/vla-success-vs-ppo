@@ -40,3 +40,6 @@ venv/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# 파일럿 산출물 중 큰 원본 프레임 (요약 격자·JSON만 커밋)
+pilot/artifacts/p1_envs/*.png

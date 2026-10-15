@@ -1,0 +1,546 @@
+[
+  {
+    "idx": 1,
+    "env_id": "PutOnPlateInScene25Carrot-v1",
+    "split": "train",
+    "axis": "ID",
+    "desc": "similar to training setting",
+    "ok": true,
+    "make_s": 2.65,
+    "reset_s": 0.17,
+    "instruction": [
+      "put watering can on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 123.1,
+    "frame_std": 57.96,
+    "step_fps": 14.1,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 2,
+    "env_id": "PutOnPlateInScene25VisionImage-v1",
+    "split": "test",
+    "axis": "vision",
+    "desc": "unseen table",
+    "ok": true,
+    "make_s": 1.5,
+    "reset_s": 0.17,
+    "instruction": [
+      "put plant on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 141.35,
+    "frame_std": 62.99,
+    "step_fps": 14.1,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 3,
+    "env_id": "PutOnPlateInScene25VisionTexture03-v1",
+    "split": "test",
+    "axis": "vision",
+    "desc": "dynamic texture (weak)",
+    "ok": true,
+    "make_s": 1.49,
+    "reset_s": 0.19,
+    "instruction": [
+      "put toy bear on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 120.5,
+    "frame_std": 47.33,
+    "step_fps": 14.1,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 4,
+    "env_id": "PutOnPlateInScene25VisionTexture05-v1",
+    "split": "test",
+    "axis": "vision",
+    "desc": "dynamic texture (strong)",
+    "ok": true,
+    "make_s": 1.55,
+    "reset_s": 0.2,
+    "instruction": [
+      "put watering can on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 162.75,
+    "frame_std": 55.84,
+    "step_fps": 12.9,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 5,
+    "env_id": "PutOnPlateInScene25VisionWhole03-v1",
+    "split": "test",
+    "axis": "vision",
+    "desc": "dynamic noise (weak)",
+    "ok": true,
+    "make_s": 1.73,
+    "reset_s": 0.16,
+    "instruction": [
+      "put ketchup bottle on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 131.89,
+    "frame_std": 67.36,
+    "step_fps": 13.9,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 6,
+    "env_id": "PutOnPlateInScene25VisionWhole05-v1",
+    "split": "test",
+    "axis": "vision",
+    "desc": "dynamic noise (strong)",
+    "ok": true,
+    "make_s": 1.77,
+    "reset_s": 0.18,
+    "instruction": [
+      "put banana on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 131.54,
+    "frame_std": 42.8,
+    "step_fps": 14.0,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 7,
+    "env_id": "PutOnPlateInScene25Carrot-v1",
+    "split": "test",
+    "axis": "semantic",
+    "desc": "unseen objects",
+    "ok": true,
+    "make_s": 1.7,
+    "reset_s": 0.17,
+    "instruction": [
+      "put pepper on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 121.95,
+    "frame_std": 50.76,
+    "step_fps": 14.6,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 8,
+    "env_id": "PutOnPlateInScene25Plate-v1",
+    "split": "test",
+    "axis": "semantic",
+    "desc": "unseen receptacles",
+    "ok": true,
+    "make_s": 1.96,
+    "reset_s": 0.17,
+    "instruction": [
+      "put toy bear on notepad"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 155.59,
+    "frame_std": 48.53,
+    "step_fps": 13.0,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 9,
+    "env_id": "PutOnPlateInScene25Instruct-v1",
+    "split": "test",
+    "axis": "semantic",
+    "desc": "unseen instructions",
+    "ok": true,
+    "make_s": 1.7,
+    "reset_s": 0.19,
+    "instruction": [
+      "Can you put watering can on plate?"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 145.13,
+    "frame_std": 63.52,
+    "step_fps": 13.3,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 10,
+    "env_id": "PutOnPlateInScene25MultiCarrot-v1",
+    "split": "test",
+    "axis": "semantic",
+    "desc": "multi-object (both unseen)",
+    "ok": true,
+    "make_s": 1.88,
+    "reset_s": 0.19,
+    "instruction": [
+      "put cup on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 154.22,
+    "frame_std": 51.12,
+    "step_fps": 14.0,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 11,
+    "env_id": "PutOnPlateInScene25MultiPlate-v1",
+    "split": "test",
+    "axis": "semantic",
+    "desc": "multi-receptacle (both unseen)",
+    "ok": true,
+    "make_s": 2.05,
+    "reset_s": 0.2,
+    "instruction": [
+      "put golf ball on flat bowl"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 138.83,
+    "frame_std": 62.35,
+    "step_fps": 13.7,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 12,
+    "env_id": "PutOnPlateInScene25Position-v1",
+    "split": "test",
+    "axis": "execution",
+    "desc": "unseen position",
+    "ok": true,
+    "make_s": 1.79,
+    "reset_s": 0.16,
+    "instruction": [
+      "put watering can on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 146.97,
+    "frame_std": 60.23,
+    "step_fps": 13.4,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 13,
+    "env_id": "PutOnPlateInScene25EEPose-v1",
+    "split": "test",
+    "axis": "execution",
+    "desc": "unseen robot init pose",
+    "ok": true,
+    "make_s": 1.58,
+    "reset_s": 0.17,
+    "instruction": [
+      "put ketchup bottle on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 118.85,
+    "frame_std": 87.63,
+    "step_fps": 16.6,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 14,
+    "env_id": "PutOnPlateInScene25PositionChangeTo-v1",
+    "split": "test",
+    "axis": "execution",
+    "desc": "mid-episode object reposition",
+    "ok": true,
+    "make_s": 1.86,
+    "reset_s": 0.18,
+    "instruction": [
+      "put BBQ sauce on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 159.16,
+    "frame_std": 61.49,
+    "step_fps": 14.3,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 15,
+    "env_id": "PutOnPlateInScene25MultiCarrot-v1",
+    "split": "train",
+    "axis": "train-variant",
+    "desc": "multi-object (both seen)",
+    "ok": true,
+    "make_s": 1.81,
+    "reset_s": 0.17,
+    "instruction": [
+      "put zuchinni on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 146.42,
+    "frame_std": 60.11,
+    "step_fps": 14.1,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  },
+  {
+    "idx": 16,
+    "env_id": "PutOnPlateInScene25MultiPlate-v1",
+    "split": "train",
+    "axis": "train-variant",
+    "desc": "distractive receptacle",
+    "ok": true,
+    "make_s": 1.85,
+    "reset_s": 0.19,
+    "instruction": [
+      "put pipe on plate"
+    ],
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "frame_mean": 144.16,
+    "frame_std": 58.47,
+    "step_fps": 12.8,
+    "info_keys": [
+      "carrot_plate_dist",
+      "consecutive_grasp",
+      "elapsed_steps",
+      "gripper_carrot_dist",
+      "gripper_plate_dist",
+      "is_src_obj_grasped",
+      "src_on_target",
+      "success"
+    ],
+    "success": false,
+    "is_src_obj_grasped": false,
+    "consecutive_grasp": false
+  }
+]
