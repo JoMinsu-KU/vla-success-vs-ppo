@@ -34,6 +34,7 @@ print("[resolution]", res or "default")
 env = gym.make("PickCube-v1", obs_mode="rgb", num_envs=1, sim_backend="cpu",
                render_backend=render_backend, **extra)
 obs, _ = env.reset(seed=0)
+print("[render_device]", env.unwrapped._render_device, "backend", env.unwrapped.backend.render_backend)
 print(f"[make+reset] {time.time() - t0:.2f}s")
 
 cams = obs["sensor_data"]
