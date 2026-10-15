@@ -43,3 +43,7 @@ desktop.ini
 
 # 파일럿 산출물 중 큰 원본 프레임 (요약 격자·JSON만 커밋)
 pilot/artifacts/p1_envs/*.png
+
+# HuggingFace 캐시 (체크포인트, 수십 GB)
+hf_cache/
+pilot/artifacts/*/videos/

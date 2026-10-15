@@ -1,0 +1,14 @@
+torch==2.2.0
+torchvision==0.17.0
+numpy<2
+transformers==4.40.1
+tokenizers==0.19.1
+timm==0.9.10
+peft==0.11.1
+sentencepiece==0.1.99
+draccus==0.8.0
+huggingface_hub<1.0
+tensorflow==2.15.0
+tensorflow_datasets==4.9.3
+protobuf<5
+tensorflow-metadata==1.15.0
