@@ -1,0 +1,5 @@
+# WSL2에서 실행할 스크립트가 CRLF로 바뀌지 않도록 LF로 고정
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
