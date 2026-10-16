@@ -1,0 +1,30 @@
+{
+  "ckpt": "D:\\VLA_ReinforceLearning\\checkpoints\\openvla-7b-rlvla-rl",
+  "lora_modules_merged": 439,
+  "step_ms_base": 357.0,
+  "step_ms_merged": 257.1,
+  "speedup": 1.39,
+  "closed_loop": [
+    {
+      "episode": 0,
+      "steps": 80,
+      "action_tokens_identical": true,
+      "observations_identical": true,
+      "logprob_max_abs_diff": 0.0,
+      "value_max_abs_diff": 0.0,
+      "success_base": true,
+      "success_merged": true
+    },
+    {
+      "episode": 1,
+      "steps": 80,
+      "action_tokens_identical": true,
+      "observations_identical": true,
+      "logprob_max_abs_diff": 0.0,
+      "value_max_abs_diff": 0.0,
+      "success_base": true,
+      "success_merged": true
+    }
+  ],
+  "passed": true
+}

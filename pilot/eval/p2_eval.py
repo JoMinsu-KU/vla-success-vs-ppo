@@ -47,7 +47,25 @@ EPISODE_LEN = 80
 
 
 # ---------------------------------------------------------------- 정책 (원 코드 + attention 교체)
-def load_policy(ckpt: str, unnorm_key: str, temperature_eval: float):
+def merge_zero_lora(policy) -> int:
+    """원 코드가 붙인 새 LoRA(가우시안 A, 0 B)를 가중치에 병합해 PEFT 래퍼를 걷어낸다.
+
+    B가 모두 0이면 병합 증분 B·A·scale이 정확히 0이므로 가중치가 비트 단위로 같다.
+    B에 0이 아닌 값이 하나라도 있으면 (학습된 LoRA) 병합하지 않고 오류를 낸다.
+    반환: 병합한 LoRA 모듈 수.
+    """
+    n = 0
+    for name, p in policy.vla.named_parameters():
+        if "lora_B" in name:
+            n += 1
+            if torch.count_nonzero(p).item() != 0:
+                raise RuntimeError(f"non-zero LoRA B found ({name}); refusing to merge")
+    policy.vla = policy.vla.merge_and_unload()
+    policy.vla.eval()
+    return n
+
+
+def load_policy(ckpt: str, unnorm_key: str, temperature_eval: float, merge_lora: bool = False):
     from prismatic.extern.hf import modeling_prismatic as mp
     from simpler_env.policies.openvla import openvla_train as ot
 
@@ -70,6 +88,9 @@ def load_policy(ckpt: str, unnorm_key: str, temperature_eval: float):
         vla_temperature=1.0, vla_temperature_eval=temperature_eval,
     )
     policy = ot.OpenVLAPolicy(args, device_id=0)
+    if merge_lora:
+        n = merge_zero_lora(policy)
+        print(f"[speed] merged {n} zero-B LoRA modules (weights unchanged)", flush=True)
     policy.prep_rollout()
     unnorm_state = policy.vla.get_action_stats(unnorm_key)
     return policy, unnorm_state
