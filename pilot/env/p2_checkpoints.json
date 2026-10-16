@@ -1,0 +1,293 @@
+{
+  "gen-robot/openvla-7b-rlvla-rl": {
+    "revision": "93c54b036cc90ee394731fc73788406d7e65f057",
+    "local_path": "D:\\VLA_ReinforceLearning\\checkpoints\\openvla-7b-rlvla-rl",
+    "files": {
+      ".gitattributes": {
+        "size": 1519,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "README.md": {
+        "size": 654,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "added_tokens.json": {
+        "size": 21,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "config.json": {
+        "size": 60792,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "dataset_statistics.json": {
+        "size": 29791,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "generation_config.json": {
+        "size": 136,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "model-00001-of-00004.safetensors": {
+        "size": 4925122448,
+        "lfs_sha256": "af8b56a254e9c005e094b4866518cfd2fe8ee459a05ab3573bd7ee39ea91d178",
+        "verified": true
+      },
+      "model-00002-of-00004.safetensors": {
+        "size": 4947392496,
+        "lfs_sha256": "c4d6993dae3a72b837ddde6d9dd99fe6c5c1a4a12883a0fbb6456e6c46d51f24",
+        "verified": true
+      },
+      "model-00003-of-00004.safetensors": {
+        "size": 4947417456,
+        "lfs_sha256": "0cee8071eb6a5467b0a879193db2f88223440b0ccade32a02bd4611a594f1479",
+        "verified": true
+      },
+      "model-00004-of-00004.safetensors": {
+        "size": 262668432,
+        "lfs_sha256": "fa3c7973f18da6987859b8f7d14efaece7ec846d49851e6e5e0640b67ea9f310",
+        "verified": true
+      },
+      "model.safetensors.index.json": {
+        "size": 94764,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "preprocessor_config.json": {
+        "size": 1690,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "special_tokens_map.json": {
+        "size": 552,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "tokenizer.json": {
+        "size": 1842976,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "tokenizer.model": {
+        "size": 499723,
+        "lfs_sha256": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347",
+        "verified": true
+      },
+      "tokenizer_config.json": {
+        "size": 1212,
+        "lfs_sha256": null,
+        "verified": true
+      }
+    },
+    "total_gb": 15.09
+  },
+  "gen-robot/openvla-7b-rlvla-sft_16k": {
+    "revision": "cda67bb9cf33bc87cb8bf715572ae0c44e98f8ae",
+    "local_path": "D:\\VLA_ReinforceLearning\\checkpoints\\openvla-7b-rlvla-sft_16k",
+    "files": {
+      ".gitattributes": {
+        "size": 1519,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "README.md": {
+        "size": 680,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "added_tokens.json": {
+        "size": 21,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "config.json": {
+        "size": 65801,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "configuration_prismatic.py": {
+        "size": 5865,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "dataset_statistics.json": {
+        "size": 2264,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "generation_config.json": {
+        "size": 136,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "model-00001-of-00004.safetensors": {
+        "size": 4925122448,
+        "lfs_sha256": "e19ed0b5af455cd4e9256d0834d1b7d6118c0bb5ed346ed199bf93dc57d4ec7a",
+        "verified": true
+      },
+      "model-00002-of-00004.safetensors": {
+        "size": 4947392496,
+        "lfs_sha256": "98c90b6ed303880bed3a9ecf4e0ec636d0f62527d557714ca2e5405d7d77e3dc",
+        "verified": true
+      },
+      "model-00003-of-00004.safetensors": {
+        "size": 4947417456,
+        "lfs_sha256": "f456579f8b66a2202e143528119f61c8b9322cd3e6c5a923bd4394a99ef49a8e",
+        "verified": true
+      },
+      "model-00004-of-00004.safetensors": {
+        "size": 262668432,
+        "lfs_sha256": "73e23fbbd9e27038dc14a193e6a26d1fa4080e96263eb7cdbe9f8baf2e8802a7",
+        "verified": true
+      },
+      "model.safetensors.index.json": {
+        "size": 94764,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "modeling_prismatic.py": {
+        "size": 26062,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "preprocessor_config.json": {
+        "size": 1650,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "processing_prismatic.py": {
+        "size": 12718,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "processor_config.json": {
+        "size": 130,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "special_tokens_map.json": {
+        "size": 552,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "tokenizer.json": {
+        "size": 1842976,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "tokenizer.model": {
+        "size": 499723,
+        "lfs_sha256": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347",
+        "verified": true
+      },
+      "tokenizer_config.json": {
+        "size": 1192,
+        "lfs_sha256": null,
+        "verified": true
+      }
+    },
+    "total_gb": 15.09
+  },
+  "gen-robot/openvla-7b-rlvla-warmup": {
+    "revision": "735fd5d1f4472c4c9f3f998f0e89aa641af5ad03",
+    "local_path": "D:\\VLA_ReinforceLearning\\checkpoints\\openvla-7b-rlvla-warmup",
+    "files": {
+      ".gitattributes": {
+        "size": 1519,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "README.md": {
+        "size": 634,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "added_tokens.json": {
+        "size": 21,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "config.json": {
+        "size": 63291,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "dataset_statistics.json": {
+        "size": 2251,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "generation_config.json": {
+        "size": 136,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "model-00001-of-00004.safetensors": {
+        "size": 4925122448,
+        "lfs_sha256": "feb6d565dbdddb4f54da3fedf7f2ebe8671d1fbdfb18481ec24140f55f2b7874",
+        "verified": true
+      },
+      "model-00002-of-00004.safetensors": {
+        "size": 4947392496,
+        "lfs_sha256": "975cc2f92020391adcad1a1a4de31dae5faac290297ef5a0f88cb54d05ed7e4c",
+        "verified": true
+      },
+      "model-00003-of-00004.safetensors": {
+        "size": 4947417456,
+        "lfs_sha256": "cac556f576af9249e3c5cd8ea18ecc32d2e67cd2c008d5d128408129914826ab",
+        "verified": true
+      },
+      "model-00004-of-00004.safetensors": {
+        "size": 262668432,
+        "lfs_sha256": "b5f6c68daa174bb24658843ccb5011046216ecd29053de5bc61eec078263a296",
+        "verified": true
+      },
+      "model.safetensors.index.json": {
+        "size": 94764,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "preprocessor_config.json": {
+        "size": 1650,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "processing_prismatic.py": {
+        "size": 12718,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "processor_config.json": {
+        "size": 130,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "special_tokens_map.json": {
+        "size": 552,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "tokenizer.json": {
+        "size": 1842976,
+        "lfs_sha256": null,
+        "verified": true
+      },
+      "tokenizer.model": {
+        "size": 499723,
+        "lfs_sha256": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347",
+        "verified": true
+      },
+      "tokenizer_config.json": {
+        "size": 1192,
+        "lfs_sha256": null,
+        "verified": true
+      }
+    },
+    "total_gb": 15.09
+  }
+}
