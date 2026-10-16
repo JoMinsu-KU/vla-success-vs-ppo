@@ -62,38 +62,60 @@ def build_policy(ckpt, seed, lr):
     return policy, lora_params, opt
 
 
-def collect(policy, pool, seed, rnd, n_eps, topk, log):
+def collect(policy, make_pool, seed, rnd, n_eps, topk, log, max_retries=3):
+    """환경 풀을 만들어 64 에피소드를 수집한다. 작업자가 죽으면(렌더러 충돌 등) 풀을 다시 만들고 그 웨이브만 다시 한다.
+    다시 한 웨이브는 같은 초기 상태·같은 RNG 시드로 처음부터 돌리므로 결과 분포는 같다. 재시도 수는 기록한다."""
     be.set_top_k(policy, topk)
     specs = [dict(env_id=ENV_ID, obj_set="train", episode_id=eid(seed, rnd, k), seed=seed, round=rnd, episode=k)
              for k in range(n_eps)]
     dev = torch.device("cuda:0")
+    pool = make_pool()
     n = len(pool.conns)
-    trajs, recs = [], []
+    trajs, recs, retries = [], [], 0
     policy.prep_rollout()
     for w0 in range(0, n_eps, n):
         wave = specs[w0:w0 + n]
-        torch.manual_seed(10_000_000 * seed + 10_000 * rnd + w0)
-        resets = pool.reset(wave)
-        obs = [r[0] for r in resets]
-        instr = [r[1] for r in resets]
-        buf = [dict(obs=[], tok=[], lp=[]) for _ in wave]
-        last = None
-        for t in range(80):
-            toks, lps = be.policy_step(policy, obs, instr, "bridge_orig", 1.0, dev)
-            for i in range(len(wave)):
-                buf[i]["obs"].append(obs[i])
-                buf[i]["tok"].append(toks[i])
-                buf[i]["lp"].append(lps[i])
-            outs = pool.step(list(toks))
-            obs = [o[0] for o in outs]
-            last = [o[1] for o in outs]
+        for attempt in range(max_retries + 1):
+            try:
+                torch.manual_seed(10_000_000 * seed + 10_000 * rnd + w0)
+                resets = pool.reset(wave)
+                obs = [r[0] for r in resets]
+                instr = [r[1] for r in resets]
+                buf = [dict(obs=[], tok=[], lp=[]) for _ in wave]
+                last = None
+                for t in range(80):
+                    toks, lps = be.policy_step(policy, obs, instr, "bridge_orig", 1.0, dev)
+                    for i in range(len(wave)):
+                        buf[i]["obs"].append(obs[i])
+                        buf[i]["tok"].append(toks[i])
+                        buf[i]["lp"].append(lps[i])
+                    outs = pool.step(list(toks))
+                    obs = [o[0] for o in outs]
+                    last = [o[1] for o in outs]
+                break
+            except (EOFError, BrokenPipeError, ConnectionResetError, OSError) as e:
+                retries += 1
+                log(f"  [worker failure] wave {w0 // n} attempt {attempt + 1}: {type(e).__name__}; restarting env pool")
+                try:
+                    pool.close()
+                except Exception:
+                    pass
+                for pr in pool.procs:
+                    if pr.is_alive():
+                        pr.kill()
+                torch.cuda.empty_cache()
+                time.sleep(5)
+                pool = make_pool()
+                if attempt == max_retries:
+                    raise
         for i, s in enumerate(wave):
             Y = bool(last[i]["success"])
             recs.append(dict(s, instruction=instr[i], success=Y, grasped_latch=last[i]["grasped_latch"]))
             if Y:
                 trajs.append(dict(obs=np.stack(buf[i]["obs"]), tok=np.stack(buf[i]["tok"]),
                                   lp=np.array(buf[i]["lp"], dtype=np.float32), instruction=instr[i]))
-    return trajs, recs
+    pool.close()
+    return trajs, recs, retries
 
 
 def joint_logprob(policy, obs, instr, tok):
@@ -187,9 +209,9 @@ def main():
         rng = np.random.default_rng(seed)
         for rnd in range(a.rounds):
             t0 = time.time()
-            pool = be.EnvPool(a.envs, unnorm, scale_seed=seed)
-            trajs, recs = collect(policy, pool, seed, rnd, a.episodes, a.topk, log)
-            pool.close()  # 학습 동안 렌더 컨텍스트의 GPU 메모리를 비운다
+            torch.cuda.empty_cache()  # 학습 때 캐시된 GPU 메모리를 돌려줘야 환경 렌더 컨텍스트가 들어간다
+            trajs, recs, retries = collect(policy, lambda: be.EnvPool(a.envs, unnorm, scale_seed=seed),
+                                           seed, rnd, a.episodes, a.topk, log)
             t_col = time.time() - t0
             with (out / "p5_episodes.jsonl").open("a", encoding="utf-8") as f:
                 for r in recs:
@@ -197,6 +219,7 @@ def main():
             n_succ = len(trajs)
             assert n_succ == sum(r["success"] for r in recs)
             row = dict(seed=seed, round=rnd, episodes=len(recs), successes=n_succ, collect_sec=round(t_col, 1),
+                       worker_retries=retries,
                        stored_bytes=int(sum(t["obs"].nbytes + t["tok"].nbytes for t in trajs)))
             log(f"[seed {seed} round {rnd}] successes {n_succ}/{len(recs)} collect {t_col / 60:.1f} min")
             if n_succ == 0:
@@ -207,6 +230,7 @@ def main():
                 upd = train_round(policy, lora_params, opt, trajs, a.mb, a.kl_max, rng, log)
                 row.update(zero_success_round=False, update=upd, train_sec=round(time.time() - t1, 1),
                            peak_train_cuda_gib=round(torch.cuda.max_memory_allocated() / 2**30, 2))
+                torch.cuda.empty_cache()
                 log(f"[seed {seed} round {rnd}] steps {len(upd['steps'])}/{upd['n_steps_planned']} "
                     f"subset NLL {upd['subset_nll_before']:.4f} -> {upd['subset_nll_after']:.4f} "
                     f"peak {row['peak_train_cuda_gib']} GiB train {row['train_sec'] / 60:.1f} min")
