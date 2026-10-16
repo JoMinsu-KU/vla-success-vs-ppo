@@ -1,0 +1,36 @@
+{
+  "0_rerun_from_reset": {
+    "max_qpos": 0.0,
+    "max_obj_pose": 0.0,
+    "max_pixel": 0,
+    "frac_pixels_diff": 0.0,
+    "info_identical": true
+  },
+  "3_task_state_restored": {
+    "latches_equal": true,
+    "counter_equal": true,
+    "elapsed_equal": true,
+    "elapsed": 15
+  },
+  "1_full_restore_replay": {
+    "max_qpos": 0.00014907121658325195,
+    "max_obj_pose": 2.771615982055664e-06,
+    "max_pixel": 212,
+    "frac_pixels_diff": 0.000895225724161719,
+    "info_identical": true
+  },
+  "2_pose_only_restore_replay": {
+    "max_qpos": 2.1771914958953857,
+    "max_obj_pose": 2.771615982055664e-06,
+    "max_pixel": 219,
+    "frac_pixels_diff": 0.16440794229507447,
+    "info_identical": false
+  },
+  "episode_grasped_in_T1": false,
+  "4_restore_at_70_then_H40": {
+    "steps_run": 40,
+    "elapsed_first": 71,
+    "elapsed_last": 110,
+    "completed": true
+  }
+}

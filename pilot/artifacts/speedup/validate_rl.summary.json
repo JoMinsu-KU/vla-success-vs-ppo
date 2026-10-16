@@ -1,0 +1,10 @@
+{
+  "task": "PutOnPlateInScene25Carrot-v1/train",
+  "p2_success": 57,
+  "batched_success": 55,
+  "n": 64,
+  "p2_only": 6,
+  "batched_only": 4,
+  "mcnemar_p": 0.75390625,
+  "sec_per_episode": 27.67
+}

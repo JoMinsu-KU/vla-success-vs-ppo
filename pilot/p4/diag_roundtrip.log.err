@@ -1,0 +1,3 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:06,  2.21s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:04<00:04,  2.16s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:06<00:02,  2.17s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:06<00:00,  1.40s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:06<00:00,  1.69s/it]
+Unable to read VR Path Registry from C:\Users\choiLee\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\choiLee\AppData\Local\openvr\openvrpaths.vrpath

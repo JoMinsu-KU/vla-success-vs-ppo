@@ -1,0 +1,79 @@
+{
+  "C1": {
+    "available_unnorm_keys": [
+      "austin_buds_dataset_converted_externally_to_rlds",
+      "austin_sailor_dataset_converted_externally_to_rlds",
+      "austin_sirius_dataset_converted_externally_to_rlds",
+      "bc_z",
+      "berkeley_autolab_ur5",
+      "berkeley_cable_routing",
+      "berkeley_fanuc_manipulation",
+      "bridge_orig",
+      "cmu_stretch",
+      "dlr_edan_shared_control_converted_externally_to_rlds",
+      "dobbe",
+      "fmb_dataset",
+      "fractal20220817_data",
+      "furniture_bench_dataset_converted_externally_to_rlds",
+      "iamlab_cmu_pickup_insert_converted_externally_to_rlds",
+      "jaco_play",
+      "kuka",
+      "nyu_franka_play_dataset_converted_externally_to_rlds",
+      "roboturk",
+      "stanford_hydra_dataset_converted_externally_to_rlds",
+      "taco_play",
+      "toto",
+      "ucsd_kitchen_dataset_converted_externally_to_rlds",
+      "utaustin_mutex",
+      "viola",
+      "warmup"
+    ],
+    "wrapper_matches_reference_xyz_rot": true,
+    "wrapper_matches_reference_gripper": true
+  },
+  "C2": {
+    "init_logits_equal_base": true,
+    "init_logits_max_abs_diff": 0.0,
+    "same_seed_same_A": true,
+    "different_seed_different_A": true,
+    "trainable_param_names_identical": true,
+    "n_trainable_tensors": 878
+  },
+  "C4_K0": {
+    "n_positions": 42,
+    "max_tv_sampler_vs_train": 1.0519912763129469e-07,
+    "mean_tv_sampler_vs_train": 4.1733141645338464e-08,
+    "max_tv_sampler_vs_trunc50": 0.09402075409889221,
+    "max_mass_outside_top50": 0.0,
+    "mean_mass_outside_top50": 0.0,
+    "all_sampled_tokens_in_top50": false,
+    "min_sampler_mass_in_256": 0.9999997019767761
+  },
+  "C4_K50": {
+    "n_positions": 42,
+    "max_tv_sampler_vs_train": 0.09402082860469818,
+    "mean_tv_sampler_vs_train": 0.0060127292293340896,
+    "max_tv_sampler_vs_trunc50": 0.0015022298321127892,
+    "max_mass_outside_top50": 0.09402084350585938,
+    "mean_mass_outside_top50": 0.006054821468534924,
+    "all_sampled_tokens_in_top50": true,
+    "min_sampler_mass_in_256": 0.9999997615814209
+  },
+  "C4_synthetic": {
+    "outside_mass_full": 0.20000004768371582,
+    "outside_mass_after_top50": 0.0,
+    "detects_truncation": true
+  },
+  "C4_roundtrip": {
+    "n": 6,
+    "max_abs_diff": 0.31367063522338867,
+    "diffs": [
+      0.31367063522338867,
+      0.08064079284667969,
+      0.05329704284667969,
+      0.07371902465820312,
+      0.000152587890625,
+      0.13597917556762695
+    ]
+  }
+}

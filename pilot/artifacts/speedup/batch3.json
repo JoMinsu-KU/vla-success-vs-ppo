@@ -1,0 +1,22 @@
+{
+  "ckpt": "D:\\VLA_ReinforceLearning\\checkpoints\\openvla-7b-rlvla-rl",
+  "N": 3,
+  "mem_after_model_mib": 18428,
+  "mem_after_envs_mib": 21799,
+  "mem_end_mib": 22399,
+  "batch_vs_single": {
+    "max_abs_logit_diff": 0.25,
+    "mean_kl": 0.0025527984835207462,
+    "max_kl": 0.004018633160740137,
+    "argmax_agree": 1.0
+  },
+  "single_repeat": {
+    "max_abs_logit_diff": 0.0,
+    "mean_kl": 0.0,
+    "max_kl": 0.0,
+    "argmax_agree": 1.0
+  },
+  "episodes": 6,
+  "sec_per_episode": 9.12,
+  "success": 3
+}

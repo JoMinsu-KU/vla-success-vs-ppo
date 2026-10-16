@@ -1,0 +1,350 @@
+{
+  "summary": {
+    "n": 12,
+    "retokenization_mismatches": 0,
+    "max_store_minus_eval": 0.28525543212890625,
+    "max_eval_minus_full_bf16": 0.0,
+    "max_store_minus_full_bf16": 0.28525543212890625,
+    "max_store_minus_full_fp32softmax": 0.28525543212890625,
+    "max_bf16_vs_fp32_softmax_store": 0.0,
+    "max_logit_diff_gen_vs_full": 0.625
+  },
+  "rows": [
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31858,
+        31854,
+        31923,
+        31878,
+        31865,
+        31904,
+        31744
+      ],
+      "retok_tokens": [
+        31858,
+        31854,
+        31923,
+        31878,
+        31865,
+        31904,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.3837890625,
+      "logit_maxdiff_pos0": 0.28125,
+      "lp_store_bf16": -8.787171363830566,
+      "lp_store_fp32": -8.787171363830566,
+      "lp_eval_original": -8.570874214172363,
+      "lp_full_bf16": -8.570874214172363,
+      "lp_full_fp32": -8.570874214172363
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31763,
+        31854,
+        31956,
+        31867,
+        31883,
+        31868,
+        31744
+      ],
+      "retok_tokens": [
+        31763,
+        31854,
+        31956,
+        31867,
+        31883,
+        31868,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.5625,
+      "logit_maxdiff_pos0": 0.21875,
+      "lp_store_bf16": -7.574251174926758,
+      "lp_store_fp32": -7.574251174926758,
+      "lp_eval_original": -7.686327934265137,
+      "lp_full_bf16": -7.686327934265137,
+      "lp_full_fp32": -7.686327934265137
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31924,
+        31894,
+        31925,
+        31863,
+        31885,
+        31912,
+        31744
+      ],
+      "retok_tokens": [
+        31924,
+        31894,
+        31925,
+        31863,
+        31885,
+        31912,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.53125,
+      "logit_maxdiff_pos0": 0.1875,
+      "lp_store_bf16": -11.743012428283691,
+      "lp_store_fp32": -11.743012428283691,
+      "lp_eval_original": -11.459192276000977,
+      "lp_full_bf16": -11.459192276000977,
+      "lp_full_fp32": -11.459192276000977
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31850,
+        31868,
+        31970,
+        31871,
+        31876,
+        31871,
+        31744
+      ],
+      "retok_tokens": [
+        31850,
+        31868,
+        31970,
+        31871,
+        31876,
+        31871,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.375,
+      "logit_maxdiff_pos0": 0.0,
+      "lp_store_bf16": -11.821762084960938,
+      "lp_store_fp32": -11.821762084960938,
+      "lp_eval_original": -11.632659912109375,
+      "lp_full_bf16": -11.632659912109375,
+      "lp_full_fp32": -11.632659912109375
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31824,
+        31798,
+        31913,
+        31839,
+        31888,
+        31864,
+        31744
+      ],
+      "retok_tokens": [
+        31824,
+        31798,
+        31913,
+        31839,
+        31888,
+        31864,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.625,
+      "logit_maxdiff_pos0": 0.21875,
+      "lp_store_bf16": -19.17148208618164,
+      "lp_store_fp32": -19.17148208618164,
+      "lp_eval_original": -19.33349609375,
+      "lp_full_bf16": -19.33349609375,
+      "lp_full_fp32": -19.33349609375
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31890,
+        31879,
+        31932,
+        31885,
+        31873,
+        31990,
+        31744
+      ],
+      "retok_tokens": [
+        31890,
+        31879,
+        31932,
+        31885,
+        31873,
+        31990,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.4375,
+      "logit_maxdiff_pos0": 0.328125,
+      "lp_store_bf16": -11.814081192016602,
+      "lp_store_fp32": -11.814081192016602,
+      "lp_eval_original": -12.009198188781738,
+      "lp_full_bf16": -12.009198188781738,
+      "lp_full_fp32": -12.009198188781738
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31879,
+        31820,
+        31978,
+        31871,
+        31849,
+        31857,
+        31744
+      ],
+      "retok_tokens": [
+        31879,
+        31820,
+        31978,
+        31871,
+        31849,
+        31857,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.46875,
+      "logit_maxdiff_pos0": 0.21875,
+      "lp_store_bf16": -19.942174911499023,
+      "lp_store_fp32": -19.942174911499023,
+      "lp_eval_original": -19.834392547607422,
+      "lp_full_bf16": -19.834392547607422,
+      "lp_full_fp32": -19.834392547607422
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31871,
+        31878,
+        31898,
+        31865,
+        31862,
+        31875,
+        31744
+      ],
+      "retok_tokens": [
+        31871,
+        31878,
+        31898,
+        31865,
+        31862,
+        31875,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.4375,
+      "logit_maxdiff_pos0": 0.22265625,
+      "lp_store_bf16": -3.759267807006836,
+      "lp_store_fp32": -3.759267807006836,
+      "lp_eval_original": -3.8143608570098877,
+      "lp_full_bf16": -3.8143608570098877,
+      "lp_full_fp32": -3.8143608570098877
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31841,
+        31862,
+        31918,
+        31875,
+        31870,
+        31897,
+        31744
+      ],
+      "retok_tokens": [
+        31841,
+        31862,
+        31918,
+        31875,
+        31870,
+        31897,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.5,
+      "logit_maxdiff_pos0": 0.2109375,
+      "lp_store_bf16": -8.417505264282227,
+      "lp_store_fp32": -8.417505264282227,
+      "lp_eval_original": -8.702760696411133,
+      "lp_full_bf16": -8.702760696411133,
+      "lp_full_fp32": -8.702760696411133
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31853,
+        31888,
+        31971,
+        31871,
+        31901,
+        31895,
+        31744
+      ],
+      "retok_tokens": [
+        31853,
+        31888,
+        31971,
+        31871,
+        31901,
+        31895,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.609375,
+      "logit_maxdiff_pos0": 0.224609375,
+      "lp_store_bf16": -5.735583305358887,
+      "lp_store_fp32": -5.735583305358887,
+      "lp_eval_original": -6.013045310974121,
+      "lp_full_bf16": -6.013045310974121,
+      "lp_full_fp32": -6.013045310974121
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31872,
+        31869,
+        31901,
+        31872,
+        31860,
+        31867,
+        31744
+      ],
+      "retok_tokens": [
+        31872,
+        31869,
+        31901,
+        31872,
+        31860,
+        31867,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.40625,
+      "logit_maxdiff_pos0": 0.1875,
+      "lp_store_bf16": -2.154313564300537,
+      "lp_store_fp32": -2.154313564300537,
+      "lp_eval_original": -2.165499210357666,
+      "lp_full_bf16": -2.165499210357666,
+      "lp_full_fp32": -2.165499210357666
+    },
+    {
+      "retokenized_equal": true,
+      "gen_tokens": [
+        31745,
+        31879,
+        31980,
+        31871,
+        31883,
+        31860,
+        31744
+      ],
+      "retok_tokens": [
+        31745,
+        31879,
+        31980,
+        31871,
+        31883,
+        31860,
+        31744
+      ],
+      "logit_maxdiff_gen_vs_full": 0.46875,
+      "logit_maxdiff_pos0": 0.15625,
+      "lp_store_bf16": -12.860107421875,
+      "lp_store_fp32": -12.860107421875,
+      "lp_eval_original": -13.065292358398438,
+      "lp_full_bf16": -13.065292358398438,
+      "lp_full_fp32": -13.065292358398438
+    }
+  ]
+}
