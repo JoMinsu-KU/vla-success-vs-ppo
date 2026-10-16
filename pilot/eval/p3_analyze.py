@@ -90,7 +90,7 @@ def warmup_switch(s):
     a = s["cp90"][1] < 0.05
     b_obj = s["n_obj_upper_below_8pct"] >= 8
     b_tab = s["n_table_upper_below_8pct"] >= 8
-    return dict(overall_upper_below_5pct=a, objects_rule=b_obj, tables_rule=b_tab, switch_to_W2=a or b_obj or b_tab)
+    return dict(overall_upper_below_5pct=bool(a), objects_rule=bool(b_obj), tables_rule=bool(b_tab), switch_to_W2=bool(a or b_obj or b_tab))
 
 
 summ = {name: summarize(name) for name in by}
