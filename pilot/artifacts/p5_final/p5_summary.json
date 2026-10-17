@@ -1,0 +1,52 @@
+{
+  "rounds": 20,
+  "episodes_recorded": 1280,
+  "episodes_expected": 1280,
+  "successes_total": 578,
+  "successes_match_episode_records": true,
+  "zero_success_rounds": 0,
+  "rounds_with_update": 20,
+  "optimizer_steps_total": 294,
+  "all_steps_finite": true,
+  "rounds_subset_nll_decreased": 20,
+  "max_grad_norm": 2.609375,
+  "clip_triggered_steps": 0,
+  "max_peak_train_cuda_gib": 19.42,
+  "mean_collect_min": 14.0,
+  "mean_train_min": 5.8,
+  "worker_retries": 0,
+  "process_failures_logged": 5,
+  "mean_stored_success_gb_per_round": 2.13,
+  "seed0_success_by_round": [
+    30,
+    30,
+    26,
+    29,
+    29,
+    28,
+    32,
+    24,
+    27,
+    31
+  ],
+  "seed0_first_half_vs_second_half": [
+    144,
+    142
+  ],
+  "seed1_success_by_round": [
+    27,
+    30,
+    25,
+    31,
+    26,
+    31,
+    33,
+    28,
+    29,
+    32
+  ],
+  "seed1_first_half_vs_second_half": [
+    139,
+    153
+  ]
+}

@@ -1,0 +1,360 @@
+[collect seed 0 round 0] successes 30/64 in 13.8 min
+    step 1/15 n=160 loss 1.0912 grad_norm 1.906 kl 0.1392
+    step 2/15 n=160 loss 1.1369 grad_norm 1.883 kl 0.8403
+    step 3/15 n=160 loss 1.0722 grad_norm 1.867 kl 3.6128
+    step 4/15 n=160 loss 1.1162 grad_norm 1.914 kl 8.3374
+    step 5/15 n=160 loss 1.1661 grad_norm 1.828 kl 12.7831
+    step 6/15 n=160 loss 1.1950 grad_norm 1.961 kl 20.7817
+    step 7/15 n=160 loss 1.1067 grad_norm 1.852 kl 26.1403
+    step 8/15 n=160 loss 1.1027 grad_norm 1.914 kl 28.5128
+    step 9/15 n=160 loss 1.0809 grad_norm 1.875 kl 32.5299
+    step 10/15 n=160 loss 1.1531 grad_norm 1.859 kl 36.0568
+    step 11/15 n=160 loss 1.0858 grad_norm 1.828 kl 41.5256
+    step 12/15 n=160 loss 1.0310 grad_norm 1.797 kl 43.5156
+    step 13/15 n=160 loss 1.0933 grad_norm 1.805 kl 47.3762
+    step 14/15 n=160 loss 1.1071 grad_norm 1.875 kl 48.6843
+    step 15/15 n=160 loss 1.1379 grad_norm 1.805 kl 52.1448
+[train seed 0 round 0] steps 15/15 subset NLL 0.8610 -> 0.5284
+[seed 0 round 0] successes 30/64  round 27.2 min
+[collect seed 0 round 1] successes 30/64 in 14.0 min
+    step 1/15 n=160 loss 1.0315 grad_norm 1.727 kl 0.0304
+    step 2/15 n=160 loss 1.0259 grad_norm 1.664 kl 0.0365
+    step 3/15 n=160 loss 1.0340 grad_norm 1.711 kl 0.0739
+    step 4/15 n=160 loss 1.0626 grad_norm 1.719 kl 0.1943
+    step 5/15 n=160 loss 1.0279 grad_norm 1.727 kl 0.4764
+    step 6/15 n=160 loss 1.1110 grad_norm 1.773 kl 1.1850
+    step 7/15 n=160 loss 1.1130 grad_norm 1.797 kl 2.0090
+    step 8/15 n=160 loss 1.0325 grad_norm 1.719 kl 4.0980
+    step 9/15 n=160 loss 1.0646 grad_norm 1.750 kl 9.4668
+    step 10/15 n=160 loss 1.0409 grad_norm 1.719 kl 12.8900
+    step 11/15 n=160 loss 1.0844 grad_norm 1.758 kl 22.4040
+    step 12/15 n=160 loss 1.0958 grad_norm 1.750 kl 30.3481
+    step 13/15 n=160 loss 1.0375 grad_norm 1.719 kl 39.3040
+    step 14/15 n=160 loss 1.1466 grad_norm 1.797 kl 45.6899
+    step 15/15 n=160 loss 1.0227 grad_norm 1.672 kl 72.9364
+[train seed 0 round 1] steps 15/15 subset NLL 1.0087 -> 0.7326
+[seed 0 round 1] successes 30/64  round 30.3 min
+[collect seed 0 round 2] successes 26/64 in 14.2 min
+    step 1/13 n=160 loss 1.0040 grad_norm 1.766 kl 0.0315
+    step 2/13 n=160 loss 1.1388 grad_norm 1.805 kl 0.1413
+    step 3/13 n=160 loss 1.0598 grad_norm 1.766 kl 0.4518
+    step 4/13 n=160 loss 1.1029 grad_norm 1.719 kl 0.8856
+    step 5/13 n=160 loss 1.0593 grad_norm 1.820 kl 1.4594
+    step 6/13 n=160 loss 1.0544 grad_norm 1.758 kl 2.7238
+    step 7/13 n=160 loss 1.0172 grad_norm 1.750 kl 5.3344
+    step 8/13 n=160 loss 1.0893 grad_norm 1.805 kl 7.2941
+    step 9/13 n=160 loss 1.0670 grad_norm 1.742 kl 12.9673
+    step 10/13 n=160 loss 1.0896 grad_norm 1.773 kl 17.7278
+    step 11/13 n=160 loss 1.1287 grad_norm 1.797 kl 25.6878
+    step 12/13 n=160 loss 1.0665 grad_norm 1.750 kl 34.9434
+    step 13/13 n=160 loss 1.0780 grad_norm 1.773 kl 42.3673
+[train seed 0 round 2] steps 13/13 subset NLL 1.1819 -> 0.8243
+[seed 0 round 2] successes 26/64  round 28.3 min
+[collect seed 0 round 3] successes 29/64 in 14.0 min
+    step 1/15 n=160 loss 1.1663 grad_norm 1.773 kl 0.0535
+    step 2/15 n=160 loss 1.1489 grad_norm 1.812 kl 0.1880
+    step 3/15 n=160 loss 1.1832 grad_norm 1.828 kl 0.5870
+    step 4/15 n=160 loss 1.1155 grad_norm 1.750 kl 1.3885
+    step 5/15 n=160 loss 1.1584 grad_norm 1.789 kl 3.8379
+    step 6/15 n=160 loss 1.1040 grad_norm 1.766 kl 5.3642
+    step 7/15 n=160 loss 1.1188 grad_norm 1.758 kl 11.9241
+    step 8/15 n=160 loss 1.0341 grad_norm 1.734 kl 18.8831
+    step 9/15 n=160 loss 1.0348 grad_norm 1.734 kl 25.9736
+    step 10/15 n=160 loss 1.1075 grad_norm 1.789 kl 36.7265
+    step 11/15 n=160 loss 1.1336 grad_norm 1.758 kl 51.5081
+    step 12/15 n=160 loss 1.1477 grad_norm 1.820 kl 57.8333
+    step 13/15 n=160 loss 1.1077 grad_norm 1.773 kl 67.1331
+    step 14/15 n=160 loss 1.1215 grad_norm 1.758 kl 80.6552
+    step 15/15 n=80 loss 1.2267 grad_norm 2.609 kl 90.6323
+[train seed 0 round 3] steps 15/15 subset NLL 1.0977 -> 0.7219
+[seed 0 round 3] successes 29/64  round 29.5 min
+[collect seed 0 round 4] successes 29/64 in 14.0 min
+    step 1/15 n=160 loss 1.1621 grad_norm 1.758 kl 0.0597
+    step 2/15 n=160 loss 1.0067 grad_norm 1.633 kl 0.2383
+    step 3/15 n=160 loss 1.1263 grad_norm 1.688 kl 0.5858
+    step 4/15 n=160 loss 1.0893 grad_norm 1.711 kl 1.8979
+    step 5/15 n=160 loss 1.1442 grad_norm 1.727 kl 2.8562
+    step 6/15 n=160 loss 1.1056 grad_norm 1.648 kl 6.3480
+    step 7/15 n=160 loss 1.0628 grad_norm 1.688 kl 8.0655
+    step 8/15 n=160 loss 1.1052 grad_norm 1.641 kl 18.7057
+    step 9/15 n=160 loss 1.0972 grad_norm 1.727 kl 23.5400
+    step 10/15 n=160 loss 1.1121 grad_norm 1.703 kl 32.6495
+    step 11/15 n=160 loss 1.1297 grad_norm 1.711 kl 49.1341
+    step 12/15 n=160 loss 1.2013 grad_norm 1.742 kl 60.2238
+    step 13/15 n=160 loss 1.0664 grad_norm 1.781 kl 58.2257
+    step 14/15 n=160 loss 1.1068 grad_norm 1.711 kl 62.0575
+    step 15/15 n=80 loss 1.1684 grad_norm 2.406 kl 99.6886
+[train seed 0 round 4] steps 15/15 subset NLL 0.9989 -> 0.6726
+[seed 0 round 4] successes 29/64  round 29.9 min
+[collect seed 0 round 5] successes 28/64 in 14.1 min
+    step 1/14 n=160 loss 1.1648 grad_norm 1.734 kl 0.0572
+    step 2/14 n=160 loss 1.2020 grad_norm 1.797 kl 0.1919
+    step 3/14 n=160 loss 1.1542 grad_norm 1.750 kl 0.4306
+    step 4/14 n=160 loss 1.2166 grad_norm 1.781 kl 1.0387
+    step 5/14 n=160 loss 1.1635 grad_norm 1.742 kl 1.8459
+    step 6/14 n=160 loss 1.1397 grad_norm 1.766 kl 2.8024
+    step 7/14 n=160 loss 1.0894 grad_norm 1.703 kl 4.3473
+    step 8/14 n=160 loss 1.1546 grad_norm 1.727 kl 6.1412
+    step 9/14 n=160 loss 1.1470 grad_norm 1.750 kl 7.7914
+    step 10/14 n=160 loss 1.0773 grad_norm 1.711 kl 12.1676
+    step 11/14 n=160 loss 1.1232 grad_norm 1.758 kl 14.4771
+    step 12/14 n=160 loss 1.1548 grad_norm 1.820 kl 19.6617
+    step 13/14 n=160 loss 1.2586 grad_norm 1.891 kl 23.3084
+    step 14/14 n=160 loss 1.1106 grad_norm 1.734 kl 29.1680
+[train seed 0 round 5] steps 14/14 subset NLL 1.2430 -> 0.8923
+[seed 0 round 5] successes 28/64  round 29.2 min
+[collect seed 0 round 6] successes 32/64 in 14.1 min
+    step 1/16 n=160 loss 1.0652 grad_norm 1.656 kl 0.0359
+    step 2/16 n=160 loss 1.1165 grad_norm 1.711 kl 0.0742
+    step 3/16 n=160 loss 1.0539 grad_norm 1.734 kl 0.1246
+    step 4/16 n=160 loss 1.0449 grad_norm 1.602 kl 0.2699
+    step 5/16 n=160 loss 1.0834 grad_norm 1.734 kl 0.3919
+    step 6/16 n=160 loss 1.0636 grad_norm 1.680 kl 0.8320
+    step 7/16 n=160 loss 1.1016 grad_norm 1.695 kl 1.1706
+    step 8/16 n=160 loss 1.1172 grad_norm 1.742 kl 2.4819
+    step 9/16 n=160 loss 1.0762 grad_norm 1.695 kl 4.1100
+    step 10/16 n=160 loss 1.0277 grad_norm 1.664 kl 6.4017
+    step 11/16 n=160 loss 1.1449 grad_norm 1.734 kl 9.0176
+    step 12/16 n=160 loss 1.0931 grad_norm 1.641 kl 13.6642
+    step 13/16 n=160 loss 1.0735 grad_norm 1.695 kl 24.1514
+    step 14/16 n=160 loss 1.1785 grad_norm 1.719 kl 30.2192
+    step 15/16 n=160 loss 1.1419 grad_norm 1.758 kl 42.9732
+    step 16/16 n=160 loss 1.0647 grad_norm 1.656 kl 58.5006
+[train seed 0 round 6] steps 16/16 subset NLL 1.1085 -> 0.7638
+[seed 0 round 6] successes 32/64  round 34.2 min
+[collect seed 0 round 7] successes 24/64 in 14.1 min
+  [train failed] seed 0 round 7 attempt 1 exit 1: numpy.core._exceptions._ArrayMemoryError: Unable to allocate 1.65 GiB for an array with shape (1769472000,) and data type uint8
+    step 1/12 n=160 loss 1.1624 grad_norm 1.703 kl 0.0557
+    step 2/12 n=160 loss 1.2368 grad_norm 1.805 kl 0.1376
+    step 3/12 n=160 loss 1.1827 grad_norm 1.766 kl 0.1850
+    step 4/12 n=160 loss 1.0964 grad_norm 1.656 kl 0.7011
+    step 5/12 n=160 loss 1.1657 grad_norm 1.688 kl 1.8943
+    step 6/12 n=160 loss 1.1644 grad_norm 1.727 kl 3.6363
+    step 7/12 n=160 loss 1.0950 grad_norm 1.672 kl 7.7094
+    step 8/12 n=160 loss 1.1506 grad_norm 1.672 kl 16.0272
+    step 9/12 n=160 loss 1.1920 grad_norm 1.742 kl 21.0368
+    step 10/12 n=160 loss 1.1325 grad_norm 1.719 kl 32.8254
+    step 11/12 n=160 loss 1.2937 grad_norm 1.844 kl 56.3245
+    step 12/12 n=160 loss 1.1482 grad_norm 1.781 kl 76.6903
+[train seed 0 round 7] steps 12/12 subset NLL 1.2551 -> 0.9318
+[seed 0 round 7] successes 24/64  round 27.7 min
+[collect seed 0 round 8] successes 27/64 in 14.0 min
+    step 1/14 n=160 loss 1.1872 grad_norm 1.742 kl 0.1352
+    step 2/14 n=160 loss 1.1144 grad_norm 1.680 kl 0.3586
+    step 3/14 n=160 loss 1.1856 grad_norm 1.719 kl 0.8456
+    step 4/14 n=160 loss 1.1864 grad_norm 1.734 kl 1.9074
+    step 5/14 n=160 loss 1.2225 grad_norm 1.734 kl 3.5572
+    step 6/14 n=160 loss 1.1125 grad_norm 1.703 kl 5.4503
+    step 7/14 n=160 loss 1.1738 grad_norm 1.719 kl 9.8941
+    step 8/14 n=160 loss 1.2336 grad_norm 1.820 kl 14.1309
+    step 9/14 n=160 loss 1.1316 grad_norm 1.680 kl 19.0048
+    step 10/14 n=160 loss 1.1211 grad_norm 1.703 kl 24.9258
+    step 11/14 n=160 loss 1.2082 grad_norm 1.758 kl 36.7936
+    step 12/14 n=160 loss 1.1143 grad_norm 1.680 kl 44.4186
+    step 13/14 n=160 loss 1.1249 grad_norm 1.742 kl 59.4573
+    step 14/14 n=80 loss 1.2659 grad_norm 2.484 kl 89.1675
+[train seed 0 round 8] steps 14/14 subset NLL 1.1626 -> 0.7729
+[seed 0 round 8] successes 27/64  round 28.5 min
+[collect seed 0 round 9] successes 31/64 in 14.3 min
+  [train failed] seed 0 round 9 attempt 1 exit 1: numpy.core._exceptions._ArrayMemoryError: Unable to allocate 2.13 GiB for an array with shape (2285568000,) and data type uint8
+    step 1/16 n=160 loss 1.1851 grad_norm 1.633 kl 0.0367
+    step 2/16 n=160 loss 1.0863 grad_norm 1.617 kl 0.0662
+    step 3/16 n=160 loss 1.1750 grad_norm 1.695 kl 0.1904
+    step 4/16 n=160 loss 1.1342 grad_norm 1.633 kl 0.3992
+    step 5/16 n=160 loss 1.0838 grad_norm 1.617 kl 0.7575
+    step 6/16 n=160 loss 1.1931 grad_norm 1.688 kl 1.4642
+    step 7/16 n=160 loss 1.1429 grad_norm 1.617 kl 2.3138
+    step 8/16 n=160 loss 1.1456 grad_norm 1.711 kl 2.9415
+    step 9/16 n=160 loss 1.1493 grad_norm 1.672 kl 4.0059
+    step 10/16 n=160 loss 1.1673 grad_norm 1.648 kl 5.7936
+    step 11/16 n=160 loss 1.0636 grad_norm 1.641 kl 7.2587
+    step 12/16 n=160 loss 1.2412 grad_norm 1.695 kl 10.5575
+    step 13/16 n=160 loss 1.2121 grad_norm 1.711 kl 14.2876
+    step 14/16 n=160 loss 1.0474 grad_norm 1.609 kl 17.9091
+    step 15/16 n=160 loss 1.2360 grad_norm 1.727 kl 22.1196
+    step 16/16 n=80 loss 1.1797 grad_norm 2.406 kl 32.6531
+[train seed 0 round 9] steps 16/16 subset NLL 1.0719 -> 0.7415
+[seed 0 round 9] successes 31/64  round 31.3 min
+[collect seed 1 round 0] successes 27/64 in 14.2 min
+  [train failed] seed 1 round 0 attempt 1 exit 1: numpy.core._exceptions._ArrayMemoryError: Unable to allocate 1.85 GiB for an array with shape (1990656000,) and data type uint8
+    step 1/14 n=160 loss 1.0100 grad_norm 1.758 kl 0.5077
+    step 2/14 n=160 loss 0.9852 grad_norm 1.766 kl 4.7888
+    step 3/14 n=160 loss 0.9867 grad_norm 1.758 kl 19.4672
+    step 4/14 n=160 loss 1.1562 grad_norm 1.883 kl 73.6642
+    step 5/14 n=160 loss 1.0810 grad_norm 1.797 kl 144.5390
+    step 6/14 n=160 loss 1.1061 grad_norm 1.836 kl 251.7866
+    step 7/14 n=160 loss 0.9968 grad_norm 1.727 kl 357.5587
+    step 8/14 n=160 loss 1.0183 grad_norm 1.766 kl 537.7008
+    step 9/14 n=160 loss 1.0158 grad_norm 1.711 kl 727.1383
+    step 10/14 n=160 loss 1.0431 grad_norm 1.781 kl 797.8469
+    step 11/14 n=160 loss 1.1472 grad_norm 1.820 kl 980.1669
+    step 12/14 n=160 loss 0.9769 grad_norm 1.711 kl 1119.4714
+    step 13/14 n=160 loss 1.0461 grad_norm 1.797 kl 1275.0078
+    step 14/14 n=80 loss 1.0968 grad_norm 2.484 kl 1456.3240
+[train seed 1 round 0] steps 14/14 subset NLL 1.0758 -> 0.6586
+[seed 1 round 0] successes 27/64  round 29.0 min
+[collect seed 1 round 1] successes 30/64 in 14.1 min
+  [train failed] seed 1 round 1 attempt 1 exit 1: numpy.core._exceptions._ArrayMemoryError: Unable to allocate 2.06 GiB for an array with shape (2211840000,) and data type uint8
+    step 1/15 n=160 loss 1.0606 grad_norm 1.680 kl 0.0392
+    step 2/15 n=160 loss 1.1041 grad_norm 1.734 kl 0.0701
+    step 3/15 n=160 loss 1.0988 grad_norm 1.695 kl 0.1579
+    step 4/15 n=160 loss 1.0858 grad_norm 1.711 kl 0.4714
+    step 5/15 n=160 loss 1.0271 grad_norm 1.680 kl 0.7825
+    step 6/15 n=160 loss 1.0833 grad_norm 1.773 kl 1.2077
+    step 7/15 n=160 loss 1.0726 grad_norm 1.711 kl 2.0742
+    step 8/15 n=160 loss 1.0496 grad_norm 1.719 kl 2.7894
+    step 9/15 n=160 loss 1.0747 grad_norm 1.750 kl 3.9215
+    step 10/15 n=160 loss 1.1665 grad_norm 1.789 kl 4.6184
+    step 11/15 n=160 loss 1.0790 grad_norm 1.766 kl 6.5056
+    step 12/15 n=160 loss 1.0967 grad_norm 1.773 kl 8.1151
+    step 13/15 n=160 loss 1.0388 grad_norm 1.664 kl 10.4587
+    step 14/15 n=160 loss 1.1425 grad_norm 1.727 kl 11.3558
+    step 15/15 n=160 loss 1.0269 grad_norm 1.688 kl 15.0010
+[train seed 1 round 1] steps 15/15 subset NLL 0.9365 -> 0.6797
+[seed 1 round 1] successes 30/64  round 30.7 min
+[collect seed 1 round 2] successes 25/64 in 14.0 min
+    step 1/13 n=160 loss 1.1395 grad_norm 1.719 kl 0.0403
+    step 2/13 n=160 loss 1.1062 grad_norm 1.750 kl 0.0988
+    step 3/13 n=160 loss 1.0696 grad_norm 1.695 kl 0.2753
+    step 4/13 n=160 loss 1.1046 grad_norm 1.680 kl 0.8120
+    step 5/13 n=160 loss 1.0668 grad_norm 1.727 kl 1.5293
+    step 6/13 n=160 loss 1.0231 grad_norm 1.648 kl 2.3566
+    step 7/13 n=160 loss 1.1458 grad_norm 1.711 kl 5.0423
+    step 8/13 n=160 loss 1.1336 grad_norm 1.773 kl 8.0352
+    step 9/13 n=160 loss 1.0887 grad_norm 1.695 kl 10.3170
+    step 10/13 n=160 loss 1.0800 grad_norm 1.648 kl 14.4361
+    step 11/13 n=160 loss 1.0741 grad_norm 1.688 kl 20.4824
+    step 12/13 n=160 loss 1.0787 grad_norm 1.680 kl 27.0475
+    step 13/13 n=80 loss 0.9176 grad_norm 2.250 kl 34.1255
+[train seed 1 round 2] steps 13/13 subset NLL 0.9744 -> 0.6712
+[seed 1 round 2] successes 25/64  round 36.5 min
+[collect seed 1 round 3] successes 31/64 in 14.0 min
+    step 1/16 n=160 loss 1.0746 grad_norm 1.688 kl 0.0598
+    step 2/16 n=160 loss 1.0420 grad_norm 1.695 kl 0.0970
+    step 3/16 n=160 loss 0.9930 grad_norm 1.672 kl 0.2577
+    step 4/16 n=160 loss 0.9971 grad_norm 1.664 kl 0.4068
+    step 5/16 n=160 loss 1.0252 grad_norm 1.664 kl 0.9352
+    step 6/16 n=160 loss 1.0084 grad_norm 1.656 kl 1.2539
+    step 7/16 n=160 loss 1.1078 grad_norm 1.750 kl 1.9033
+    step 8/16 n=160 loss 1.0643 grad_norm 1.703 kl 2.7468
+    step 9/16 n=160 loss 1.0360 grad_norm 1.695 kl 3.8670
+    step 10/16 n=160 loss 1.0787 grad_norm 1.695 kl 7.0130
+    step 11/16 n=160 loss 1.0118 grad_norm 1.664 kl 13.5464
+    step 12/16 n=160 loss 1.1123 grad_norm 1.781 kl 29.7379
+    step 13/16 n=160 loss 1.0343 grad_norm 1.703 kl 46.0015
+    step 14/16 n=160 loss 1.1139 grad_norm 1.750 kl 95.1443
+    step 15/16 n=160 loss 1.0171 grad_norm 1.719 kl 94.0016
+    step 16/16 n=80 loss 0.9441 grad_norm 2.391 kl 249.3856
+[train seed 1 round 3] steps 16/16 subset NLL 0.8510 -> 0.5972
+[seed 1 round 3] successes 31/64  round 46.3 min
+[collect seed 1 round 4] successes 26/64 in 14.1 min
+    step 1/13 n=160 loss 1.0729 grad_norm 1.711 kl 0.1140
+    step 2/13 n=160 loss 0.9732 grad_norm 1.695 kl 0.3392
+    step 3/13 n=160 loss 1.0071 grad_norm 1.688 kl 1.1058
+    step 4/13 n=160 loss 0.9897 grad_norm 1.625 kl 2.1879
+    step 5/13 n=160 loss 1.0353 grad_norm 1.688 kl 3.8557
+    step 6/13 n=160 loss 1.1069 grad_norm 1.734 kl 7.1625
+    step 7/13 n=160 loss 1.1033 grad_norm 1.688 kl 8.1007
+    step 8/13 n=160 loss 1.1420 grad_norm 1.766 kl 13.2014
+    step 9/13 n=160 loss 1.1042 grad_norm 1.805 kl 16.8901
+    step 10/13 n=160 loss 0.9771 grad_norm 1.656 kl 19.9045
+    step 11/13 n=160 loss 1.1139 grad_norm 1.688 kl 24.7307
+    step 12/13 n=160 loss 1.0832 grad_norm 1.719 kl 28.4960
+    step 13/13 n=160 loss 1.0698 grad_norm 1.734 kl 37.9404
+[train seed 1 round 4] steps 13/13 subset NLL 1.1440 -> 0.7896
+[seed 1 round 4] successes 26/64  round 44.4 min
+[collect seed 1 round 5] successes 31/64 in 14.0 min
+    step 1/16 n=160 loss 1.0375 grad_norm 1.641 kl 0.0872
+    step 2/16 n=160 loss 1.2269 grad_norm 1.812 kl 0.3147
+    step 3/16 n=160 loss 1.0967 grad_norm 1.719 kl 0.6361
+    step 4/16 n=160 loss 1.0584 grad_norm 1.664 kl 1.8289
+    step 5/16 n=160 loss 1.0620 grad_norm 1.703 kl 4.2218
+    step 6/16 n=160 loss 1.0363 grad_norm 1.641 kl 8.4862
+    step 7/16 n=160 loss 1.1489 grad_norm 1.742 kl 12.5506
+    step 8/16 n=160 loss 1.1078 grad_norm 1.711 kl 23.1926
+    step 9/16 n=160 loss 1.0672 grad_norm 1.727 kl 30.8203
+    step 10/16 n=160 loss 1.1647 grad_norm 1.789 kl 41.0740
+    step 11/16 n=160 loss 1.0430 grad_norm 1.648 kl 62.6963
+    step 12/16 n=160 loss 1.0615 grad_norm 1.672 kl 65.7601
+    step 13/16 n=160 loss 1.0722 grad_norm 1.711 kl 79.3916
+    step 14/16 n=160 loss 1.1143 grad_norm 1.719 kl 90.1819
+    step 15/16 n=160 loss 1.2446 grad_norm 1.797 kl 121.7837
+    step 16/16 n=80 loss 1.1088 grad_norm 2.438 kl 114.7350
+[train seed 1 round 5] steps 16/16 subset NLL 1.0039 -> 0.6638
+[seed 1 round 5] successes 31/64  round 44.4 min
+[collect seed 1 round 6] successes 33/64 in 13.9 min
+    step 1/17 n=160 loss 1.0261 grad_norm 1.633 kl 0.0723
+    step 2/17 n=160 loss 1.0967 grad_norm 1.711 kl 0.1399
+    step 3/17 n=160 loss 1.1113 grad_norm 1.719 kl 0.3428
+    step 4/17 n=160 loss 1.1065 grad_norm 1.719 kl 0.8402
+    step 5/17 n=160 loss 1.0556 grad_norm 1.625 kl 1.4635
+    step 6/17 n=160 loss 1.1348 grad_norm 1.734 kl 2.2005
+    step 7/17 n=160 loss 1.0893 grad_norm 1.703 kl 2.5622
+    step 8/17 n=160 loss 1.0713 grad_norm 1.703 kl 5.6389
+    step 9/17 n=160 loss 1.1828 grad_norm 1.766 kl 7.4597
+    step 10/17 n=160 loss 1.1000 grad_norm 1.664 kl 7.4429
+    step 11/17 n=160 loss 1.1493 grad_norm 1.703 kl 11.4861
+    step 12/17 n=160 loss 1.0727 grad_norm 1.688 kl 12.4791
+    step 13/17 n=160 loss 1.1496 grad_norm 1.711 kl 16.7409
+    step 14/17 n=160 loss 1.0932 grad_norm 1.711 kl 20.0316
+    step 15/17 n=160 loss 1.0928 grad_norm 1.719 kl 27.2169
+    step 16/17 n=160 loss 1.2246 grad_norm 1.773 kl 31.1947
+    step 17/17 n=80 loss 1.1221 grad_norm 2.469 kl 44.3128
+[train seed 1 round 6] steps 17/17 subset NLL 1.1743 -> 0.8283
+[seed 1 round 6] successes 33/64  round 45.6 min
+  [collect failed] seed 1 round 7 attempt 1 exit 3221226505: EOFError
+[collect seed 1 round 7] successes 28/64 in 13.9 min
+    step 1/14 n=160 loss 1.0258 grad_norm 1.633 kl 0.0273
+    step 2/14 n=160 loss 1.1361 grad_norm 1.688 kl 0.0597
+    step 3/14 n=160 loss 1.0144 grad_norm 1.570 kl 0.1993
+    step 4/14 n=160 loss 1.0644 grad_norm 1.656 kl 0.9998
+    step 5/14 n=160 loss 1.0955 grad_norm 1.656 kl 2.2890
+    step 6/14 n=160 loss 1.0437 grad_norm 1.703 kl 5.6599
+    step 7/14 n=160 loss 1.0554 grad_norm 1.617 kl 11.2822
+    step 8/14 n=160 loss 1.0205 grad_norm 1.586 kl 21.3668
+    step 9/14 n=160 loss 1.0396 grad_norm 1.664 kl 29.9397
+    step 10/14 n=160 loss 1.1105 grad_norm 1.648 kl 46.8253
+    step 11/14 n=160 loss 0.9471 grad_norm 1.531 kl 59.7429
+    step 12/14 n=160 loss 1.0541 grad_norm 1.633 kl 99.6798
+    step 13/14 n=160 loss 1.0271 grad_norm 1.617 kl 112.8448
+    step 14/14 n=160 loss 1.0766 grad_norm 1.680 kl 221.1248
+[train seed 1 round 7] steps 14/14 subset NLL 0.8886 -> 0.6450
+[seed 1 round 7] successes 28/64  round 34.0 min
+[collect seed 1 round 8] successes 29/64 in 14.0 min
+    step 1/15 n=160 loss 1.1407 grad_norm 1.695 kl 0.0878
+    step 2/15 n=160 loss 0.9811 grad_norm 1.594 kl 0.3428
+    step 3/15 n=160 loss 1.1010 grad_norm 1.625 kl 0.6631
+    step 4/15 n=160 loss 1.1376 grad_norm 1.648 kl 1.8071
+    step 5/15 n=160 loss 1.1577 grad_norm 1.664 kl 3.6118
+    step 6/15 n=160 loss 1.0648 grad_norm 1.586 kl 6.5731
+    step 7/15 n=160 loss 1.1166 grad_norm 1.656 kl 9.3471
+    step 8/15 n=160 loss 1.1032 grad_norm 1.648 kl 14.6084
+    step 9/15 n=160 loss 1.0269 grad_norm 1.602 kl 21.0220
+    step 10/15 n=160 loss 1.0986 grad_norm 1.602 kl 24.3765
+    step 11/15 n=160 loss 1.1009 grad_norm 1.680 kl 28.9888
+    step 12/15 n=160 loss 1.0774 grad_norm 1.648 kl 39.5131
+    step 13/15 n=160 loss 1.2221 grad_norm 1.719 kl 50.9922
+    step 14/15 n=160 loss 1.1186 grad_norm 1.672 kl 66.1183
+    step 15/15 n=80 loss 1.1150 grad_norm 2.281 kl 74.0857
+[train seed 1 round 8] steps 15/15 subset NLL 1.1345 -> 0.7948
+[seed 1 round 8] successes 29/64  round 29.7 min
+[collect seed 1 round 9] successes 32/64 in 13.9 min
+    step 1/16 n=160 loss 1.0471 grad_norm 1.578 kl 0.0208
+    step 2/16 n=160 loss 1.0908 grad_norm 1.609 kl 0.0496
+    step 3/16 n=160 loss 1.1586 grad_norm 1.648 kl 0.0999
+    step 4/16 n=160 loss 1.1281 grad_norm 1.648 kl 0.1673
+    step 5/16 n=160 loss 1.2110 grad_norm 1.680 kl 0.3141
+    step 6/16 n=160 loss 1.1805 grad_norm 1.641 kl 0.4195
+    step 7/16 n=160 loss 1.0518 grad_norm 1.625 kl 0.6508
+    step 8/16 n=160 loss 1.0487 grad_norm 1.594 kl 1.0818
+    step 9/16 n=160 loss 1.0450 grad_norm 1.617 kl 1.5266
+    step 10/16 n=160 loss 1.0999 grad_norm 1.656 kl 2.0412
+    step 11/16 n=160 loss 1.1506 grad_norm 1.711 kl 2.8791
+    step 12/16 n=160 loss 1.0911 grad_norm 1.633 kl 4.4033
+    step 13/16 n=160 loss 1.1684 grad_norm 1.625 kl 5.4190
+    step 14/16 n=160 loss 1.0133 grad_norm 1.555 kl 7.5019
+    step 15/16 n=160 loss 1.1850 grad_norm 1.688 kl 10.3067
+    step 16/16 n=160 loss 1.0619 grad_norm 1.594 kl 13.5529
+[train seed 1 round 9] steps 16/16 subset NLL 0.9426 -> 0.7216
+[seed 1 round 9] successes 32/64  round 31.3 min
+ALL DONE
