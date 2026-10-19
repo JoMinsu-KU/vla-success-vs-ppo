@@ -1,0 +1,49 @@
+test_identity_bf16_policy_path (pilot.p4.test_core_cpu.TestC9LossScale)
+원 코드는 ratio·advantage를 bf16으로 계산한다. bf16에서는 7칸 합과 ×7의 반올림이 달라 근사 일치만 기대. ... ok
+test_identity_fp32 (pilot.p4.test_core_cpu.TestC9LossScale) ... ok
+test_v06_alternative_differs (pilot.p4.test_core_cpu.TestC9LossScale)
+v0.6의 'value 계수 1/7'은 비율은 같지만 총 기울기가 1/7이라 같은 결과가 아니다 (v0.7에서 대체한 이유). ... ok
+test_a2pm_loo_proportional (pilot.p4.test_core_cpu.TestLikelihoodWeights)
+Y_i − b_{−i} = N/(N−1)·(Y_i − Ȳ). ... ok
+test_degenerate_batches_skip (pilot.p4.test_core_cpu.TestLikelihoodWeights) ... ok
+test_cosine_one (pilot.p4.test_core_cpu.TestOPlusProportionalToBC) ... ok
+test_all_success_or_failure_is_zero (pilot.p4.test_core_cpu.TestOutcomeAdvantage) ... ok
+test_constant_within_trajectory_and_masked_constant (pilot.p4.test_core_cpu.TestOutcomeAdvantage) ... ok
+test_identity_max_Y_minus_b (pilot.p4.test_core_cpu.TestOutcomeAdvantage)
+1.4절 (5): 공통 상수 b에서 max(Y − b, 0) = (1 − b)Y, 모든 표본에서. ... ok
+test_mask_after_normalization_order (pilot.p4.test_core_cpu.TestOutcomeAdvantage)
+정규화 → 마스킹 (재정규화 없음). 마스킹 뒤 재정규화하면 값이 달라진다. ... ok
+test_pooled_normalization_differs_from_per_batch (pilot.p4.test_core_cpu.TestOutcomeAdvantage)
+(iv) 진단 크기별로 '합친 뒤 한 번 정규화'해야 한다: 배치별 정규화 평균과 다르다. ... ok
+test_population_std_matches_batch_standardization (pilot.p4.test_core_cpu.TestOutcomeAdvantage)
+원 코드식 버퍼 정규화(모집단 std)를 결과 advantage에 적용하면 Ã^O와 같다 (ε 차이만). ... ok
+test_potential_reward_counterexample (pilot.p4.test_core_cpu.TestRewardsAndLabels)
+3.2절 반례: 10~79스텝 성공 유지 후 80스텝에 잃은 궤적(Y=0)이 80스텝 첫 성공(Y=1)보다 수익이 크다. ... ok
+test_terminal_same_Y_same_return (pilot.p4.test_core_cpu.TestRewardsAndLabels) ... ok
+test_truncation_mask_ignores_V_T (pilot.p4.test_core_cpu.TestRewardsAndLabels)
+80스텝 절단은 마스크 0으로 종결: V(s_80)를 바꿔도 반환값·advantage가 같다. ... ok
+test_divergence_rule (pilot.p4.test_core_cpu.TestStabilityGuards) ... ok
+test_kl_estimate (pilot.p4.test_core_cpu.TestStabilityGuards) ... ok
+test_partial_chunk_divisors (pilot.p4.test_core_cpu.TestStepSchedule) ... ok
+test_steps (pilot.p4.test_core_cpu.TestStepSchedule) ... ok
+test_u_fix (pilot.p4.test_core_cpu.TestStepSchedule) ... ok
+test_reward_kinds (pilot.p4.test_ppo_cpu.TestAdvantageRules) ... ok
+test_rules_and_shared_returns (pilot.p4.test_ppo_cpu.TestAdvantageRules) ... ok
+test_c_pm_branch_reproduces_lineage (pilot.p4.test_ppo_cpu.TestE2Branch)
+계보의 실제 업데이트(C± = gae)와, 분기 체크포인트에서 같은 순서 시드로 다시 한 C± 첫 업데이트가 비트 단위로 같다. ... ok
+test_e2a_degenerate_batch_undefined (pilot.p4.test_ppo_cpu.TestE2Branch)
+전부 실패 배치: 결과 advantage가 0이라 O행 정책 기울기의 코사인은 '정의 불가'. ... ok
+test_e2a_diagnostics (pilot.p4.test_ppo_cpu.TestE2Branch) ... ok
+test_other_cells_differ_and_masked_smaller (pilot.p4.test_ppo_cpu.TestE2Branch) ... ok
+test_c10_recompute_gives_ratio_one (pilot.p4.test_ppo_cpu.TestPPOUpdate)
+생성 경로 log-prob에 잡음(C10 불일치 흉내)이 있으면 첫 ratio ≠ 1, θ_old 재계산이면 정확히 1. ... ok
+test_c9_original_equals_controlled_full_round (pilot.p4.test_ppo_cpu.TestPPOUpdate)
+n = 160 (스텝 하나, 부분 묶음 없음), 재계산 없음: 원 코드형과 통제형의 업데이트 결과가 fp32 수치 오차 안에서 같다. ... ok
+test_joint_grad_clip (pilot.p4.test_ppo_cpu.TestPPOUpdate) ... ok
+test_order_reproducible (pilot.p4.test_ppo_cpu.TestPPOUpdate) ... ok
+test_partial_chunk_and_steps (pilot.p4.test_ppo_cpu.TestPPOUpdate) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 2.145s
+
+OK
