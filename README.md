@@ -6,8 +6,9 @@
 
 ## 현재 상태
 
-- 연구 명세: [docs/vla_rl_decomposition_package_v0_9.md](docs/vla_rl_decomposition_package_v0_9.md) (최신). 이전 판 v0.8도 같은 폴더에 있다.
-- 단계: 4090 파일럿 착수 전. 사전 고정(9.1절) → WSL 시험(6.0절)·학습 없는 단위 시험(P4)·통계 시뮬레이션 병행.
+- 연구 명세: [docs/vla_rl_decomposition_package_v0_10.md](docs/vla_rl_decomposition_package_v0_10.md) (최신). 이전 판 v0.8·v0.9도 같은 폴더에 있다.
+- 단계: 4090 파일럿 1차 완료, G1 재검토. 종합 보고 [pilot/G1_report.md](pilot/G1_report.md), 이탈 기록 [pilot/deviations.md](pilot/deviations.md).
+- 다음: 통제 PPO 학습기(A3⁰)·E2 분기 코드와 P4 잔여 시험 → G1 재판정 → G2 (H200 실측).
 
 ## 사전 고정 기록
 
