@@ -1,0 +1,45 @@
+{
+  "N": 3,
+  "Y": [
+    1,
+    1,
+    0
+  ],
+  "A_default": {
+    "lora": {
+      "max_abs_diff": 0.00039958953857421875,
+      "rel_diff_to_update": 0.389514214638896,
+      "frac_elements_different": 0.564915989679458,
+      "update_norm": 1.294190342272818,
+      "bitwise_equal": false
+    },
+    "value_head": {
+      "max_abs_diff": 0.005126953125,
+      "rel_diff_to_update": 0.05282157890558097,
+      "frac_elements_different": 0.3764841993551059,
+      "update_norm": 5.572853810227356,
+      "bitwise_equal": false
+    },
+    "sec_lineage": 52.4,
+    "sec_branch": 50.6
+  },
+  "B_deterministic": {
+    "lora": {
+      "max_abs_diff": 0.0,
+      "rel_diff_to_update": 0.0,
+      "frac_elements_different": 0.0,
+      "update_norm": 1.2954379106907643,
+      "bitwise_equal": true
+    },
+    "value_head": {
+      "max_abs_diff": 0.0,
+      "rel_diff_to_update": 0.0,
+      "frac_elements_different": 0.0,
+      "update_norm": 5.565420847066058,
+      "bitwise_equal": true
+    },
+    "sec_lineage": 67.6,
+    "sec_branch": 74.1
+  },
+  "peak_cuda_gib": 20.82
+}

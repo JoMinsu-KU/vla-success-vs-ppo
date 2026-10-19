@@ -68,6 +68,8 @@ def full_batch_gradient(adapter, batch, rule, old_lp, old_v, cfg: ppo.PPOConfig,
 
 
 def _cos_ratio(a, b):
+    # 저장은 float32, 내적·노름은 float64 (1억 원소 이상을 float32로 누산하면 코사인이 1을 넘을 수 있음)
+    a, b = a.double(), b.double()
     na, nb = float(a.norm()), float(b.norm())
     if na < EPS_NORM or nb < EPS_NORM:
         return dict(cos=None, norm_ratio=None, norm_pm=na, norm_plus=nb, note="undefined (near-zero norm)")
