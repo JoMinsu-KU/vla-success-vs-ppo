@@ -6,9 +6,10 @@
 
 ## 현재 상태
 
-- 연구 명세: [docs/vla_rl_decomposition_package_v0_11.md](docs/vla_rl_decomposition_package_v0_11.md) (최신). 이전 판 v0.8~v0.10도 같은 폴더에 있다.
-- 단계: G1 통과 (조건부, 2026-10-19). 종합 보고 [pilot/G1_report.md](pilot/G1_report.md), 이탈 기록 [pilot/deviations.md](pilot/deviations.md).
-- 다음: G2 (H200 실측, 64 환경 전체 규모 확인 포함) → G-PRE → E1.
+- 연구 명세: [docs/vla_rl_decomposition_package_v0_12.md](docs/vla_rl_decomposition_package_v0_12.md) (최신, 6차 외부 검토 반영). 이전 판 v0.8~v0.11도 같은 폴더에 있다.
+- 외부 검토: 요청서 [docs/review_request_v0_11.md](docs/review_request_v0_11.md), 대응표는 명세 부록 E-8. 신규성 확인 [pilot/G0_check_2026-10-19.md](pilot/G0_check_2026-10-19.md).
+- 단계: G1 통과 (조건부, 2026-10-19) = G2 진입 승인 (본실험 착수 승인은 G-PRE). 종합 보고 [pilot/G1_report.md](pilot/G1_report.md), 이탈 기록 [pilot/deviations.md](pilot/deviations.md).
+- 다음: G2 (H200 실측, 64 환경 전체 규모 확인, 생성–학습 잔여 불일치·엄격 결정성·S_rec 타당성 확인, Linux 경로의 공개 체크포인트 재평가) → G-PRE → E1.
 
 ## 사전 고정 기록
 

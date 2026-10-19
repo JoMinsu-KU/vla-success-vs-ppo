@@ -81,6 +81,8 @@ def simulate_procedure(sigma, delta, true_diff, delta_plan, reps, rule="adaptive
 
 
 # 필요 n 계산은 반복마다 비중심 t를 부르므로, (sd 반올림, δ)로 캐시한다.
+# [알려진 결함, 6차 검토 11.1] 키는 반올림하지만 계산은 최초 입력 sd로 해서, 같은 키의 n이 실행 순서에 따라 달라질 수 있다.
+# 1차 결과 보존을 위해 고치지 않고 두며, 수정판은 gpre_sim_v2.py (사전 고정 SD 구간 → n 표).
 _req_cache = {}
 _orig_required_n = required_n
 
@@ -189,6 +191,7 @@ def perm_ni_p(a, b, delta):
     obs = welch(a + delta, b)
     t_obs = obs[0] / obs[1]
     cnt = 0
+    # [알려진 결함, 6차 검토 11.2] 사전식 목록의 10개마다 하나라 균일 표집이 아니다. 수정판은 gpre_sim_v2.py (전체 열거).
     for idx in SPLITS[::10]:  # 1,287개 분할로 근사 (속도)
         mask = np.zeros(16, bool)
         mask[idx] = True

@@ -142,6 +142,24 @@ class TestPPOUpdate(unittest.TestCase):
         self.assertTrue(yes["first_minibatch"]["ratio_equal_one"])
         self.assertEqual(yes["first_minibatch"]["max_abs_log_ratio"], 0.0)
 
+    def test_max_steps_keeps_full_round_old_values(self):
+        """max_steps는 optimizer 스텝만 줄이고, old value·GAE는 라운드 전체로 계산한다 (6차 검토 2번).
+        첫 스텝의 업데이트가 max_steps 유무와 무관하게 같아야 한다. C10 감사 기록도 남는다."""
+        b = make_batch(T=8, N=40)
+        res = []
+        for ms in (None, 1):
+            ad = TinyAdapter(b, seed=0)
+            fill_generation_values(ad, b, noise=0.3)
+            out = ppo.ppo_update(ad, b, ppo.PPOConfig(minibatch=8, accum=4, max_steps=ms))
+            res.append((out, [p.detach().clone() for p in ad.params_policy]))
+        self.assertEqual(res[1][0]["n_steps"], 1)
+        self.assertEqual(res[1][0]["n_steps_planned"], res[0][0]["n_steps"])
+        self.assertEqual(res[0][0]["steps"][0]["loss"], res[1][0]["steps"][0]["loss"])
+        aud = res[1][0]["c10_audit"]
+        self.assertEqual(aud["all"]["n"], b.T * b.N)
+        self.assertGreater(aud["all"]["mean_abs"], 0.1)  # 잡음 0.3을 넣었으므로 q₀ ≠ p₀가 측정된다
+        self.assertIn("Y1", aud)
+
     def test_partial_chunk_and_steps(self):
         b = make_batch(T=8, N=25)  # 200 전이 → 25 미니배치 → 스텝 2 (20, 5)
         ad = TinyAdapter(b)

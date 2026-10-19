@@ -122,6 +122,24 @@ def recompute_old(adapter, steps, chunk: int):
     return out_lp, out_v
 
 
+def c10_summary(lp_tf, lp_gen, v_tf, v_gen, adv, Y=None):
+    """C10 잔여 불일치 감사: joint log w = log p₀ − log q₀ (teacher forcing − 생성 경로)의 분포.
+    전체, advantage 부호별, (주어지면) 결과 Y별. ratio = 1은 q₀ = p₀를 뜻하지 않는다 (6차 검토 1번)."""
+    lw = (lp_tf.astype(np.float64) - lp_gen.astype(np.float64))
+
+    def s(x):
+        if len(x) == 0:
+            return None
+        a = np.abs(x)
+        return dict(n=int(len(x)), mean=float(x.mean()), mean_abs=float(a.mean()), p95_abs=float(np.quantile(a, 0.95)),
+                    max_abs=float(a.max()), frac_outside_clip=float(np.mean(np.abs(np.exp(-x) - 1) > 0.2)))
+    out = dict(all=s(lw), adv_pos=s(lw[adv > 0]), adv_nonpos=s(lw[adv <= 0]),
+               value_abs_diff_mean=float(np.mean(np.abs(v_tf.astype(np.float64) - v_gen))))
+    if Y is not None:
+        out["Y1"], out["Y0"] = s(lw[Y > 0.5]), s(lw[Y <= 0.5])
+    return out
+
+
 @dataclass
 class PPOConfig:
     mode: str = "controlled"          # "controlled" 또는 "original"
@@ -138,7 +156,7 @@ class PPOConfig:
     huber_delta: float = 10.0
     order_seed: int = 0
     recompute_old: bool = True        # C10 (controlled에서만 의미)
-    max_steps: int | None = None      # 시험용: 앞 몇 스텝만
+    max_steps: int | None = None      # 시험용: optimizer 스텝만 앞 몇 개 (old 값은 항상 전체 계산)
 
 
 def ppo_update(adapter, batch: RoundBatch, cfg: PPOConfig, log=None):
@@ -147,23 +165,27 @@ def ppo_update(adapter, batch: RoundBatch, cfg: PPOConfig, log=None):
     n = T * N
     controlled = cfg.mode == "controlled"
     order = minibatch_order(n, cfg.order_seed)
-    steps = plan_steps(order, cfg.minibatch, cfg.accum, controlled)
-    if cfg.max_steps is not None:
-        steps = steps[:cfg.max_steps]
+    steps_all = plan_steps(order, cfg.minibatch, cfg.accum, controlled)
+    # max_steps는 optimizer 실행만 줄인다. old log-prob·value는 항상 라운드 전체에서 업데이트 전에 계산해 고정한다
+    # (일부만 계산하면 GAE의 시간축 타깃이 달라진다. 6차 검토 2번).
+    steps = steps_all if cfg.max_steps is None else steps_all[:cfg.max_steps]
 
+    c10_audit = None
     if controlled and cfg.recompute_old:
-        old_lp_d, old_v_d = recompute_old(adapter, steps, cfg.chunk)
-        old_lp = np.array([old_lp_d.get(i, np.nan) for i in range(n)], np.float32)
-        old_v = np.array([old_v_d.get(i, np.nan) for i in range(n)], np.float32)
-        if cfg.max_steps is None:
-            assert not np.isnan(old_lp).any()
-        values_for_gae = np.nan_to_num(old_v).reshape(T, N)
+        old_lp_d, old_v_d = recompute_old(adapter, steps_all, cfg.chunk)
+        old_lp = np.array([old_lp_d[i] for i in range(n)], np.float32)
+        old_v = np.array([old_v_d[i] for i in range(n)], np.float32)
+        values_for_gae = old_v.reshape(T, N)
+        c10_audit = dict(lp_gen=batch.logprob_gen.reshape(-1).astype(np.float32),
+                         v_gen=batch.value_gen.reshape(-1).astype(np.float32))
     else:
         old_lp = batch.logprob_gen.reshape(-1).astype(np.float32)
         old_v = batch.value_gen.reshape(-1).astype(np.float32)
         values_for_gae = batch.value_gen
     adv, ret, _ = advantages_and_returns(batch, values_for_gae, cfg.reward_kind, cfg.adv_rule)
     adv_f, ret_f = adv.reshape(-1), ret.reshape(-1)
+    if c10_audit is not None:  # 생성 경로 값은 학습에 쓰지 않고 감사용으로만 요약한다 (q₀ ≠ p₀ 측정)
+        c10_audit = c10_summary(old_lp, c10_audit["lp_gen"], old_v, c10_audit["v_gen"], adv_f, np.tile(batch.Y(), T))
 
     params = list(adapter.params_policy) + list(adapter.params_value)
     adapter.train_mode()
@@ -213,7 +235,8 @@ def ppo_update(adapter, batch: RoundBatch, cfg: PPOConfig, log=None):
                 f"val {rec['value_loss']:.4f} clipfrac {rec['clipfrac']:.3f} gnorm {gn:.3f}")
         if not finite:
             break
-    return dict(steps=recs, n_steps=len(steps), first_minibatch=first_ratio,
+    return dict(steps=recs, n_steps=len(steps), n_steps_planned=len(steps_all), first_minibatch=first_ratio,
+                c10_audit=c10_audit,
                 adv_mean=float(adv_f.mean()), adv_pos_frac=float((adv_f > 0).mean()), Y_mean=float(batch.Y().mean()))
 
 
