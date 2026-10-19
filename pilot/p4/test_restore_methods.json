@@ -1,0 +1,156 @@
+{
+  "summary": {
+    "reconfigure": {
+      "all_repeat_identical": true,
+      "all_match_original": false,
+      "mean_sec_to_build_start": 0.2842857142857143
+    },
+    "replay": {
+      "all_repeat_identical": false,
+      "all_match_original": false,
+      "mean_sec_to_build_start": 1.3800000000000001
+    }
+  },
+  "episodes": [
+    {
+      "ep": 0,
+      "start": 14,
+      "reconfigure": {
+        "repeat_identical": true,
+        "repeat_max_state_diff": 0.0,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 24.074953079223633,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 0.29
+      },
+      "replay": {
+        "repeat_identical": false,
+        "repeat_max_state_diff": 4.193793773651123,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 25.036867141723633,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 1.21
+      }
+    },
+    {
+      "ep": 1,
+      "start": 11,
+      "reconfigure": {
+        "repeat_identical": true,
+        "repeat_max_state_diff": 0.0,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 8.2593412399292,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 0.3
+      },
+      "replay": {
+        "repeat_identical": false,
+        "repeat_max_state_diff": 1.9897822141647339,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 2.12027645111084,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 0.98
+      }
+    },
+    {
+      "ep": 2,
+      "start": 15,
+      "reconfigure": {
+        "repeat_identical": true,
+        "repeat_max_state_diff": 0.0,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 1.2593203783035278,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 0.27
+      },
+      "replay": {
+        "repeat_identical": false,
+        "repeat_max_state_diff": 2.2000205516815186,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 3.916957378387451,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 1.34
+      }
+    },
+    {
+      "ep": 3,
+      "start": 15,
+      "reconfigure": {
+        "repeat_identical": true,
+        "repeat_max_state_diff": 0.0,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 1.6546998023986816,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 0.31
+      },
+      "replay": {
+        "repeat_identical": false,
+        "repeat_max_state_diff": 2.0941667556762695,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 2.5754189491271973,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 1.45
+      }
+    },
+    {
+      "ep": 4,
+      "start": 18,
+      "reconfigure": {
+        "repeat_identical": true,
+        "repeat_max_state_diff": 0.0,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 5.245842933654785,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 0.28
+      },
+      "replay": {
+        "repeat_identical": false,
+        "repeat_max_state_diff": 1.8701833486557007,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 6.3192362785339355,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 1.64
+      }
+    },
+    {
+      "ep": 5,
+      "start": 14,
+      "reconfigure": {
+        "repeat_identical": true,
+        "repeat_max_state_diff": 0.0,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 2.8255910873413086,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 0.26
+      },
+      "replay": {
+        "repeat_identical": false,
+        "repeat_max_state_diff": 7.135575294494629,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 5.1130876541137695,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 1.26
+      }
+    },
+    {
+      "ep": 7,
+      "start": 18,
+      "reconfigure": {
+        "repeat_identical": true,
+        "repeat_max_state_diff": 0.0,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 3.6947827339172363,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 0.28
+      },
+      "replay": {
+        "repeat_identical": false,
+        "repeat_max_state_diff": 1.7356897592544556,
+        "matches_original_state": false,
+        "vs_original_max_state_diff": 3.5336427688598633,
+        "matches_original_pixels": false,
+        "sec_to_build_start": 1.78
+      }
+    }
+  ]
+}

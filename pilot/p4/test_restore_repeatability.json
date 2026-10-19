@@ -1,0 +1,190 @@
+{
+  "summary": {
+    "n": 7,
+    "all_repeat_identical": false
+  },
+  "episodes": [
+    {
+      "ep": 0,
+      "start": 14,
+      "repeat_identical_state": false,
+      "repeat_identical_pixels": false,
+      "repeat_after_other_episode_identical": false,
+      "repeat_grasp_identical": true,
+      "vs_original_by_component_step1": {
+        "object_pose": 0.09094071388244629,
+        "object_vel": 8.646281242370605,
+        "robot_qpos": 0.02022343873977661,
+        "robot_qvel": 0.44711971282958984
+      },
+      "vs_original_by_component_step5": {
+        "object_pose": 0.006804421544075012,
+        "object_vel": 7.570987701416016,
+        "robot_qpos": 0.024540424346923828,
+        "robot_qvel": 0.052313029766082764
+      },
+      "vs_original_by_component_step25": {
+        "object_pose": 0.0815911591053009,
+        "object_vel": 6.4924516677856445,
+        "robot_qpos": 0.12363409996032715,
+        "robot_qvel": 0.2613545060157776
+      }
+    },
+    {
+      "ep": 1,
+      "start": 11,
+      "repeat_identical_state": false,
+      "repeat_identical_pixels": false,
+      "repeat_after_other_episode_identical": false,
+      "repeat_grasp_identical": true,
+      "vs_original_by_component_step1": {
+        "object_pose": 0.00170058012008667,
+        "object_vel": 0.44708746671676636,
+        "robot_qpos": 0.0031546056270599365,
+        "robot_qvel": 0.012096762657165527
+      },
+      "vs_original_by_component_step5": {
+        "object_pose": 0.006035268306732178,
+        "object_vel": 0.46701523661613464,
+        "robot_qpos": 0.012471437454223633,
+        "robot_qvel": 0.007957642897963524
+      },
+      "vs_original_by_component_step25": {
+        "object_pose": 1.1202198266983032,
+        "object_vel": 0.6782745122909546,
+        "robot_qpos": 0.0994676798582077,
+        "robot_qvel": 0.02361084520816803
+      }
+    },
+    {
+      "ep": 2,
+      "start": 15,
+      "repeat_identical_state": false,
+      "repeat_identical_pixels": true,
+      "repeat_after_other_episode_identical": false,
+      "repeat_grasp_identical": true,
+      "vs_original_by_component_step1": {
+        "object_pose": 0.0017452239990234375,
+        "object_vel": 0.3517668545246124,
+        "robot_qpos": 0.0027598142623901367,
+        "robot_qvel": 0.007551698014140129
+      },
+      "vs_original_by_component_step5": {
+        "object_pose": 0.009795546531677246,
+        "object_vel": 0.35330578684806824,
+        "robot_qpos": 0.015700697898864746,
+        "robot_qvel": 0.009190191514790058
+      },
+      "vs_original_by_component_step25": {
+        "object_pose": 0.029677361249923706,
+        "object_vel": 0.0,
+        "robot_qpos": 0.11207088828086853,
+        "robot_qvel": 0.012448811903595924
+      }
+    },
+    {
+      "ep": 3,
+      "start": 15,
+      "repeat_identical_state": false,
+      "repeat_identical_pixels": false,
+      "repeat_after_other_episode_identical": false,
+      "repeat_grasp_identical": true,
+      "vs_original_by_component_step1": {
+        "object_pose": 0.0007724165916442871,
+        "object_vel": 0.1335393786430359,
+        "robot_qpos": 0.0030535459518432617,
+        "robot_qvel": 0.007311908528208733
+      },
+      "vs_original_by_component_step5": {
+        "object_pose": 0.0057870447635650635,
+        "object_vel": 0.15499350428581238,
+        "robot_qpos": 0.019201040267944336,
+        "robot_qvel": 0.009528025053441525
+      },
+      "vs_original_by_component_step25": {
+        "object_pose": 0.03168708086013794,
+        "object_vel": 0.8178462982177734,
+        "robot_qpos": 0.1054527759552002,
+        "robot_qvel": 0.031074795871973038
+      }
+    },
+    {
+      "ep": 4,
+      "start": 18,
+      "repeat_identical_state": false,
+      "repeat_identical_pixels": false,
+      "repeat_after_other_episode_identical": false,
+      "repeat_grasp_identical": true,
+      "vs_original_by_component_step1": {
+        "object_pose": 0.001307077705860138,
+        "object_vel": 0.23725326359272003,
+        "robot_qpos": 0.0027647018432617188,
+        "robot_qvel": 0.006256469059735537
+      },
+      "vs_original_by_component_step5": {
+        "object_pose": 0.0076072365045547485,
+        "object_vel": 0.7712846398353577,
+        "robot_qpos": 0.01900172233581543,
+        "robot_qvel": 0.0170888714492321
+      },
+      "vs_original_by_component_step25": {
+        "object_pose": 0.17763331532478333,
+        "object_vel": 0.3416244387626648,
+        "robot_qpos": 0.1022794246673584,
+        "robot_qvel": 0.02229626104235649
+      }
+    },
+    {
+      "ep": 5,
+      "start": 14,
+      "repeat_identical_state": false,
+      "repeat_identical_pixels": false,
+      "repeat_after_other_episode_identical": false,
+      "repeat_grasp_identical": true,
+      "vs_original_by_component_step1": {
+        "object_pose": 0.0014317333698272705,
+        "object_vel": 1.0342624187469482,
+        "robot_qpos": 0.0023558735847473145,
+        "robot_qvel": 0.011714261956512928
+      },
+      "vs_original_by_component_step5": {
+        "object_pose": 0.011350110173225403,
+        "object_vel": 2.1910552978515625,
+        "robot_qpos": 0.010255753993988037,
+        "robot_qvel": 0.009211165830492973
+      },
+      "vs_original_by_component_step25": {
+        "object_pose": 0.10497888922691345,
+        "object_vel": 0.0,
+        "robot_qpos": 0.07757794857025146,
+        "robot_qvel": 0.010202156379818916
+      }
+    },
+    {
+      "ep": 7,
+      "start": 18,
+      "repeat_identical_state": false,
+      "repeat_identical_pixels": true,
+      "repeat_after_other_episode_identical": false,
+      "repeat_grasp_identical": false,
+      "vs_original_by_component_step1": {
+        "object_pose": 0.010159985162317753,
+        "object_vel": 0.6715087890625,
+        "robot_qpos": 0.005688183009624481,
+        "robot_qvel": 0.0413801372051239
+      },
+      "vs_original_by_component_step5": {
+        "object_pose": 0.03042030707001686,
+        "object_vel": 0.7629790306091309,
+        "robot_qpos": 0.021756649017333984,
+        "robot_qvel": 0.022250879555940628
+      },
+      "vs_original_by_component_step25": {
+        "object_pose": 0.08745749294757843,
+        "object_vel": 0.7047495245933533,
+        "robot_qpos": 0.11394286155700684,
+        "robot_qvel": 0.03273621201515198
+      }
+    }
+  ]
+}
