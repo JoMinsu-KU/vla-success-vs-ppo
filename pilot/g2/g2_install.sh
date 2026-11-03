@@ -21,7 +21,9 @@ C="$WORK/vla-success-vs-ppo/pilot/scripts/constraints_torch220.txt"
 
 pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121
 pip install "setuptools<70" wheel
-(cd RL4VLA/openvla && pip install -e . -c "$C")
+# G2 실측(2026-11-03): torch 제약만 주면 tensorflow-metadata 1.21이 들어와 protobuf 4.x와 충돌(runtime_version).
+# 파일럿 제약(constraints_openvla.txt, tensorflow-metadata 1.15.0·huggingface_hub<1.0 등)을 함께 준다.
+(cd RL4VLA/openvla && pip install -e . -c "$C" -c "$WORK/vla-success-vs-ppo/pilot/scripts/constraints_openvla.txt")
 pip install -U tyro -c "$C"
 pip install datasets==3.3.2 -c "$C"
 # flash-attn: README가 지정한 사전 빌드 휠 (torch 2.2, cu12, python 3.10)
@@ -32,6 +34,8 @@ python -c "import flash_attn" 2>/dev/null || { wget -q "https://github.com/Dao-A
 # 파일럿과 같은 OpenVLA 계열 버전 고정 (transformers 4.40.1, peft 0.11.1, timm 0.9.10 등)
 pip install -c "$WORK/vla-success-vs-ppo/pilot/scripts/constraints_openvla.txt" -c "$C" \
   transformers==4.40.1 tokenizers==0.19.1 timm==0.9.10 peft==0.11.1 sentencepiece==0.1.99 scipy pandas
+# G2 실측: 원 평가 스크립트(train_ms3_ppo.py)는 wandb를 import한다. protobuf 3.20(tensorflow 2.15 계열)과 맞는 wandb로 고정.
+pip install --index-url https://pypi.org/simple wandb==0.17.9 protobuf==3.20.3
 
 # 3. ManiSkill 자산 (bridge 장면, WidowX)
 python -m mani_skill.utils.download_asset bridge_v2_real2sim -y
