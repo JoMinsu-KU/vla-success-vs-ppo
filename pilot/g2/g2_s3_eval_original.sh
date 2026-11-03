@@ -23,6 +23,12 @@ run() {  # name ckpt_path unnorm env seed
   local name=$1 ck=$2 un=$3 env=$4 seed=$5
   local d="$OUT/runs/$name/$env/s$seed"
   if ls "$d"/wandb/offline-run-*/glob/vis_0_test/stats.yaml >/dev/null 2>&1; then echo "[skip] $name $env s$seed"; return; fi
+  # GPU시간 상한 (G2 명세 S3: 10시간). 웜업 실행은 누적 시간 + 최근 평균 1회가 상한을 넘으면 건너뛴다 (웜업부터 뺀다)
+  if [[ $name == warmup ]]; then
+    local used=$(awk -F'\t' '{s+=$7} END{print s+0}' "$OUT/runs.tsv" 2>/dev/null)
+    local avg=$(tail -n 6 "$OUT/runs.tsv" | awk -F'\t' '{s+=$7;n++} END{print (n?s/n:600)}')
+    if awk -v u="$used" -v a="$avg" 'BEGIN{exit !(u+a > 36000)}'; then echo "[budget-skip] $name $env s$seed used=${used}s"; return; fi
+  fi
   rm -rf "$d"; mkdir -p "$d"
   local t0=$(date +%s)
   WANDB_DIR="$d" CUDA_VISIBLE_DEVICES=0 XLA_PYTHON_CLIENT_PREALLOCATE=false \

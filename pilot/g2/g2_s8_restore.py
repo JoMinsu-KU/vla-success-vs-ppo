@@ -44,6 +44,18 @@ PERT = ["control", "R-a", "R-b", "R-c"]
 
 
 # ---------------------------------------------------------------- 환경
+def key_state(env, i):
+    """초기 전이 비교용: 집을 물체 위치, 접시 위치 (m), 로봇 관절 위치 (rad)."""
+    return dict(src=env.src_actor(i).pose.p[i].detach().cpu().numpy().astype(np.float64),
+                tgt=env.tgt_actor(i).pose.p[i].detach().cpu().numpy().astype(np.float64),
+                qpos=env.u.agent.robot.get_qpos()[i].detach().cpu().numpy().astype(np.float64))
+
+
+def key_diff(a, b):
+    return dict(src_m=float(np.abs(a["src"] - b["src"]).max()), tgt_m=float(np.abs(a["tgt"] - b["tgt"]).max()),
+                qpos_rad=float(np.abs(a["qpos"] - b["qpos"]).max()))
+
+
 class Env:
     """sim_backend cpu(환경 1개) 또는 gpu(환경 B개). 원 SimlerWrapper 설정·행동 변환."""
 
@@ -168,9 +180,14 @@ class Env:
                     qv[i, jidx] = 0
                     u.agent.robot.set_qvel(qv)
                     st = gc.get_state()
-                    tq = st["target_qpos"].clone()
-                    tq[i] = up
-                    gc.set_state(dict(target_qpos=tq))
+                    if "target_qpos" in st:
+                        tq = st["target_qpos"].clone()
+                        tq[i] = up
+                        gc.set_state(dict(target_qpos=tq))
+                    # WidowX 그리퍼 제어기는 목표 상태를 두지 않으므로(use_target 꺼짐) 구동 목표를 직접 열림으로
+                    tgt = gc.qpos.clone()
+                    tgt[i] = up
+                    gc.set_drive_targets(tgt)
                 elif k == "R-b":
                     ac = u.agent.controller.controllers["arm"]
                     tp = ac._target_pose.raw_pose.clone()
@@ -252,6 +269,39 @@ def replay(env, rec):
     return np.stack(sims), np.stack(imgs)
 
 
+def gpu_worker(ckpt_dir, out, name):
+    """CPU–GPU 연결 평가의 GPU 쪽 (별도 프로세스). 입력 C_cpu_<name>.pkl, 출력 C_gpu_<name>.pkl."""
+    recs = pickle.load(open(out / "srec.pkl", "rb"))
+    cin = pickle.load(open(out / f"C_cpu_{name}.pkl", "rb"))
+    items, first = cin["items"], cin["first"]
+    pol = load_policy(ckpt_dir, cin["sub"], cin["unnorm"])
+    us = {k: np.asarray(v) for k, v in pol.vla.get_action_stats(cin["unnorm"]).items()}
+    gpu = Env("gpu", us, n=64)
+    gpu_res, sg = {}, {}
+    for b0 in range(0, len(items), 48):
+        chunk = items[b0:b0 + 48]
+        fill = chunk + [chunk[i % len(chunk)] for i in range(64 - len(chunk))]
+        gpu.reset([recs[j]["eid"] for j, _ in fill])
+        gpu.set_full([recs[j]["base"] for j, _ in fill])
+        gpu.perturb([k for _, k in fill], [recs[j]["obj_pose0"] for j, _ in fill])
+        gpu.step(torch.as_tensor(np.stack([first[x] for x in fill])))
+        for i, x in enumerate(chunk):
+            sg[x] = key_state(gpu, i)
+        gpu.reset([recs[j]["eid"] for j, _ in fill])
+        gpu.set_full([recs[j]["base"] for j, _ in fill])
+        gpu.perturb([k for _, k in fill], [recs[j]["obj_pose0"] for j, _ in fill])
+        torch.manual_seed(1900 + b0)
+        rgb, ins = gpu.obs(), [recs[j]["instr"] for j, _ in fill]
+        info = None
+        for t in range(H):
+            rgb, info = gpu.step(policy_tokens(pol, rgb, ins))
+        Yg = (info["success"] & info["is_src_obj_grasped"]).cpu().numpy()
+        for i, x in enumerate(chunk):
+            gpu_res[x] = bool(Yg[i])
+    gpu.close()
+    pickle.dump(dict(gpu_res=gpu_res, sg=sg), open(out / f"C_gpu_{name}.pkl", "wb"))
+
+
 def part_A_worker(srec_path, out_path, idxs):
     """별도 프로세스에서 같은 복원·재생 (작업자 배치 변경)."""
     recs = pickle.load(open(srec_path, "rb"))
@@ -271,12 +321,16 @@ def main():
     ap.add_argument("out_dir")
     ap.add_argument("--part", default="all")
     ap.add_argument("--worker", default="")
+    ap.add_argument("--gpu-worker", default="")
     ap.add_argument("--m-rec", type=int, default=M_REC, help="스모크 시험용. 본 측정은 24")
     ap.add_argument("--ckpts", default="W1,SFT,RL")
     a = ap.parse_args()
     out = Path(a.out_dir)
     out.mkdir(parents=True, exist_ok=True)
     BRIDGE = json.loads((out / "bridge_unnorm.json").read_text()) if (out / "bridge_unnorm.json").exists() else None
+    if a.gpu_worker:
+        gpu_worker(a.ckpt_dir, out, a.gpu_worker)
+        return
     if a.worker:
         srec_path, out_path, idxs = a.worker.split(":")
         part_A_worker(srec_path, out_path, [int(x) for x in idxs.split(",")])
@@ -339,7 +393,7 @@ def main():
             q = u.agent.robot.get_qpos()[0].cpu().numpy()
             in_lim = bool(np.all(q >= ql[:, 0] - 1e-4) and np.all(q <= ql[:, 1] + 1e-4))
             # 관통: CPU PhysX 접촉점의 separation (음수 = 관통 깊이)
-            src = cpu.src_actor(0)._objs[0].entity
+            src = cpu.src_actor(0)._objs[0]
             links = [lk._objs[0].entity for lk in u.agent.robot.get_links()]
             depth_tab = depth_grip = 0.0
             with G.sim_nondeterministic_ok():
@@ -354,8 +408,10 @@ def main():
                     elif other is not None and "arena" in other.name:
                         depth_tab = max(depth_tab, -mn)
             latch = rec["base"]["task"]["grasp"]
+            # 접촉력은 물리 스텝 뒤에만 계산되므로(복원 직후에는 0) 물리 집기 판정은 복원 뒤 1스텝(기록된 행동)에서 한다
+            rgb, info1 = cpu.step(torch.as_tensor(rec["tokens"][rec["s0"]]).reshape(1, 7))
             phys = bool(cpu.grasp_now()[0])
-            rgb, _ = cpu.step(torch.as_tensor(rec["tokens"][rec["s0"]]).reshape(1, 7))
+            latch = latch and bool(info1["is_src_obj_grasped"][0])
             v1 = float(torch.linalg.norm(cpu.src_actor(0).linear_velocity[0]))
             ok = in_lim and depth_tab < 0.005 and depth_grip < 0.005 and v1 < 0.5 and (latch == phys)
             B.append(dict(j=j, joint_limits_ok=in_lim, penetration_table_m=depth_tab, penetration_gripper_m=depth_grip,
@@ -367,7 +423,6 @@ def main():
     if a.part in ("C", "all"):
         valid = [b["j"] for b in res["B_validity"]["cases"] if b["valid"]] if "B_validity" in res else list(range(len(recs)))
         C = res.get("C_link", {})
-        gpu = None
         for name, sub, unnorm in [c for c in CKPTS if c[0] in a.ckpts.split(",")]:
             if name in C:
                 continue
@@ -393,59 +448,41 @@ def main():
                     rgb, info = cpu.step(a_)
                 cpu_res[(j, k)] = bool(info["success"][0]) and bool(info["is_src_obj_grasped"][0])
             t_cpu = time.time() - t0
-            # GPU (환경 64개, 항목 96개 → 48개씩 두 배치, 나머지 칸은 같은 항목 복제)
-            if gpu is None:
-                gpu = Env("gpu", us, n=64)
-            gpu.set_unnorm(us)
+            # 초기 전이 비교용 CPU 상태 (복원 + 교란 + CPU 첫 행동 1스텝)
+            sc = {}
+            for j, k in items:
+                rec = recs[j]
+                cpu.reset([rec["eid"]])
+                cpu.set_full([rec["base"]])
+                cpu.perturb([k], [rec["obj_pose0"]])
+                cpu.step(torch.as_tensor(first[(j, k)]).reshape(1, 7))
+                sc[(j, k)] = key_state(cpu, 0)
+            # GPU: PhysX GPU 모드는 CPU PhysX를 쓴 프로세스에서 켤 수 없으므로 별도 프로세스에서 실행
+            cin, cout = out / f"C_cpu_{name}.pkl", out / f"C_gpu_{name}.pkl"
+            pickle.dump(dict(items=items, first=first, unnorm=unnorm, sub=sub), open(cin, "wb"))
             t0 = time.time()
-            gpu_res, trans = {}, []
-            for b0 in range(0, len(items), 48):
-                chunk = items[b0:b0 + 48]
-                fill = chunk + [chunk[i % len(chunk)] for i in range(64 - len(chunk))]
-                gpu.reset([recs[j]["eid"] for j, _ in fill])
-                gpu.set_full([recs[j]["base"] for j, _ in fill])
-                gpu.perturb([k for _, k in fill], [recs[j]["obj_pose0"] for j, _ in fill])
-                # 초기 전이: CPU 첫 행동을 그대로 1스텝 (상태 차이), 그다음 다시 복원해 정책 평가
-                toks = torch.as_tensor(np.stack([first[x] for x in fill]))
-                gpu.step(toks)
-                sg = gpu.u.get_state().cpu().numpy()
-                for i, (j, k) in enumerate(chunk):
-                    rec = recs[j]
-                    cpu.reset([rec["eid"]])
-                    cpu.set_full([rec["base"]])
-                    cpu.perturb([k], [rec["obj_pose0"]])
-                    cpu.step(torch.as_tensor(first[(j, k)]).reshape(1, 7))
-                    sc = cpu.u.get_state()[0].cpu().numpy()
-                    trans.append(float(np.abs(sg[i] - sc).max()))
-                gpu.reset([recs[j]["eid"] for j, _ in fill])
-                gpu.set_full([recs[j]["base"] for j, _ in fill])
-                gpu.perturb([k for _, k in fill], [recs[j]["obj_pose0"] for j, _ in fill])
-                torch.manual_seed(1900 + b0)
-                rgb, ins = gpu.obs(), [recs[j]["instr"] for j, _ in fill]
-                for t in range(H):
-                    rgb, info = gpu.step(policy_tokens(pol, rgb, ins))
-                Yg = (info["success"] & info["is_src_obj_grasped"]).cpu().numpy()
-                for i, x in enumerate(chunk):
-                    gpu_res[x] = bool(Yg[i])
+            subprocess.run([sys.executable, __file__, a.ckpt_dir, str(out), "--gpu-worker", name], check=True)
             t_gpu = time.time() - t0
+            g = pickle.load(open(cout, "rb"))
+            gpu_res = g["gpu_res"]
+            trans = [key_diff(g["sg"][x], sc[x]) for x in items]
 
             def rate(d, k, js):
                 v = [d[(j, k)] for j in js]
                 return round(100 * sum(v) / max(1, len(v)), 1)
             C[name] = dict(cpu={k: rate(cpu_res, k, valid) for k in PERT}, gpu={k: rate(gpu_res, k, valid) for k in PERT},
                            agreement=round(100 * np.mean([cpu_res[x] == gpu_res[x] for x in items if x[0] in valid]), 1),
-                           initial_transition_state_maxabs=dict(median=float(np.median(trans)), max=float(np.max(trans))),
+                           initial_transition_cpu_vs_gpu={c: dict(median=float(np.median([t[c] for t in trans])), max=float(np.max([t[c] for t in trans])))
+                                                             for c in ("src_m", "tgt_m", "qpos_rad")},
                            sec_cpu=round(t_cpu, 1), sec_gpu=round(t_gpu, 1), n_states=len(valid),
                            per_item=[dict(j=j, k=k, cpu=cpu_res[(j, k)], gpu=gpu_res[(j, k)]) for j, k in items])
             log(f"[C {name}] cpu {C[name]['cpu']} gpu {C[name]['gpu']} agree {C[name]['agreement']}% "
-                f"trans {C[name]['initial_transition_state_maxabs']}")
+                f"trans {C[name]['initial_transition_cpu_vs_gpu']}")
             res["C_link"] = C
             save()
             if name != "W1":
                 del pol
                 torch.cuda.empty_cache()
-        if gpu is not None:
-            gpu.close()
         # 교란 없는 복원 대조 vs 원 궤적 (W1)
         ctrl = [C["W1"]["per_item"][i]["cpu"] for i in range(len(C["W1"]["per_item"])) if C["W1"]["per_item"][i]["k"] == "control"
                 and C["W1"]["per_item"][i]["j"] in valid]
