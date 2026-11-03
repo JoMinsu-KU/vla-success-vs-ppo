@@ -48,3 +48,4 @@ pilot/artifacts/p1_envs/*.png
 hf_cache/
 pilot/artifacts/*/videos/
 pilot/artifacts/p4_storage_contact/store/
+.nfs*
