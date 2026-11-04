@@ -1,0 +1,254 @@
+{
+  "gen-robot/openvla-7b-rlvla-rl": {
+    "revision": "93c54b036cc90ee394731fc73788406d7e65f057",
+    "local_path": "checkpoints/openvla-7b-rlvla-rl",
+    "all_ok": true,
+    "files": {
+      ".gitattributes": {
+        "exists": true,
+        "size_ok": true
+      },
+      "README.md": {
+        "exists": true,
+        "size_ok": true
+      },
+      "added_tokens.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "dataset_statistics.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "generation_config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "model-00001-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00002-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00003-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00004-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model.safetensors.index.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "preprocessor_config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "special_tokens_map.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "tokenizer.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "tokenizer.model": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "tokenizer_config.json": {
+        "exists": true,
+        "size_ok": true
+      }
+    }
+  },
+  "gen-robot/openvla-7b-rlvla-sft_16k": {
+    "revision": "cda67bb9cf33bc87cb8bf715572ae0c44e98f8ae",
+    "local_path": "checkpoints/openvla-7b-rlvla-sft_16k",
+    "all_ok": true,
+    "files": {
+      ".gitattributes": {
+        "exists": true,
+        "size_ok": true
+      },
+      "README.md": {
+        "exists": true,
+        "size_ok": true
+      },
+      "added_tokens.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "configuration_prismatic.py": {
+        "exists": true,
+        "size_ok": true
+      },
+      "dataset_statistics.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "generation_config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "model-00001-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00002-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00003-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00004-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model.safetensors.index.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "modeling_prismatic.py": {
+        "exists": true,
+        "size_ok": true
+      },
+      "preprocessor_config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "processing_prismatic.py": {
+        "exists": true,
+        "size_ok": true
+      },
+      "processor_config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "special_tokens_map.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "tokenizer.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "tokenizer.model": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "tokenizer_config.json": {
+        "exists": true,
+        "size_ok": true
+      }
+    }
+  },
+  "gen-robot/openvla-7b-rlvla-warmup": {
+    "revision": "735fd5d1f4472c4c9f3f998f0e89aa641af5ad03",
+    "local_path": "checkpoints/openvla-7b-rlvla-warmup",
+    "all_ok": true,
+    "files": {
+      ".gitattributes": {
+        "exists": true,
+        "size_ok": true
+      },
+      "README.md": {
+        "exists": true,
+        "size_ok": true
+      },
+      "added_tokens.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "dataset_statistics.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "generation_config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "model-00001-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00002-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00003-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model-00004-of-00004.safetensors": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "model.safetensors.index.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "preprocessor_config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "processing_prismatic.py": {
+        "exists": true,
+        "size_ok": true
+      },
+      "processor_config.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "special_tokens_map.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "tokenizer.json": {
+        "exists": true,
+        "size_ok": true
+      },
+      "tokenizer.model": {
+        "exists": true,
+        "size_ok": true,
+        "sha256_ok": true
+      },
+      "tokenizer_config.json": {
+        "exists": true,
+        "size_ok": true
+      }
+    }
+  }
+}

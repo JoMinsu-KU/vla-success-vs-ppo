@@ -1,0 +1,2156 @@
+{
+  "srec_build": {
+    "n": 24,
+    "sec": 803.8,
+    "episodes_tried": 37
+  },
+  "A_repeatability": {
+    "cases": [
+      {
+        "i": 0,
+        "twice": true,
+        "after_other": true,
+        "other_process_reversed_order": true
+      },
+      {
+        "i": 1,
+        "twice": true,
+        "after_other": true,
+        "other_process_reversed_order": true
+      },
+      {
+        "i": 2,
+        "twice": true,
+        "after_other": true,
+        "other_process_reversed_order": true
+      },
+      {
+        "i": 3,
+        "twice": true,
+        "after_other": true,
+        "other_process_reversed_order": true
+      },
+      {
+        "i": 4,
+        "twice": true,
+        "after_other": true,
+        "other_process_reversed_order": true
+      },
+      {
+        "i": 5,
+        "twice": true,
+        "after_other": true,
+        "other_process_reversed_order": true
+      },
+      {
+        "i": 6,
+        "twice": true,
+        "after_other": true,
+        "other_process_reversed_order": true
+      },
+      {
+        "i": 7,
+        "twice": true,
+        "after_other": true,
+        "other_process_reversed_order": true
+      }
+    ],
+    "all_identical": true
+  },
+  "B_validity": {
+    "cases": [
+      {
+        "j": 0,
+        "joint_limits_ok": true,
+        "penetration_table_m": 5.940167824292075e-08,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.02347397617995739,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 1,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.08073197305202484,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 2,
+        "joint_limits_ok": true,
+        "penetration_table_m": 5.959527271670595e-08,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.03799113631248474,
+        "latch": true,
+        "physical_grasp": false,
+        "valid": false
+      },
+      {
+        "j": 3,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.0208946093916893,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 4,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0005019288510084152,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.06670767068862915,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 5,
+        "joint_limits_ok": true,
+        "penetration_table_m": 1.7881374958506058e-07,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.020518777891993523,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 6,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.02043623849749565,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 7,
+        "joint_limits_ok": true,
+        "penetration_table_m": 1.1921015641291888e-07,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.03999294713139534,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 8,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.017118830233812332,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 9,
+        "joint_limits_ok": true,
+        "penetration_table_m": 1.4675483051007632e-12,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.06666511297225952,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 10,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.1149221658706665,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 11,
+        "joint_limits_ok": true,
+        "penetration_table_m": 5.992888674200003e-08,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.07991888374090195,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 12,
+        "joint_limits_ok": true,
+        "penetration_table_m": 1.1921078169052635e-07,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.05220174416899681,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 13,
+        "joint_limits_ok": true,
+        "penetration_table_m": 5.960530558013488e-08,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.05972893908619881,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 14,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.04764735326170921,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 15,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.001692980877123773,
+        "latch": true,
+        "physical_grasp": false,
+        "valid": false
+      },
+      {
+        "j": 16,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.027588315308094025,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 17,
+        "joint_limits_ok": true,
+        "penetration_table_m": 2.851052727237402e-13,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.054410506039857864,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 18,
+        "joint_limits_ok": true,
+        "penetration_table_m": 0.0,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.061966411769390106,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 19,
+        "joint_limits_ok": true,
+        "penetration_table_m": 1.1920750608851449e-07,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.0031664841808378696,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 20,
+        "joint_limits_ok": true,
+        "penetration_table_m": 5.960535531812639e-08,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.1819193959236145,
+        "latch": true,
+        "physical_grasp": false,
+        "valid": false
+      },
+      {
+        "j": 21,
+        "joint_limits_ok": true,
+        "penetration_table_m": 2.2011674167404793e-12,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.004168491344898939,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 22,
+        "joint_limits_ok": true,
+        "penetration_table_m": 1.1921250120394689e-07,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.09910853207111359,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      },
+      {
+        "j": 23,
+        "joint_limits_ok": true,
+        "penetration_table_m": 5.958611737355568e-08,
+        "penetration_gripper_m": 0.0,
+        "obj_speed_after_1step": 0.025202404707670212,
+        "latch": true,
+        "physical_grasp": true,
+        "valid": true
+      }
+    ],
+    "n_valid": 21,
+    "n": 24
+  },
+  "C_link": {
+    "W1": {
+      "cpu": {
+        "control": 57.1,
+        "R-a": 23.8,
+        "R-b": 61.9,
+        "R-c": 57.1
+      },
+      "gpu": {
+        "control": 61.9,
+        "R-a": 23.8,
+        "R-b": 66.7,
+        "R-c": 66.7
+      },
+      "agreement": 78.6,
+      "initial_transition_cpu_vs_gpu": {
+        "src_m": {
+          "median": 0.0008645541965961456,
+          "max": 0.8327530175447464
+        },
+        "tgt_m": {
+          "median": 1.0648742318153381e-05,
+          "max": 0.5696781873703003
+        },
+        "qpos_rad": {
+          "median": 0.0012907730415463448,
+          "max": 0.00959177315235138
+        }
+      },
+      "sec_cpu": 1058.1,
+      "sec_gpu": 278.6,
+      "n_states": 21,
+      "per_item": [
+        {
+          "j": 0,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 0,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 0,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 0,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 1,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 1,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 1,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 1,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 2,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 2,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 2,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 2,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 6,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 6,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "control",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 8,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 10,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 10,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 10,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 10,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 11,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 11,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 11,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 11,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 12,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 12,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 12,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 12,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 13,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "control",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 14,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 15,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 15,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 15,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 15,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 16,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 16,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 16,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 16,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 18,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 19,
+          "k": "control",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 19,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 19,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 19,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 20,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 20,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 20,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 20,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 22,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 22,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 22,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 22,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 23,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 23,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 23,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 23,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        }
+      ]
+    },
+    "SFT": {
+      "cpu": {
+        "control": 85.7,
+        "R-a": 33.3,
+        "R-b": 81.0,
+        "R-c": 76.2
+      },
+      "gpu": {
+        "control": 81.0,
+        "R-a": 28.6,
+        "R-b": 85.7,
+        "R-c": 71.4
+      },
+      "agreement": 88.1,
+      "initial_transition_cpu_vs_gpu": {
+        "src_m": {
+          "median": 0.0009307675063610077,
+          "max": 0.8935370817780495
+        },
+        "tgt_m": {
+          "median": 1.0650604963302612e-05,
+          "max": 0.5759152173995972
+        },
+        "qpos_rad": {
+          "median": 0.00129710603505373,
+          "max": 0.009474279591813684
+        }
+      },
+      "sec_cpu": 1068.1,
+      "sec_gpu": 371.3,
+      "n_states": 21,
+      "per_item": [
+        {
+          "j": 0,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 0,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 0,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 0,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 1,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 1,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 1,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 1,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 2,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 2,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 2,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 2,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "control",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 3,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 4,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 5,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 8,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 10,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 10,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 10,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 10,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 11,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 11,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 11,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 11,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 12,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 12,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 12,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 12,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 14,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 15,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 15,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 15,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 15,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 16,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 16,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 16,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 16,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 17,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 18,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 19,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 19,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 19,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 19,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 20,
+          "k": "control",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 20,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 20,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 20,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 22,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 22,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 22,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 22,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 23,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 23,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 23,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 23,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        }
+      ]
+    },
+    "RL": {
+      "cpu": {
+        "control": 95.2,
+        "R-a": 66.7,
+        "R-b": 90.5,
+        "R-c": 95.2
+      },
+      "gpu": {
+        "control": 71.4,
+        "R-a": 71.4,
+        "R-b": 81.0,
+        "R-c": 90.5
+      },
+      "agreement": 79.8,
+      "initial_transition_cpu_vs_gpu": {
+        "src_m": {
+          "median": 0.0008844286203384399,
+          "max": 0.943952314555645
+        },
+        "tgt_m": {
+          "median": 1.0669231414794922e-05,
+          "max": 0.5733517408370972
+        },
+        "qpos_rad": {
+          "median": 0.0010693883523344994,
+          "max": 0.009255733340978622
+        }
+      },
+      "sec_cpu": 1069.1,
+      "sec_gpu": 285.9,
+      "n_states": 21,
+      "per_item": [
+        {
+          "j": 0,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 0,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 0,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 0,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 1,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 1,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 1,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 1,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 2,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 2,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 2,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 2,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 3,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 3,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 4,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 4,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 5,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 6,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 7,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 8,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 8,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 9,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 10,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 10,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 10,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 10,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 11,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 11,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 11,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 11,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 12,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 12,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 12,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 12,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 13,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 13,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 14,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 14,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 15,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 15,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 15,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 15,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 16,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 16,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 16,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 16,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 17,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 18,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 19,
+          "k": "control",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 19,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 19,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 19,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 20,
+          "k": "control",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 20,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 20,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 20,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "control",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 21,
+          "k": "R-b",
+          "cpu": false,
+          "gpu": false
+        },
+        {
+          "j": 21,
+          "k": "R-c",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 22,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 22,
+          "k": "R-a",
+          "cpu": false,
+          "gpu": true
+        },
+        {
+          "j": 22,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 22,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": false
+        },
+        {
+          "j": 23,
+          "k": "control",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 23,
+          "k": "R-a",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 23,
+          "k": "R-b",
+          "cpu": true,
+          "gpu": true
+        },
+        {
+          "j": 23,
+          "k": "R-c",
+          "cpu": true,
+          "gpu": true
+        }
+      ]
+    }
+  },
+  "B_control_vs_original": {
+    "control_restored_W1_cpu": 57.1,
+    "original_trajectory": 61.9,
+    "report_flag": false
+  },
+  "C_relative_order_control": {
+    "cpu": [
+      "RL",
+      "SFT",
+      "W1"
+    ],
+    "gpu": [
+      "SFT",
+      "RL",
+      "W1"
+    ]
+  },
+  "total_min": 91.6
+}

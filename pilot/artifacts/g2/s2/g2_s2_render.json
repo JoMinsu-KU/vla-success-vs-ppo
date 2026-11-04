@@ -1,0 +1,427 @@
+{
+  "gpu_index": 0,
+  "sapien_device_summary": "GPU: NVIDIA H200 NVL\n  Supported: 1\n  Present:   0\n  cudaId:    0\n  rayTrace:  1\n  cudaMode   0\n",
+  "torch_cuda": {
+    "available": true,
+    "n": 1,
+    "name": "NVIDIA H200 NVL"
+  },
+  "train_env": [
+    {
+      "num_envs": 1,
+      "ok": true,
+      "make_reset_s": 10.05,
+      "frame": {
+        "shape": [
+          1,
+          480,
+          640,
+          3
+        ],
+        "mean": 174.3418207465278,
+        "std": 46.80064798768097,
+        "nonzero": 1.0
+      },
+      "steps80_s": 29.83,
+      "env_steps_per_s": 2.7,
+      "reconfigure_reset_s": 2.31,
+      "gpu_mem_delta_mib": 4412,
+      "info_keys": [
+        "carrot_plate_dist",
+        "consecutive_grasp",
+        "elapsed_steps",
+        "gripper_carrot_dist",
+        "gripper_plate_dist",
+        "is_src_obj_grasped",
+        "src_on_target",
+        "success"
+      ]
+    },
+    {
+      "num_envs": 8,
+      "ok": true,
+      "make_reset_s": 9.14,
+      "frame": {
+        "shape": [
+          8,
+          480,
+          640,
+          3
+        ],
+        "mean": 148.749765625,
+        "std": 72.95837176336744,
+        "nonzero": 0.9871632215711805
+      },
+      "steps80_s": 30.15,
+      "env_steps_per_s": 21.2,
+      "reconfigure_reset_s": 2.65,
+      "gpu_mem_delta_mib": 3152,
+      "info_keys": [
+        "carrot_plate_dist",
+        "consecutive_grasp",
+        "elapsed_steps",
+        "gripper_carrot_dist",
+        "gripper_plate_dist",
+        "is_src_obj_grasped",
+        "src_on_target",
+        "success"
+      ]
+    },
+    {
+      "num_envs": 64,
+      "ok": true,
+      "make_reset_s": 12.67,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 139.63466764662002,
+        "std": 69.79661310135363,
+        "nonzero": 0.9958746507432725
+      },
+      "steps80_s": 58.31,
+      "env_steps_per_s": 87.8,
+      "reconfigure_reset_s": 4.86,
+      "gpu_mem_delta_mib": 17187,
+      "info_keys": [
+        "carrot_plate_dist",
+        "consecutive_grasp",
+        "elapsed_steps",
+        "gripper_carrot_dist",
+        "gripper_plate_dist",
+        "is_src_obj_grasped",
+        "src_on_target",
+        "success"
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "idx": 1,
+      "env_id": "PutOnPlateInScene25Carrot-v1",
+      "split": "train",
+      "axis": "ID",
+      "ok": true,
+      "s": 15.45,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 139.59960454305013,
+        "std": 69.82045193920963,
+        "nonzero": 0.995884026421441
+      },
+      "instruction": "put hamburger on plate"
+    },
+    {
+      "idx": 2,
+      "env_id": "PutOnPlateInScene25VisionImage-v1",
+      "split": "test",
+      "axis": "vision",
+      "ok": true,
+      "s": 15.21,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 135.26993762546115,
+        "std": 64.73118501189153,
+        "nonzero": 0.9998332214355469
+      },
+      "instruction": "put pipe on plate"
+    },
+    {
+      "idx": 3,
+      "env_id": "PutOnPlateInScene25VisionTexture03-v1",
+      "split": "test",
+      "axis": "vision",
+      "ok": true,
+      "s": 15.57,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 139.51496020846898,
+        "std": 67.62579496003325,
+        "nonzero": 0.9958843655056424
+      },
+      "instruction": "put ketchup bottle on plate"
+    },
+    {
+      "idx": 4,
+      "env_id": "PutOnPlateInScene25VisionTexture05-v1",
+      "split": "test",
+      "axis": "vision",
+      "ok": true,
+      "s": 15.88,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 139.4839690823025,
+        "std": 66.85525074928307,
+        "nonzero": 0.9958843655056424
+      },
+      "instruction": "put ketchup bottle on plate"
+    },
+    {
+      "idx": 5,
+      "env_id": "PutOnPlateInScene25VisionWhole03-v1",
+      "split": "test",
+      "axis": "vision",
+      "ok": true,
+      "s": 16.0,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 131.5036249287923,
+        "std": 52.5284347126883,
+        "nonzero": 0.9999967447916667
+      },
+      "instruction": "put ketchup bottle on plate"
+    },
+    {
+      "idx": 6,
+      "env_id": "PutOnPlateInScene25VisionWhole05-v1",
+      "split": "test",
+      "axis": "vision",
+      "ok": true,
+      "s": 15.98,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 126.60226518419054,
+        "std": 46.596193270746106,
+        "nonzero": 0.9999982198079427
+      },
+      "instruction": "put ketchup bottle on plate"
+    },
+    {
+      "idx": 7,
+      "env_id": "PutOnPlateInScene25Carrot-v1",
+      "split": "test",
+      "axis": "semantic",
+      "ok": true,
+      "s": 15.82,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 139.3639025709364,
+        "std": 69.85296594487755,
+        "nonzero": 0.9958843315972222
+      },
+      "instruction": "put nonstop can on plate"
+    },
+    {
+      "idx": 8,
+      "env_id": "PutOnPlateInScene25Plate-v1",
+      "split": "test",
+      "axis": "semantic",
+      "ok": true,
+      "s": 17.43,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 136.5582856411404,
+        "std": 69.79967141182475,
+        "nonzero": 0.9958839925130208
+      },
+      "instruction": "put ketchup bottle on manhole cover"
+    },
+    {
+      "idx": 9,
+      "env_id": "PutOnPlateInScene25Instruct-v1",
+      "split": "test",
+      "axis": "semantic",
+      "ok": true,
+      "s": 15.93,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 139.60998057047527,
+        "std": 69.84453614162483,
+        "nonzero": 0.9958839925130208
+      },
+      "instruction": "Can you put ketchup bottle on plate?"
+    },
+    {
+      "idx": 10,
+      "env_id": "PutOnPlateInScene25MultiCarrot-v1",
+      "split": "test",
+      "axis": "semantic",
+      "ok": true,
+      "s": 16.9,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 134.3459622531467,
+        "std": 68.53176777353812,
+        "nonzero": 0.9974638536241319
+      },
+      "instruction": "put kitchen spoon on plate"
+    },
+    {
+      "idx": 11,
+      "env_id": "PutOnPlateInScene25MultiPlate-v1",
+      "split": "test",
+      "axis": "semantic",
+      "ok": true,
+      "s": 20.43,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 132.63045367770724,
+        "std": 68.31449764965133,
+        "nonzero": 0.9982164171006944
+      },
+      "instruction": "put pipe on pizza"
+    },
+    {
+      "idx": 12,
+      "env_id": "PutOnPlateInScene25Position-v1",
+      "split": "test",
+      "axis": "execution",
+      "ok": true,
+      "s": 18.03,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 137.6850073920356,
+        "std": 69.19753971002037,
+        "nonzero": 0.9990970865885417
+      },
+      "instruction": "put bread on plate"
+    },
+    {
+      "idx": 13,
+      "env_id": "PutOnPlateInScene25EEPose-v1",
+      "split": "test",
+      "axis": "execution",
+      "ok": true,
+      "s": 18.06,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 136.97156139797636,
+        "std": 69.29185298093975,
+        "nonzero": 0.9948889838324653
+      },
+      "instruction": "put ketchup bottle on plate"
+    },
+    {
+      "idx": 14,
+      "env_id": "PutOnPlateInScene25PositionChangeTo-v1",
+      "split": "test",
+      "axis": "execution",
+      "ok": true,
+      "s": 15.7,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 135.22003300984701,
+        "std": 68.42656824015366,
+        "nonzero": 0.9974709235297309
+      },
+      "instruction": "put watering can on plate"
+    },
+    {
+      "idx": 15,
+      "env_id": "PutOnPlateInScene25MultiCarrot-v1",
+      "split": "train",
+      "axis": "train-variant",
+      "ok": true,
+      "s": 15.99,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 134.8896940612793,
+        "std": 68.46113398266887,
+        "nonzero": 0.9974610561794705
+      },
+      "instruction": "put carrot on plate"
+    },
+    {
+      "idx": 16,
+      "env_id": "PutOnPlateInScene25MultiPlate-v1",
+      "split": "train",
+      "axis": "train-variant",
+      "ok": true,
+      "s": 17.99,
+      "frame": {
+        "shape": [
+          64,
+          480,
+          640,
+          3
+        ],
+        "mean": 135.71783299764,
+        "std": 69.10137348732577,
+        "nonzero": 0.9982170104980469
+      },
+      "instruction": "put golf ball on plate"
+    }
+  ],
+  "verdict": {
+    "train_env_64_ok": true,
+    "conditions_ok": 16
+  }
+}

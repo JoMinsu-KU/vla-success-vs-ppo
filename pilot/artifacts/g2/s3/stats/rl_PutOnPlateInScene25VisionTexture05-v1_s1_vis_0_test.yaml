@@ -1,0 +1,329 @@
+env_name: PutOnPlateInScene25VisionTexture05-v1
+ep_len: 80
+epoch: 0
+instruction:
+  0: put fast food cup on plate
+  1: put bread on plate
+  2: put BBQ sauce on plate
+  3: put kitchen shovel on plate
+  4: put watering can on plate
+  5: put watering can on plate
+  6: put fast food cup on plate
+  7: put toy bear on plate
+  8: put banana on plate
+  9: put plant on plate
+  10: put plastic bottle on plate
+  11: put watering can on plate
+  12: put pipe on plate
+  13: put zuchinni on plate
+  14: put ketchup bottle on plate
+  15: put bread on plate
+  16: put pipe on plate
+  17: put kitchen shovel on plate
+  18: put plastic bottle on plate
+  19: put pipe on plate
+  20: put pipe on plate
+  21: put ketchup bottle on plate
+  22: put golf ball on plate
+  23: put 7up can on plate
+  24: put golf ball on plate
+  25: put plant on plate
+  26: put plastic bottle on plate
+  27: put hamburger on plate
+  28: put watering can on plate
+  29: put 7up can on plate
+  30: put bread on plate
+  31: put 7up can on plate
+  32: put plastic bottle on plate
+  33: put golf ball on plate
+  34: put pipe on plate
+  35: put pipe on plate
+  36: put zuchinni on plate
+  37: put hamburger on plate
+  38: put carrot on plate
+  39: put zuchinni on plate
+  40: put hamburger on plate
+  41: put kitchen shovel on plate
+  42: put BBQ sauce on plate
+  43: put watering can on plate
+  44: put fast food cup on plate
+  45: put fast food cup on plate
+  46: put fast food cup on plate
+  47: put golf ball on plate
+  48: put fast food cup on plate
+  49: put kitchen shovel on plate
+  50: put hamburger on plate
+  51: put banana on plate
+  52: put carrot on plate
+  53: put hamburger on plate
+  54: put carrot on plate
+  55: put BBQ sauce on plate
+  56: put carrot on plate
+  57: put toy bear on plate
+  58: put fast food cup on plate
+  59: put carrot on plate
+  60: put zuchinni on plate
+  61: put bread on plate
+  62: put hamburger on plate
+  63: put golf ball on plate
+last_info:
+  0:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  1:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  2:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  3:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  4:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  5:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  6:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  7:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  8:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  9:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  10:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  11:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  12:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  13:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  14:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  15:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  16:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  17:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  18:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  19:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  20:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  21:
+    consecutive_grasp: false
+    is_src_obj_grasped: true
+    success: false
+  22:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  23:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  24:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  25:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  26:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  27:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  28:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  29:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  30:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  31:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  32:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  33:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  34:
+    consecutive_grasp: false
+    is_src_obj_grasped: true
+    success: false
+  35:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  36:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  37:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  38:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  39:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  40:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  41:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  42:
+    consecutive_grasp: false
+    is_src_obj_grasped: true
+    success: true
+  43:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  44:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  45:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  46:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  47:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  48:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  49:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  50:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  51:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  52:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  53:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  54:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  55:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  56:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  57:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  58:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  59:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  60:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  61:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  62:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  63:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+stats:
+  consecutive_grasp: 0.796875
+  is_src_obj_grasped: 0.84375
+  success: 0.71875

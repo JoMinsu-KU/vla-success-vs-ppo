@@ -1,0 +1,34 @@
+{
+  "args": {
+    "ckpt": "/home/jovyan/vla_g2/checkpoints/openvla-7b-rlvla-warmup",
+    "out_dir": "/home/jovyan/vla_g2/s9",
+    "arm": "A2p",
+    "rounds": 50,
+    "path": "math",
+    "seed": 0,
+    "chunk": 8,
+    "n_envs": 64,
+    "save_rounds": "10,50",
+    "resume": "",
+    "smoke_steps": 0
+  },
+  "numerics": {
+    "torch": "2.2.0+cu121",
+    "cuda": "12.1",
+    "cudnn": 8902,
+    "device": "NVIDIA H200 NVL",
+    "deterministic": true,
+    "deterministic_warn_only": false,
+    "sdp_flash": false,
+    "sdp_mem_efficient": false,
+    "sdp_math": true,
+    "cublas_workspace": ":4096:8",
+    "tf32_matmul": false,
+    "attn_implementation": [
+      "sdpa"
+    ]
+  },
+  "start_round": 0,
+  "lora_params": 110828288,
+  "value_params": 2163456
+}

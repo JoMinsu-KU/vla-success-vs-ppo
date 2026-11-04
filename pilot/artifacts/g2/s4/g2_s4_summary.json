@@ -1,0 +1,222 @@
+{
+  "ID (Carrot train)": {
+    "rl": {
+      "Y": 93.2,
+      "success": 93.2,
+      "success_any": 96.9,
+      "n": 192,
+      "se_Y": 1.8,
+      "per_batch_Y": [
+        89.1,
+        93.8,
+        96.9
+      ]
+    },
+    "sft": {
+      "Y": 84.4,
+      "success": 84.4,
+      "success_any": 86.5,
+      "n": 192,
+      "se_Y": 2.6,
+      "per_batch_Y": [
+        90.6,
+        81.2,
+        81.2
+      ]
+    },
+    "warmup": {
+      "Y": 45.8,
+      "success": 46.4,
+      "success_any": 52.1,
+      "n": 192,
+      "se_Y": 3.6,
+      "per_batch_Y": [
+        43.8,
+        46.9,
+        46.9
+      ]
+    },
+    "rl_minus_sft_Y": 8.8,
+    "paired": {
+      "rl_only": 29,
+      "sft_only": 12,
+      "mcnemar_p": 0.011507789735333063
+    }
+  },
+  "Position": {
+    "rl": {
+      "Y": 78.6,
+      "success": 78.6,
+      "success_any": 81.2,
+      "n": 192,
+      "se_Y": 3.0,
+      "per_batch_Y": [
+        85.9,
+        68.8,
+        81.2
+      ]
+    },
+    "sft": {
+      "Y": 69.8,
+      "success": 69.8,
+      "success_any": 74.0,
+      "n": 192,
+      "se_Y": 3.3,
+      "per_batch_Y": [
+        78.1,
+        59.4,
+        71.9
+      ]
+    },
+    "warmup": {
+      "Y": 27.6,
+      "success": 27.6,
+      "success_any": 32.8,
+      "n": 192,
+      "se_Y": 3.2,
+      "per_batch_Y": [
+        28.1,
+        31.2,
+        23.4
+      ]
+    },
+    "rl_minus_sft_Y": 8.8,
+    "paired": {
+      "rl_only": 38,
+      "sft_only": 21,
+      "mcnemar_p": 0.036343179957053884
+    }
+  },
+  "EEPose": {
+    "rl": {
+      "Y": 76.6,
+      "success": 77.6,
+      "success_any": 82.8,
+      "n": 192,
+      "se_Y": 3.1,
+      "per_batch_Y": [
+        79.7,
+        81.2,
+        68.8
+      ]
+    },
+    "sft": {
+      "Y": 29.2,
+      "success": 29.2,
+      "success_any": 31.2,
+      "n": 192,
+      "se_Y": 3.3,
+      "per_batch_Y": [
+        23.4,
+        35.9,
+        28.1
+      ]
+    },
+    "warmup": {
+      "Y": 27.6,
+      "success": 28.1,
+      "success_any": 32.3,
+      "n": 192,
+      "se_Y": 3.2,
+      "per_batch_Y": [
+        26.6,
+        26.6,
+        29.7
+      ]
+    },
+    "rl_minus_sft_Y": 47.4,
+    "paired": {
+      "rl_only": 100,
+      "sft_only": 9,
+      "mcnemar_p": 1.4406802659742465e-20
+    }
+  },
+  "PositionChangeTo": {
+    "rl": {
+      "Y": 79.2,
+      "success": 79.7,
+      "success_any": 84.9,
+      "n": 192,
+      "se_Y": 2.9,
+      "per_batch_Y": [
+        81.2,
+        81.2,
+        75.0
+      ]
+    },
+    "sft": {
+      "Y": 25.5,
+      "success": 26.0,
+      "success_any": 29.7,
+      "n": 192,
+      "se_Y": 3.1,
+      "per_batch_Y": [
+        25.0,
+        25.0,
+        26.6
+      ]
+    },
+    "warmup": {
+      "Y": 21.9,
+      "success": 22.9,
+      "success_any": 30.2,
+      "n": 192,
+      "se_Y": 3.0,
+      "per_batch_Y": [
+        18.8,
+        23.4,
+        23.4
+      ]
+    },
+    "rl_minus_sft_Y": 53.7,
+    "paired": {
+      "rl_only": 111,
+      "sft_only": 8,
+      "mcnemar_p": 2.5395880340833756e-24
+    }
+  },
+  "New object (Carrot test)": {
+    "rl": {
+      "Y": 70.3,
+      "success": 70.8,
+      "success_any": 81.8,
+      "n": 192,
+      "se_Y": 3.3,
+      "per_batch_Y": [
+        70.3,
+        70.3,
+        70.3
+      ]
+    },
+    "sft": {
+      "Y": 50.5,
+      "success": 51.0,
+      "success_any": 53.6,
+      "n": 192,
+      "se_Y": 3.6,
+      "per_batch_Y": [
+        54.7,
+        51.6,
+        45.3
+      ]
+    },
+    "warmup": {
+      "Y": 32.3,
+      "success": 32.3,
+      "success_any": 38.0,
+      "n": 192,
+      "se_Y": 3.4,
+      "per_batch_Y": [
+        32.8,
+        42.2,
+        21.9
+      ]
+    },
+    "rl_minus_sft_Y": 19.8,
+    "paired": {
+      "rl_only": 58,
+      "sft_only": 20,
+      "mcnemar_p": 1.951909074364107e-05
+    }
+  }
+}

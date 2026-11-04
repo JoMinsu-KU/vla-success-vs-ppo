@@ -1,0 +1,329 @@
+env_name: PutOnPlateInScene25Plate-v1
+ep_len: 80
+epoch: 0
+instruction:
+  0: put ketchup bottle on manhole cover
+  1: put banana on newspaper
+  2: put zuchinni on tomato slice
+  3: put zuchinni on drawing tablet
+  4: put 7up can on sheet metal
+  5: put ketchup bottle on pizza
+  6: put banana on drawing tablet
+  7: put 7up can on drawing tablet
+  8: put toy bear on tomato slice
+  9: put bread on newspaper
+  10: put toy bear on carpet
+  11: put bread on pizza
+  12: put hamburger on drawing tablet
+  13: put carrot on sheet metal
+  14: put BBQ sauce on cutting board
+  15: put hamburger on frying pan
+  16: put golf ball on flat bowl
+  17: put fast food cup on manhole cover
+  18: put zuchinni on chess board
+  19: put zuchinni on mouse pad
+  20: put watering can on notepad
+  21: put plastic bottle on newspaper
+  22: put golf ball on notepad
+  23: put watering can on cloth
+  24: put banana on pizza
+  25: put hamburger on envelope
+  26: put 7up can on mouse pad
+  27: put kitchen shovel on mouse pad
+  28: put golf ball on mouse pad
+  29: put hamburger on chess board
+  30: put fast food cup on pizza
+  31: put BBQ sauce on notepad
+  32: put toy bear on sheet metal
+  33: put carrot on notepad
+  34: put pipe on flat bowl
+  35: put kitchen shovel on drawing tablet
+  36: put watering can on notepad
+  37: put golf ball on mouse pad
+  38: put golf ball on envelope
+  39: put carrot on notepad
+  40: put 7up can on sheet metal
+  41: put fast food cup on notepad
+  42: put ketchup bottle on notepad
+  43: put pipe on notepad
+  44: put 7up can on gramophone disk
+  45: put golf ball on cloth
+  46: put 7up can on drawing tablet
+  47: put toy bear on gramophone disk
+  48: put kitchen shovel on newspaper
+  49: put fast food cup on tomato slice
+  50: put ketchup bottle on tomato slice
+  51: put golf ball on chess board
+  52: put ketchup bottle on manhole cover
+  53: put plant on envelope
+  54: put 7up can on cloth
+  55: put BBQ sauce on frying pan
+  56: put pipe on newspaper
+  57: put BBQ sauce on pizza
+  58: put carrot on flat bowl
+  59: put plant on sheet metal
+  60: put fast food cup on frying pan
+  61: put zuchinni on gramophone disk
+  62: put ketchup bottle on newspaper
+  63: put pipe on flat bowl
+last_info:
+  0:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  1:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  2:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  3:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  4:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  5:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  6:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  7:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  8:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  9:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  10:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: true
+  11:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  12:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  13:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  14:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  15:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  16:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  17:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  18:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  19:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  20:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  21:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  22:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  23:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  24:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  25:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  26:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  27:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  28:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  29:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  30:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  31:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  32:
+    consecutive_grasp: false
+    is_src_obj_grasped: true
+    success: false
+  33:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  34:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  35:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  36:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  37:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  38:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  39:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  40:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  41:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  42:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  43:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  44:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  45:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  46:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  47:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  48:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  49:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  50:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  51:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  52:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  53:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  54:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  55:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  56:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  57:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  58:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  59:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  60:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  61:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  62:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  63:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+stats:
+  consecutive_grasp: 0.84375
+  is_src_obj_grasped: 0.859375
+  success: 0.65625

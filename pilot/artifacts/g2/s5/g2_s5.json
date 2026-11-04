@@ -1,0 +1,143 @@
+{
+  "args": {
+    "ckpt": "/home/jovyan/vla_g2/checkpoints/openvla-7b-rlvla-warmup",
+    "out_dir": "/home/jovyan/vla_g2/s5",
+    "attn": "flash_attention_2",
+    "chunk": 8,
+    "seed": 0,
+    "n_envs": 64,
+    "smoke_steps": 0
+  },
+  "tol": 1e-05,
+  "attn_impl": [
+    "flash_attention_2"
+  ],
+  "collect": {
+    "reset_s": 4.81,
+    "policy_s": 104.3,
+    "sim_s": 93.91,
+    "total_s": 208.26,
+    "state_record_80_s": 0.14,
+    "state_dim": 367,
+    "Y": 27,
+    "success_last": 27,
+    "peak": {
+      "alloc_gib": 14.44,
+      "peak_gib": 39.55,
+      "reserved_gib": 51.06
+    }
+  },
+  "n_trainable": 112991744,
+  "C9_first_step": {
+    "transitions": 160,
+    "loss_original": 0.27800464257597923,
+    "loss_controlled": 0.2780047155916691,
+    "loss_rel_diff": 2.6264198038780907e-07,
+    "grad_rel_diff": 0.011102828150316994,
+    "grad_cos": 0.9999383618132733,
+    "grad_norm_original": 76.5,
+    "grad_norm_controlled": 76.5,
+    "clipped_grad_rel_diff": 0.011175210888299016,
+    "update_rel_diff": 0.01737230288890475,
+    "update_max_abs_diff": 0.00020170211791992188,
+    "update_frac_elements_different": 0.2093585580587387,
+    "param_dtype": "torch.bfloat16",
+    "aa_floor_original_vs_repeat": {
+      "loss_rel_diff": 0.0,
+      "grad_rel_diff": 0.010081940504523825,
+      "clipped_grad_rel_diff": 0.010154492577430813,
+      "update_rel_diff": 0.016496195205586973,
+      "update_frac_elements_different": 0.20093020796775818
+    }
+  },
+  "C9_round_accumulated": {
+    "n_steps": 32,
+    "last_step_divisor_original_controlled": [
+      20,
+      20
+    ],
+    "loss_rel_diff": 1.9690332434053335e-08,
+    "grad_rel_diff": 0.02178781399662332,
+    "note": "원 코드형은 부분 묶음도 20으로 나눈다(C7). n=5120이면 32스텝이 모두 꽉 차 C7 차이가 없다.",
+    "sec": [
+      273.9,
+      272.7
+    ]
+  },
+  "round_time": {
+    "collect_s": 208.4,
+    "collect_policy_s": 104.3,
+    "collect_sim_render_s": 93.91,
+    "collect_reset_s": 4.81,
+    "state_record_s": 0.14,
+    "recompute_old_c10_s": 85.9,
+    "update_steps_s": 273.4,
+    "n_steps": 32,
+    "save_s": 9.1,
+    "round_total_s": 576.8,
+    "peak_update": {
+      "alloc_gib": 16.99,
+      "peak_gib": 35.25,
+      "reserved_gib": 38.48
+    },
+    "first_minibatch": {
+      "max_abs_log_ratio": 0.0,
+      "ratio_equal_one": true
+    },
+    "all_finite": true,
+    "extrapolated_390_rounds_gpu_h": 62.5
+  },
+  "c10_audit_W1": {
+    "all": {
+      "n": 5120,
+      "mean": -0.022771091999766215,
+      "mean_abs": 0.16931996226194315,
+      "p95_abs": 0.463733196258545,
+      "max_abs": 1.175924301147461,
+      "frac_outside_clip": 0.32578125
+    },
+    "adv_pos": {
+      "n": 1173,
+      "mean": -0.016534981139175727,
+      "mean_abs": 0.1656747805899468,
+      "p95_abs": 0.4560469627380371,
+      "max_abs": 0.8594083786010742,
+      "frac_outside_clip": 0.3213981244671782
+    },
+    "adv_nonpos": {
+      "n": 3947,
+      "mean": -0.024624387677362525,
+      "mean_abs": 0.17040326555590102,
+      "p95_abs": 0.4657368183135985,
+      "max_abs": 1.175924301147461,
+      "frac_outside_clip": 0.32708386116037497
+    },
+    "value_abs_diff_mean": 0.001274568447843194,
+    "Y1": {
+      "n": 2160,
+      "mean": -0.01621883376027216,
+      "mean_abs": 0.16800318559398875,
+      "p95_abs": 0.45375437736511226,
+      "max_abs": 1.0455083847045898,
+      "frac_outside_clip": 0.3212962962962963
+    },
+    "Y0": {
+      "n": 2960,
+      "mean": -0.027552469633991602,
+      "mean_abs": 0.17028085334396392,
+      "p95_abs": 0.4712358832359313,
+      "max_abs": 1.175924301147461,
+      "frac_outside_clip": 0.3290540540540541
+    }
+  },
+  "paper_peak_gb": 44.4,
+  "verdict": {
+    "loss_within_tol": true,
+    "grad_c9_diff_vs_aa_floor": [
+      0.011102828150316994,
+      0.010081940504523825
+    ],
+    "note": "기울기는 bf16. C9 차이가 같은 설정의 A/A 차이 이하이면 실행 잡음과 구분되지 않음. 결정적 설정(S6)에서 다시 확인"
+  },
+  "total_min": 20.2
+}

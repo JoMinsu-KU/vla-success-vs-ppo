@@ -1,0 +1,329 @@
+env_name: PutOnPlateInScene25Instruct-v1
+ep_len: 80
+epoch: 0
+instruction:
+  0: Can you put ketchup bottle on plate?
+  1: move the banana to the plate
+  2: please put the zuchinni on the plate
+  3: pick up zuchinni and set it down on plate
+  4: Take the 7up can and put it on the plate
+  5: Put ketchup bottle onto plate.
+  6: pick up banana and set it down on plate
+  7: pick up 7up can and set it down on plate
+  8: please put the toy bear on the plate
+  9: move the bread to the plate
+  10: set toy bear on plate
+  11: Put bread onto plate.
+  12: pick up hamburger and set it down on plate
+  13: Take the carrot and put it on the plate
+  14: Move the BBQ sauce from the table to the plate
+  15: on the plate, put the hamburger
+  16: place the golf ball onto the plate surface
+  17: Can you put fast food cup on plate?
+  18: "Move zuchinni so it\u2019s on plate."
+  19: put the zuchinni where the plate is
+  20: the watering can should be placed on the plate.
+  21: move the plastic bottle to the plate
+  22: the golf ball should be placed on the plate.
+  23: Place the watering can on the plate
+  24: Put banana onto plate.
+  25: hamburger on the plate, please.
+  26: put the 7up can where the plate is
+  27: put the kitchen shovel where the plate is
+  28: put the golf ball where the plate is
+  29: "Move hamburger so it\u2019s on plate."
+  30: Put fast food cup onto plate.
+  31: the BBQ sauce should be placed on the plate.
+  32: Take the toy bear and put it on the plate
+  33: the carrot should be placed on the plate.
+  34: place the pipe onto the plate surface
+  35: pick up kitchen shovel and set it down on plate
+  36: the watering can should be placed on the plate.
+  37: put the golf ball where the plate is
+  38: golf ball on the plate, please.
+  39: the carrot should be placed on the plate.
+  40: Take the 7up can and put it on the plate
+  41: the fast food cup should be placed on the plate.
+  42: the ketchup bottle should be placed on the plate.
+  43: the pipe should be placed on the plate.
+  44: Make sure 7up can is on plate.
+  45: Place the golf ball on the plate
+  46: pick up 7up can and set it down on plate
+  47: Make sure toy bear is on plate.
+  48: move the kitchen shovel to the plate
+  49: please put the fast food cup on the plate
+  50: please put the ketchup bottle on the plate
+  51: "Move golf ball so it\u2019s on plate."
+  52: Can you put ketchup bottle on plate?
+  53: plant on the plate, please.
+  54: Place the 7up can on the plate
+  55: on the plate, put the BBQ sauce
+  56: move the pipe to the plate
+  57: Put BBQ sauce onto plate.
+  58: place the carrot onto the plate surface
+  59: Take the plant and put it on the plate
+  60: on the plate, put the fast food cup
+  61: Make sure zuchinni is on plate.
+  62: move the ketchup bottle to the plate
+  63: place the pipe onto the plate surface
+last_info:
+  0:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  1:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  2:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  3:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  4:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  5:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  6:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  7:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  8:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  9:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  10:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  11:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  12:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  13:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  14:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  15:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  16:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  17:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  18:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  19:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  20:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  21:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  22:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  23:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  24:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  25:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  26:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  27:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  28:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  29:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  30:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  31:
+    consecutive_grasp: false
+    is_src_obj_grasped: true
+    success: true
+  32:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  33:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  34:
+    consecutive_grasp: false
+    is_src_obj_grasped: true
+    success: false
+  35:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  36:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: false
+  37:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  38:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  39:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  40:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  41:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  42:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  43:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  44:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  45:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  46:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  47:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  48:
+    consecutive_grasp: false
+    is_src_obj_grasped: true
+    success: false
+  49:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  50:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  51:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  52:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  53:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  54:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  55:
+    consecutive_grasp: false
+    is_src_obj_grasped: false
+    success: false
+  56:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  57:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  58:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  59:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  60:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  61:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  62:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+  63:
+    consecutive_grasp: true
+    is_src_obj_grasped: true
+    success: true
+stats:
+  consecutive_grasp: 0.921875
+  is_src_obj_grasped: 0.96875
+  success: 0.90625

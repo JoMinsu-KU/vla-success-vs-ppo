@@ -1,0 +1,79 @@
+
+===== OS / kernel
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+6.14.0-37-generic
+
+===== CPU / RAM / disk
+128
+               total        used        free      shared  buff/cache   available
+Mem:            1007          39         904           0          69         968
+Filesystem                                                                                                                                   Size  Used Avail Use% Mounted on
+192.168.0.21:/ifs/gcp/prd/gnaix-prd-claim-uok-jms663100-gnaix-org---538a9e72--uok-jms663100260922p-pvc-c1f49685-1a50-4609-8a32-d76cc1046115  665T  4.7T  602T   1% /home/jovyan
+overlay                                                                                                                                      3.5T   91G  3.2T   3% /
+
+===== container?
+docker: no
+NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+===== nvidia-smi
+Tue Nov  3 11:11:44 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.91.07              Driver Version: 595.91.07      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200 NVL                Off |   00000000:DA:00.0 Off |                    0 |
+| N/A   41C    P0             77W /  600W |       0MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+===== GPU list
+index, name, driver_version, memory.total [MiB], mig.mode.current, display_mode, compute_mode
+0, NVIDIA H200 NVL, 595.91.07, 143771 MiB, Disabled, [Requested functionality has been deprecated], Default
+
+===== CUDA toolkit
+
+===== conda
+conda 26.5.3
+
+# conda environments:
+#
+# * -> active
+# + -> frozen
+jev                      /home/jovyan/.conda/envs/jev
+base                     /home/jovyan/anaconda3
+fdm-s1                   /home/jovyan/anaconda3/envs/fdm-s1
+fdm-s2                   /home/jovyan/anaconda3/envs/fdm-s2
+fdm-s2-research          /home/jovyan/anaconda3/envs/fdm-s2-research
+fdm-s3                   /home/jovyan/anaconda3/envs/fdm-s3
+jo                       /home/jovyan/anaconda3/envs/jo
+
+
+===== Vulkan ICD files (NVIDIA ICD가 있어야 GPU 렌더링 가능)
+/etc/vulkan/icd.d:
+total 0
+
+===== NVIDIA GL/Vulkan user-space libraries
+	libvulkan.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libvulkan.so.1
+
+===== vulkaninfo (없으면 생략)
+vulkaninfo not installed (apt: vulkan-tools). S2의 SAPIEN 시험으로 대신 확인
+
+===== network: HuggingFace / GitHub
+huggingface.co 200 0.164685s
+github.com 200 0.196044s
+
+S0 done

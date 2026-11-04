@@ -1,0 +1,853 @@
+{
+  "ID (Carrot train)": {
+    "env_id": "PutOnPlateInScene25Carrot-v1",
+    "obj_set": "train",
+    "axis": "ID",
+    "rl": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 92.2,
+      "se": 1.9,
+      "per_seed": [
+        92.2,
+        92.2,
+        92.2
+      ],
+      "Y": 92.2,
+      "paper": 93.8,
+      "range": [
+        83.8,
+        100
+      ],
+      "in_range": true,
+      "p2_4090": 87.0
+    },
+    "sft": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 87.0,
+      "se": 2.4,
+      "per_seed": [
+        89.1,
+        87.5,
+        84.4
+      ],
+      "Y": 87.0,
+      "paper": 78.1,
+      "range": [
+        68.1,
+        88.1
+      ],
+      "in_range": true,
+      "p2_4090": 85.4
+    },
+    "warmup": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 40.6,
+      "se": 6.1,
+      "per_seed": [
+        40.6
+      ],
+      "Y": 40.6
+    },
+    "gap_rl_minus_sft": 5.2,
+    "paper_gap": 15.7,
+    "paired": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 22,
+      "sft_only": 12,
+      "mcnemar_p": 0.12144948495551944
+    }
+  },
+  "VisionImage": {
+    "env_id": "PutOnPlateInScene25VisionImage-v1",
+    "obj_set": "test",
+    "axis": "vision",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 87.5,
+      "se": 2.9,
+      "per_seed": [
+        87.5,
+        87.5
+      ],
+      "Y": 87.5
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 87.5,
+      "se": 2.9,
+      "per_seed": [
+        84.4,
+        90.6
+      ],
+      "Y": 87.5
+    },
+    "gap_rl_minus_sft": 0.0,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 16,
+      "sft_only": 16,
+      "mcnemar_p": 1.0
+    }
+  },
+  "VisionTexture03": {
+    "env_id": "PutOnPlateInScene25VisionTexture03-v1",
+    "obj_set": "test",
+    "axis": "vision",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 83.6,
+      "se": 3.3,
+      "per_seed": [
+        85.9,
+        81.2
+      ],
+      "Y": 83.6
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 79.7,
+      "se": 3.6,
+      "per_seed": [
+        82.8,
+        76.6
+      ],
+      "Y": 78.9
+    },
+    "gap_rl_minus_sft": 3.9,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 20,
+      "sft_only": 15,
+      "mcnemar_p": 0.49955983320251107
+    }
+  },
+  "VisionTexture05": {
+    "env_id": "PutOnPlateInScene25VisionTexture05-v1",
+    "obj_set": "test",
+    "axis": "vision",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 71.9,
+      "se": 4.0,
+      "per_seed": [
+        71.9,
+        71.9
+      ],
+      "Y": 71.9
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 64.8,
+      "se": 4.2,
+      "per_seed": [
+        65.6,
+        64.1
+      ],
+      "Y": 64.8
+    },
+    "gap_rl_minus_sft": 7.1,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 31,
+      "sft_only": 22,
+      "mcnemar_p": 0.27167916606550335
+    }
+  },
+  "VisionWhole03": {
+    "env_id": "PutOnPlateInScene25VisionWhole03-v1",
+    "obj_set": "test",
+    "axis": "vision",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 82.8,
+      "se": 3.3,
+      "per_seed": [
+        92.2,
+        73.4
+      ],
+      "Y": 82.8
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 79.7,
+      "se": 3.6,
+      "per_seed": [
+        78.1,
+        81.2
+      ],
+      "Y": 79.7
+    },
+    "gap_rl_minus_sft": 3.1,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 19,
+      "sft_only": 15,
+      "mcnemar_p": 0.6075913612730801
+    }
+  },
+  "VisionWhole05": {
+    "env_id": "PutOnPlateInScene25VisionWhole05-v1",
+    "obj_set": "test",
+    "axis": "vision",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 71.9,
+      "se": 4.0,
+      "per_seed": [
+        75.0,
+        68.8
+      ],
+      "Y": 71.9
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 70.3,
+      "se": 4.0,
+      "per_seed": [
+        75.0,
+        65.6
+      ],
+      "Y": 70.3
+    },
+    "gap_rl_minus_sft": 1.6,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 15,
+      "sft_only": 13,
+      "mcnemar_p": 0.8505540192127228
+    }
+  },
+  "New object (Carrot test)": {
+    "env_id": "PutOnPlateInScene25Carrot-v1",
+    "obj_set": "test",
+    "axis": "semantic",
+    "rl": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 74.0,
+      "se": 3.2,
+      "per_seed": [
+        75.0,
+        78.1,
+        68.8
+      ],
+      "Y": 72.4,
+      "paper": 71.4,
+      "range": [
+        61.4,
+        81.4
+      ],
+      "in_range": true,
+      "p2_4090": 69.3
+    },
+    "sft": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 58.3,
+      "se": 3.6,
+      "per_seed": [
+        59.4,
+        59.4,
+        56.2
+      ],
+      "Y": 57.8,
+      "paper": 45.3,
+      "range": [
+        35.3,
+        55.3
+      ],
+      "in_range": false,
+      "p2_4090": 55.7
+    },
+    "warmup": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 28.1,
+      "se": 5.6,
+      "per_seed": [
+        28.1
+      ],
+      "Y": 28.1
+    },
+    "gap_rl_minus_sft": 15.7,
+    "paper_gap": 26.1,
+    "paired": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 45,
+      "sft_only": 15,
+      "mcnemar_p": 0.00013451408092849532
+    }
+  },
+  "Plate": {
+    "env_id": "PutOnPlateInScene25Plate-v1",
+    "obj_set": "test",
+    "axis": "semantic",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 71.1,
+      "se": 4.0,
+      "per_seed": [
+        73.4,
+        68.8
+      ],
+      "Y": 69.5
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 68.8,
+      "se": 4.1,
+      "per_seed": [
+        65.6,
+        71.9
+      ],
+      "Y": 68.0
+    },
+    "gap_rl_minus_sft": 2.3,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 23,
+      "sft_only": 20,
+      "mcnemar_p": 0.7607916425613439
+    }
+  },
+  "Instruct": {
+    "env_id": "PutOnPlateInScene25Instruct-v1",
+    "obj_set": "test",
+    "axis": "semantic",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 88.3,
+      "se": 2.8,
+      "per_seed": [
+        90.6,
+        85.9
+      ],
+      "Y": 87.5
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 85.2,
+      "se": 3.1,
+      "per_seed": [
+        89.1,
+        81.2
+      ],
+      "Y": 85.2
+    },
+    "gap_rl_minus_sft": 3.1,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 15,
+      "sft_only": 11,
+      "mcnemar_p": 0.557197093963623
+    }
+  },
+  "MultiCarrot test": {
+    "env_id": "PutOnPlateInScene25MultiCarrot-v1",
+    "obj_set": "test",
+    "axis": "semantic",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 61.7,
+      "se": 4.3,
+      "per_seed": [
+        73.4,
+        50.0
+      ],
+      "Y": 60.9
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 39.1,
+      "se": 4.3,
+      "per_seed": [
+        46.9,
+        31.2
+      ],
+      "Y": 38.3
+    },
+    "gap_rl_minus_sft": 22.6,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 43,
+      "sft_only": 14,
+      "mcnemar_p": 0.00015388902244434233
+    }
+  },
+  "MultiPlate test": {
+    "env_id": "PutOnPlateInScene25MultiPlate-v1",
+    "obj_set": "test",
+    "axis": "semantic",
+    "rl": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 50.0,
+      "se": 6.2,
+      "per_seed": [
+        50.0
+      ],
+      "Y": 46.9
+    },
+    "sft": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 39.1,
+      "se": 6.1,
+      "per_seed": [
+        39.1
+      ],
+      "Y": 37.5
+    },
+    "gap_rl_minus_sft": 10.9,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 16,
+      "sft_only": 9,
+      "mcnemar_p": 0.2295229434967041
+    }
+  },
+  "Position": {
+    "env_id": "PutOnPlateInScene25Position-v1",
+    "obj_set": "test",
+    "axis": "execution",
+    "rl": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 73.4,
+      "se": 3.2,
+      "per_seed": [
+        78.1,
+        75.0,
+        67.2
+      ],
+      "Y": 73.4
+    },
+    "sft": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 68.2,
+      "se": 3.4,
+      "per_seed": [
+        73.4,
+        67.2,
+        64.1
+      ],
+      "Y": 68.2
+    },
+    "warmup": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 28.1,
+      "se": 5.6,
+      "per_seed": [
+        28.1
+      ],
+      "Y": 28.1
+    },
+    "gap_rl_minus_sft": 5.2,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 45,
+      "sft_only": 35,
+      "mcnemar_p": 0.31430657986393706
+    }
+  },
+  "EEPose": {
+    "env_id": "PutOnPlateInScene25EEPose-v1",
+    "obj_set": "test",
+    "axis": "execution",
+    "rl": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 81.8,
+      "se": 2.8,
+      "per_seed": [
+        78.1,
+        85.9,
+        81.2
+      ],
+      "Y": 81.8,
+      "paper": 79.7,
+      "range": [
+        66.9,
+        92.5
+      ],
+      "in_range": true,
+      "p2_4090": 78.6
+    },
+    "sft": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 31.8,
+      "se": 3.4,
+      "per_seed": [
+        29.7,
+        34.4,
+        31.2
+      ],
+      "Y": 31.8,
+      "paper": 33.9,
+      "range": [
+        23.5,
+        44.3
+      ],
+      "in_range": true,
+      "p2_4090": 33.9
+    },
+    "warmup": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 26.6,
+      "se": 5.5,
+      "per_seed": [
+        26.6
+      ],
+      "Y": 26.6
+    },
+    "gap_rl_minus_sft": 50.0,
+    "paper_gap": 45.8,
+    "paired": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 104,
+      "sft_only": 8,
+      "mcnemar_p": 1.9808264979368403e-22
+    }
+  },
+  "PositionChangeTo": {
+    "env_id": "PutOnPlateInScene25PositionChangeTo-v1",
+    "obj_set": "test",
+    "axis": "execution",
+    "rl": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 77.6,
+      "se": 3.0,
+      "per_seed": [
+        79.7,
+        75.0,
+        78.1
+      ],
+      "Y": 77.1,
+      "paper": 74.5,
+      "range": [
+        64.5,
+        84.5
+      ],
+      "in_range": true,
+      "p2_4090": 79.7
+    },
+    "sft": {
+      "n": 192,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "success": 28.1,
+      "se": 3.2,
+      "per_seed": [
+        26.6,
+        35.9,
+        21.9
+      ],
+      "Y": 28.1,
+      "paper": 28.6,
+      "range": [
+        18.6,
+        38.6
+      ],
+      "in_range": true,
+      "p2_4090": 30.7
+    },
+    "warmup": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 21.9,
+      "se": 5.2,
+      "per_seed": [
+        21.9
+      ],
+      "Y": 20.3
+    },
+    "gap_rl_minus_sft": 49.5,
+    "paper_gap": 45.9,
+    "paired": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 104,
+      "sft_only": 9,
+      "mcnemar_p": 1.25629706703917e-21
+    }
+  },
+  "MultiCarrot train": {
+    "env_id": "PutOnPlateInScene25MultiCarrot-v1",
+    "obj_set": "train",
+    "axis": "train-variant",
+    "rl": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 78.9,
+      "se": 3.6,
+      "per_seed": [
+        78.1,
+        79.7
+      ],
+      "Y": 78.9
+    },
+    "sft": {
+      "n": 128,
+      "seeds": [
+        0,
+        1
+      ],
+      "success": 68.8,
+      "se": 4.1,
+      "per_seed": [
+        68.8,
+        68.8
+      ],
+      "Y": 68.8
+    },
+    "gap_rl_minus_sft": 10.1,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0,
+        1
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 24,
+      "sft_only": 11,
+      "mcnemar_p": 0.04095959151163697
+    }
+  },
+  "MultiPlate train": {
+    "env_id": "PutOnPlateInScene25MultiPlate-v1",
+    "obj_set": "train",
+    "axis": "train-variant",
+    "rl": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 78.1,
+      "se": 5.2,
+      "per_seed": [
+        78.1
+      ],
+      "Y": 78.1
+    },
+    "sft": {
+      "n": 64,
+      "seeds": [
+        0
+      ],
+      "success": 78.1,
+      "se": 5.2,
+      "per_seed": [
+        78.1
+      ],
+      "Y": 78.1
+    },
+    "gap_rl_minus_sft": 0.0,
+    "paper_gap": null,
+    "paired": {
+      "seeds": [
+        0
+      ],
+      "same_instructions_all_seeds": true,
+      "rl_only": 9,
+      "sft_only": 9,
+      "mcnemar_p": 1.0
+    }
+  }
+}

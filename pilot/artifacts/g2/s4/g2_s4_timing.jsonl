@@ -1,0 +1,45 @@
+{"ckpt": "rl", "cond": "ID (Carrot train)", "batch": 0, "reset_s": 4.9, "policy_s": 102.8, "sim_s": 93.8, "total_s": 201.5}
+{"ckpt": "rl", "cond": "ID (Carrot train)", "batch": 1, "reset_s": 5.4, "policy_s": 102.9, "sim_s": 90.7, "total_s": 199.0}
+{"ckpt": "rl", "cond": "ID (Carrot train)", "batch": 2, "reset_s": 5.4, "policy_s": 103.1, "sim_s": 88.2, "total_s": 196.7}
+{"ckpt": "rl", "cond": "Position", "batch": 0, "reset_s": 5.2, "policy_s": 102.9, "sim_s": 90.6, "total_s": 198.7}
+{"ckpt": "rl", "cond": "Position", "batch": 1, "reset_s": 5.3, "policy_s": 102.8, "sim_s": 95.3, "total_s": 203.4}
+{"ckpt": "rl", "cond": "Position", "batch": 2, "reset_s": 5.2, "policy_s": 102.9, "sim_s": 92.0, "total_s": 200.2}
+{"ckpt": "rl", "cond": "EEPose", "batch": 0, "reset_s": 5.1, "policy_s": 102.6, "sim_s": 95.7, "total_s": 203.5}
+{"ckpt": "rl", "cond": "EEPose", "batch": 1, "reset_s": 5.2, "policy_s": 103.2, "sim_s": 88.8, "total_s": 197.3}
+{"ckpt": "rl", "cond": "EEPose", "batch": 2, "reset_s": 6.6, "policy_s": 103.0, "sim_s": 90.6, "total_s": 200.3}
+{"ckpt": "rl", "cond": "PositionChangeTo", "batch": 0, "reset_s": 5.1, "policy_s": 103.0, "sim_s": 88.6, "total_s": 196.7}
+{"ckpt": "rl", "cond": "PositionChangeTo", "batch": 1, "reset_s": 5.3, "policy_s": 102.5, "sim_s": 90.4, "total_s": 198.2}
+{"ckpt": "rl", "cond": "PositionChangeTo", "batch": 2, "reset_s": 5.2, "policy_s": 102.8, "sim_s": 91.2, "total_s": 199.3}
+{"ckpt": "rl", "cond": "New object (Carrot test)", "batch": 0, "reset_s": 5.2, "policy_s": 102.9, "sim_s": 96.4, "total_s": 204.6}
+{"ckpt": "rl", "cond": "New object (Carrot test)", "batch": 1, "reset_s": 5.5, "policy_s": 103.2, "sim_s": 95.0, "total_s": 203.8}
+{"ckpt": "rl", "cond": "New object (Carrot test)", "batch": 2, "reset_s": 5.5, "policy_s": 103.2, "sim_s": 92.8, "total_s": 201.6}
+{"ckpt": "sft", "cond": "ID (Carrot train)", "batch": 0, "reset_s": 4.8, "policy_s": 102.8, "sim_s": 89.9, "total_s": 197.5}
+{"ckpt": "sft", "cond": "ID (Carrot train)", "batch": 1, "reset_s": 5.3, "policy_s": 102.8, "sim_s": 90.9, "total_s": 199.0}
+{"ckpt": "sft", "cond": "ID (Carrot train)", "batch": 2, "reset_s": 5.3, "policy_s": 102.8, "sim_s": 91.1, "total_s": 199.2}
+{"ckpt": "sft", "cond": "Position", "batch": 0, "reset_s": 5.1, "policy_s": 102.9, "sim_s": 93.2, "total_s": 201.3}
+{"ckpt": "sft", "cond": "Position", "batch": 1, "reset_s": 5.1, "policy_s": 103.2, "sim_s": 92.7, "total_s": 201.1}
+{"ckpt": "sft", "cond": "Position", "batch": 2, "reset_s": 5.1, "policy_s": 102.2, "sim_s": 91.7, "total_s": 199.1}
+{"ckpt": "sft", "cond": "EEPose", "batch": 0, "reset_s": 5.1, "policy_s": 102.9, "sim_s": 97.0, "total_s": 205.0}
+{"ckpt": "sft", "cond": "EEPose", "batch": 1, "reset_s": 5.2, "policy_s": 103.0, "sim_s": 94.8, "total_s": 203.1}
+{"ckpt": "sft", "cond": "EEPose", "batch": 2, "reset_s": 5.3, "policy_s": 103.3, "sim_s": 92.8, "total_s": 201.4}
+{"ckpt": "sft", "cond": "PositionChangeTo", "batch": 0, "reset_s": 5.7, "policy_s": 103.2, "sim_s": 92.2, "total_s": 201.1}
+{"ckpt": "sft", "cond": "PositionChangeTo", "batch": 1, "reset_s": 5.2, "policy_s": 103.1, "sim_s": 92.2, "total_s": 200.5}
+{"ckpt": "sft", "cond": "PositionChangeTo", "batch": 2, "reset_s": 5.2, "policy_s": 103.0, "sim_s": 91.6, "total_s": 199.8}
+{"ckpt": "sft", "cond": "New object (Carrot test)", "batch": 0, "reset_s": 5.2, "policy_s": 102.8, "sim_s": 93.1, "total_s": 201.1}
+{"ckpt": "sft", "cond": "New object (Carrot test)", "batch": 1, "reset_s": 5.3, "policy_s": 102.8, "sim_s": 94.5, "total_s": 202.5}
+{"ckpt": "sft", "cond": "New object (Carrot test)", "batch": 2, "reset_s": 5.3, "policy_s": 102.8, "sim_s": 94.4, "total_s": 202.5}
+{"ckpt": "warmup", "cond": "ID (Carrot train)", "batch": 0, "reset_s": 4.8, "policy_s": 102.5, "sim_s": 92.6, "total_s": 199.9}
+{"ckpt": "warmup", "cond": "ID (Carrot train)", "batch": 1, "reset_s": 5.4, "policy_s": 102.4, "sim_s": 92.0, "total_s": 199.9}
+{"ckpt": "warmup", "cond": "ID (Carrot train)", "batch": 2, "reset_s": 6.3, "policy_s": 103.0, "sim_s": 92.2, "total_s": 201.5}
+{"ckpt": "warmup", "cond": "Position", "batch": 0, "reset_s": 5.1, "policy_s": 102.9, "sim_s": 92.6, "total_s": 200.6}
+{"ckpt": "warmup", "cond": "Position", "batch": 1, "reset_s": 5.3, "policy_s": 103.4, "sim_s": 94.8, "total_s": 203.5}
+{"ckpt": "warmup", "cond": "Position", "batch": 2, "reset_s": 5.2, "policy_s": 103.1, "sim_s": 93.8, "total_s": 202.1}
+{"ckpt": "warmup", "cond": "EEPose", "batch": 0, "reset_s": 5.3, "policy_s": 102.9, "sim_s": 90.5, "total_s": 198.7}
+{"ckpt": "warmup", "cond": "EEPose", "batch": 1, "reset_s": 5.4, "policy_s": 103.1, "sim_s": 93.6, "total_s": 202.1}
+{"ckpt": "warmup", "cond": "EEPose", "batch": 2, "reset_s": 5.2, "policy_s": 103.1, "sim_s": 91.4, "total_s": 199.8}
+{"ckpt": "warmup", "cond": "PositionChangeTo", "batch": 0, "reset_s": 5.2, "policy_s": 103.1, "sim_s": 90.4, "total_s": 198.8}
+{"ckpt": "warmup", "cond": "PositionChangeTo", "batch": 1, "reset_s": 5.3, "policy_s": 103.4, "sim_s": 91.7, "total_s": 200.4}
+{"ckpt": "warmup", "cond": "PositionChangeTo", "batch": 2, "reset_s": 5.5, "policy_s": 103.1, "sim_s": 93.7, "total_s": 202.4}
+{"ckpt": "warmup", "cond": "New object (Carrot test)", "batch": 0, "reset_s": 5.3, "policy_s": 102.7, "sim_s": 92.4, "total_s": 200.5}
+{"ckpt": "warmup", "cond": "New object (Carrot test)", "batch": 1, "reset_s": 5.3, "policy_s": 102.8, "sim_s": 91.3, "total_s": 199.6}
+{"ckpt": "warmup", "cond": "New object (Carrot test)", "batch": 2, "reset_s": 5.7, "policy_s": 102.5, "sim_s": 90.9, "total_s": 199.1}
