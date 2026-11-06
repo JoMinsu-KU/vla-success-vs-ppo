@@ -130,7 +130,8 @@ class GpuEnv:
         opts = {"obj_set": obj_set, "episode_id": eids}
         if reconfigure:
             opts["reconfigure"] = True
-        s = None if seed is None else [int(seed) * 1000 + i for i in range(self.num_envs)]
+        # numpy RandomState 한계(2³²) 안으로. 2³² 미만이던 값(G2 전부, E1 시드 1~12)은 그대로 (본실험 튜닝 시드 100에서 넘침)
+        s = None if seed is None else [(int(seed) * 1000 + i) % (2 ** 32) for i in range(self.num_envs)]
         with sim_nondeterministic_ok():
             obs, info = self.env.reset(seed=s, options=opts)
         rgb = obs["sensor_data"][CAM]["rgb"].to(torch.uint8)
