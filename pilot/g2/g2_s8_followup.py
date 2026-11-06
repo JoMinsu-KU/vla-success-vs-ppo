@@ -170,6 +170,36 @@ def mode_gpu_replay(ckpt_dir, recs, out):
     pickle.dump(dict(res=res, sec=time.time() - t0), open(out / "F3_replay.pkl", "wb"))
 
 
+def mode_gpu_neighbor(ckpt_dir, recs, out):
+    """사후 추가 진단 (사전 고정 밖): 칸 배치 L0 고정, 칸 24~63의 행동만 바꿨을 때 칸 0~23의 궤적이 같은지."""
+    env = S8.Env("gpu", unnorm_of(ckpt_dir, SRCS[0][1], "bridge_orig"), n=NB)
+    m = len(recs)
+    slots = [i % m for i in range(NB)]
+    res = {}
+    for run in ("base", "base_repeat", "neighbor_actions_changed"):
+        reset_seeded(env, [recs[j]["eid"] for j in slots], [0] * NB)
+        env.set_full([recs[j]["base"] for j in slots])
+        env.perturb(["control"] * NB, [recs[j]["obj_pose0"] for j in slots])
+        st, hs = [], []
+        for s in range(L_REPLAY):
+            toks = []
+            for i, j in enumerate(slots):
+                jj = (j + 1) % m if (run == "neighbor_actions_changed" and i >= m) else j
+                toks.append(recs[jj]["tokens"][recs[jj]["s0"] + s])
+            rgb, _ = env.step(torch.as_tensor(np.stack(toks)))
+            st.append(env.u.get_state().detach().cpu().numpy()[:m])
+            px = rgb.cpu().numpy()
+            hs.append([hashlib.sha256(px[i].tobytes()).hexdigest() for i in range(m)])
+        res[run] = dict(state=np.stack(st), hashes=hs)
+    env.close()
+    out_d = {}
+    for run in ("base_repeat", "neighbor_actions_changed"):
+        out_d[run] = [bool(np.array_equal(res[run]["state"][:, i], res["base"]["state"][:, i])
+                           and all(h[i] == g[i] for h, g in zip(res[run]["hashes"], res["base"]["hashes"]))) for i in range(m)]
+    (out / "F3_neighbor_posthoc.json").write_text(json.dumps(out_d))
+    print({k: f"{sum(v)}/{len(v)} identical" for k, v in out_d.items()}, flush=True)
+
+
 # ---------------------------------------------------------------- F3 닫힌 고리 (RL 대조)
 def mode_gpu_closed(ckpt_dir, recs, out):
     name, sub, key = SRCS[3]
@@ -351,6 +381,8 @@ def main():
         mode_ra_gpu(a.ckpt_dir, recs, out, firsts)
     elif a.mode == "gpu_replay":
         mode_gpu_replay(a.ckpt_dir, recs, out)
+    elif a.mode == "gpu_neighbor":
+        mode_gpu_neighbor(a.ckpt_dir, recs, out)
     elif a.mode == "gpu_closed":
         mode_gpu_closed(a.ckpt_dir, recs, out)
     elif a.mode == "cpu_closed":
