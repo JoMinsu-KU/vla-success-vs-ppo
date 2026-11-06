@@ -1,0 +1,79 @@
+{
+  "_status": "G-PRE 초안 값. 태그 gpre가 붙은 커밋의 이 파일만 본실험에 쓴다 (runner가 확인).",
+  "_source": "docs/GPRE_draft.md 0절, pilot/stats/GPRE_simulation_v3.md, pilot/GPRE_T2T3_results.md",
+  "delta_pp": 5.0,
+  "alpha_one_sided": 0.04,
+  "n_min": 8,
+  "n_max": 12,
+  "n_stage1": 4,
+  "n_table_alpha004": {"lt_4.9": 8, "4.9-5.2": 9, "5.3-5.5": 10, "5.6-5.8": 11, "ge_5.9": 12},
+  "gmid_power_threshold": 0.6,
+  "eval_noise_pp": 1.4,
+
+  "train_env": "PutOnPlateInScene25Main-v3",
+  "train_obj_set": "train",
+  "n_envs": 64,
+  "rounds_e1": 390,
+  "rounds_tune": 150,
+  "temperature_collect": 1.0,
+  "temperature_eval": 0.6,
+  "top_k": "K0",
+  "unnorm_key": "bridge_orig",
+
+  "numerics_train_e1": "math",
+  "numerics_tune": "default",
+  "numerics_eval": "default",
+
+  "kl_max": 0.85,
+  "kl_probe_states": 64,
+  "kl_divergence_rounds": 10,
+  "grad_clip": 10.0,
+  "minibatch": 8,
+  "accum": 20,
+  "u_fix_steps": 32,
+
+  "tune_seed": 100,
+  "tune_candidates": {
+    "A2p": [
+      {"cand": "c0", "lr": 1e-4, "update": "U-prop"},
+      {"cand": "c1", "lr": 3e-4, "update": "U-prop"},
+      {"cand": "c2", "lr": 1e-4, "update": "U-fix"},
+      {"cand": "c3", "lr": 3e-4, "update": "U-fix"}
+    ],
+    "A3": [
+      {"cand": "c0", "lr": 5e-5, "vh_lr": 1e-3},
+      {"cand": "c1", "lr": 5e-5, "vh_lr": 3e-3},
+      {"cand": "c2", "lr": 1e-4, "vh_lr": 1e-3},
+      {"cand": "c3", "lr": 1e-4, "vh_lr": 3e-3}
+    ]
+  },
+  "tune_select_rounds": [140, 145, 150],
+  "tune_tie_pp": 2.0,
+  "idval_episodes": 512,
+
+  "e1_seeds_phase1": [1, 2, 3, 4],
+  "e1_seeds_all": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  "e1_save_rounds_A3": [19, 20, 149, 150, 299, 300, 390],
+  "e1_save_rounds_A2p": [390],
+  "latest_every": 5,
+
+  "eval_episodes_per_cond": 192,
+  "eval_conditions": [
+    ["ID", "PutOnPlateInScene25Carrot-v1", "train", "id"],
+    ["VisionImage", "PutOnPlateInScene25VisionImage-v1", "test", "vision"],
+    ["VisionTexture03", "PutOnPlateInScene25VisionTexture03-v1", "test", "vision"],
+    ["VisionTexture05", "PutOnPlateInScene25VisionTexture05-v1", "test", "vision"],
+    ["VisionWhole03", "PutOnPlateInScene25VisionWhole03-v1", "test", "vision"],
+    ["VisionWhole05", "PutOnPlateInScene25VisionWhole05-v1", "test", "vision"],
+    ["NewObject", "PutOnPlateInScene25Carrot-v1", "test", "semantic"],
+    ["NewPlate", "PutOnPlateInScene25Plate-v1", "test", "semantic"],
+    ["Instruct", "PutOnPlateInScene25Instruct-v1", "test", "semantic"],
+    ["MultiCarrot", "PutOnPlateInScene25MultiCarrot-v1", "test", "semantic"],
+    ["MultiPlate", "PutOnPlateInScene25MultiPlate-v1", "test", "semantic"],
+    ["Position", "PutOnPlateInScene25Position-v1", "test", "execution"],
+    ["EEPose", "PutOnPlateInScene25EEPose-v1", "test", "execution"],
+    ["PositionChangeTo", "PutOnPlateInScene25PositionChangeTo-v1", "test", "execution"],
+    ["MultiCarrotTrain", "PutOnPlateInScene25MultiCarrot-v1", "train", "train_variant"],
+    ["MultiPlateTrain", "PutOnPlateInScene25MultiPlate-v1", "train", "train_variant"]
+  ]
+}
