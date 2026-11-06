@@ -29,8 +29,10 @@ REPS = int(sys.argv[2]) if len(sys.argv) > 2 else 40000
 PREPS = int(sys.argv[3]) if len(sys.argv) > 3 else 10000
 OUT.mkdir(parents=True, exist_ok=True)
 DELTA = 5.0
-ALPHA = 0.045
-ALPHAS = (0.05, 0.045, 0.04)
+ALPHA = float(sys.argv[4]) if len(sys.argv) > 4 else 0.045  # 4번째 인자: 사전 고정 규칙 3번의 재실행용 (n 표·순열이 이 α를 씀)
+ALPHAS = tuple(sorted({0.05, 0.045, 0.04, ALPHA}, reverse=True))
+TAG = "" if ALPHA == 0.045 else f"_a{ALPHA}"
+A = ALPHA
 N_MIN, N_MAX, N_STAGE1 = 8, 12, 4
 SIGMAS = (3.0, 4.0, 5.0, 6.0)
 RHOS = (-0.3, 0.0, 0.3, 0.6)
@@ -136,7 +138,7 @@ def run_perm(sigma, rho, ev, reps):
     for r in range(reps):
         n = int(ns[r])
         k += signflip_reject(a[r, :n] - b[r, :n] + DELTA, ALPHA)
-    return dict(sigma=sigma, rho=rho, eval_sd=ev, reps=reps, type1_a0045=k / reps, ci95=wilson(k, reps))
+    return dict(sigma=sigma, rho=rho, eval_sd=ev, reps=reps, type1=k / reps, alpha=ALPHA, ci95=wilson(k, reps))
 
 
 if __name__ == "__main__":
@@ -159,21 +161,21 @@ if __name__ == "__main__":
         res["procedure"].append(row)
         print(f"  eval {ev:.2f} σ {sigma:.0f} ρ {rho:+.1f} {rule} n̄ {row['mean_n_pow0']:5.2f} | T1 paired "
               + " ".join(f"{al}:{row[f't1_paired_a{al}']:.4f}" for al in ALPHAS)
-              + f" | T1 Welch .045 {row['t1_welch_a0.045']:.4f} | pow0 paired/Welch .045 "
-              f"{row['pow0_paired_a0.045']:.3f}/{row['pow0_welch_a0.045']:.3f}", flush=True)
+              + f" | T1 Welch {A} {row[f't1_welch_a{A}']:.4f} | pow0 paired/Welch {A} "
+              f"{row[f'pow0_paired_a{A}']:.3f}/{row[f'pow0_welch_a{A}']:.3f}", flush=True)
 
     print("== 2. 고정 n 대조 (eval 1.4)", flush=True)
     for sigma, rho, nf in product(SIGMAS, (0.0, -0.3), (8, 12)):
         row = run_cell(sigma, rho, 1.4, str(nf), REPS)
         res["fixed"].append(row)
-        print(f"  σ {sigma:.0f} ρ {rho:+.1f} n {nf} | T1 paired .045 {row['t1_paired_a0.045']:.4f}"
-              f" | pow0 {row['pow0_paired_a0.045']:.3f}", flush=True)
+        print(f"  σ {sigma:.0f} ρ {rho:+.1f} n {nf} | T1 paired {A} {row[f't1_paired_a{A}']:.4f}"
+              f" | pow0 {row[f'pow0_paired_a{A}']:.3f}", flush=True)
 
-    print("== 3. 부호 뒤집기 순열 (적응형 P, eval 1.4, α 0.045)", flush=True)
+    print(f"== 3. 부호 뒤집기 순열 (적응형 P, eval 1.4, α {A})", flush=True)
     for sigma, rho in product((3.0, 6.0), (0.0, -0.3)):
         row = run_perm(sigma, rho, 1.4, PREPS)
         res["permutation"].append(row)
-        print(f"  σ {sigma:.0f} ρ {rho:+.1f} | T1 {row['type1_a0045']:.4f} {row['ci95']}", flush=True)
+        print(f"  σ {sigma:.0f} ρ {rho:+.1f} | T1 {row['type1']:.4f} {row['ci95']}", flush=True)
 
-    (OUT / "gpre_sim_v3_results.json").write_text(json.dumps(res, indent=1, ensure_ascii=False), encoding="utf-8")
-    print("saved", OUT / "gpre_sim_v3_results.json")
+    (OUT / f"gpre_sim_v3_results{TAG}.json").write_text(json.dumps(res, indent=1, ensure_ascii=False), encoding="utf-8")
+    print("saved", OUT / f"gpre_sim_v3_results{TAG}.json")
