@@ -10,7 +10,8 @@
 - 외부 검토: 요청서 [docs/review_request_v0_11.md](docs/review_request_v0_11.md), 대응표는 명세 부록 E-8. 신규성 확인 [pilot/G0_check_2026-10-19.md](pilot/G0_check_2026-10-19.md).
 - 단계: G1 통과 (조건부, 2026-10-19) = G2 진입 승인 (본실험 착수 승인은 G-PRE). 종합 보고 [pilot/G1_report.md](pilot/G1_report.md), 이탈 기록 [pilot/deviations.md](pilot/deviations.md).
 - G2 시험 명세: [docs/G2_H200_test_spec.md](docs/G2_H200_test_spec.md) (H200 단계별 절차·판정·GPU시간 배정, 스크립트 `pilot/g2/`).
-- 다음: G2 (H200 실측, 64 환경 전체 규모 확인, 생성–학습 잔여 불일치·엄격 결정성·S_rec 타당성 확인, Linux 경로의 공개 체크포인트 재평가) → G-PRE → E1.
+- G2 완료 (2026-11-04): 판정 단계 모두 통과, A3⁰ 학습 신호 있음, 35.5 / 60 GPU시간. 결과 [pilot/G2_results.md](pilot/G2_results.md), G-PRE 입력 [pilot/G2_gpre_inputs.md](pilot/G2_gpre_inputs.md).
+- 다음: G-PRE 사전 고정 — 초안 [docs/GPRE_draft.md](docs/GPRE_draft.md) (연구자 결정 전) → E1.
 
 ## 사전 고정 기록
 
