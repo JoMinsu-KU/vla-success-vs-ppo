@@ -1,0 +1,10 @@
+{"run": "perm", "cond": "Position", "batch": 0, "reset_s": 5.0, "policy_s": 102.6, "sim_s": 96.0, "total_s": 203.7}
+{"run": "perm", "cond": "Position", "batch": 1, "reset_s": 5.1, "policy_s": 103.3, "sim_s": 97.4, "total_s": 205.8}
+{"run": "perm", "cond": "Position", "batch": 2, "reset_s": 5.3, "policy_s": 103.3, "sim_s": 94.3, "total_s": 202.9}
+{"run": "repro", "cond": "EEPose", "batch": 0, "reset_s": 5.1, "policy_s": 103.1, "sim_s": 97.9, "total_s": 206.2}
+{"run": "perm", "cond": "EEPose", "batch": 0, "reset_s": 5.4, "policy_s": 103.5, "sim_s": 95.4, "total_s": 204.3}
+{"run": "perm", "cond": "EEPose", "batch": 1, "reset_s": 5.1, "policy_s": 103.3, "sim_s": 94.5, "total_s": 202.9}
+{"run": "perm", "cond": "EEPose", "batch": 2, "reset_s": 5.1, "policy_s": 103.3, "sim_s": 96.0, "total_s": 204.5}
+{"run": "perm", "cond": "PositionChangeTo", "batch": 0, "reset_s": 5.2, "policy_s": 102.9, "sim_s": 91.3, "total_s": 199.4}
+{"run": "perm", "cond": "PositionChangeTo", "batch": 1, "reset_s": 5.2, "policy_s": 103.0, "sim_s": 93.9, "total_s": 202.1}
+{"run": "perm", "cond": "PositionChangeTo", "batch": 2, "reset_s": 5.3, "policy_s": 103.5, "sim_s": 93.8, "total_s": 202.7}
