@@ -151,6 +151,28 @@ class Env:
         return np.array([bool(u.agent.is_grasping(self.src_actor(i))[i]) for i in range(self.n)])
 
     # ------------------------------------------------ 교란 (환경별 종류 목록, t0 물체 자세 목록)
+    def _open_gripper(self, i):
+        """환경 i의 그리퍼를 열림 상한으로: 관절 qpos, 관절 속도 0, 제어기 목표, 구동 목표 (R-a와 R-a′ 공통)."""
+        u = self.u
+        gc = u.agent.controller.controllers["gripper"]
+        up = float(np.max(np.asarray(gc.config.upper)))
+        qpos = u.agent.robot.get_qpos().clone()
+        jidx = [u.agent.robot.active_joints.index(j) for j in gc.joints]
+        qpos[i, jidx] = up
+        u.agent.robot.set_qpos(qpos)
+        qv = u.agent.robot.get_qvel().clone()
+        qv[i, jidx] = 0
+        u.agent.robot.set_qvel(qv)
+        st = gc.get_state()
+        if "target_qpos" in st:
+            tq = st["target_qpos"].clone()
+            tq[i] = up
+            gc.set_state(dict(target_qpos=tq))
+        # WidowX 그리퍼 제어기는 목표 상태를 두지 않으므로(use_target 꺼짐) 구동 목표를 직접 열림으로
+        tgt = gc.qpos.clone()
+        tgt[i] = up
+        gc.set_drive_targets(tgt)
+
     def perturb(self, kinds, obj_pose0):
         from mani_skill.utils.structs.pose import Pose
         u = self.u
@@ -170,24 +192,10 @@ class Env:
                     av[i] = 0
                     act.set_linear_velocity(lv)
                     act.set_angular_velocity(av)
-                    gc = u.agent.controller.controllers["gripper"]
-                    up = float(np.max(np.asarray(gc.config.upper)))
-                    qpos = u.agent.robot.get_qpos().clone()
-                    jidx = [u.agent.robot.active_joints.index(j) for j in gc.joints]
-                    qpos[i, jidx] = up
-                    u.agent.robot.set_qpos(qpos)
-                    qv = u.agent.robot.get_qvel().clone()
-                    qv[i, jidx] = 0
-                    u.agent.robot.set_qvel(qv)
-                    st = gc.get_state()
-                    if "target_qpos" in st:
-                        tq = st["target_qpos"].clone()
-                        tq[i] = up
-                        gc.set_state(dict(target_qpos=tq))
-                    # WidowX 그리퍼 제어기는 목표 상태를 두지 않으므로(use_target 꺼짐) 구동 목표를 직접 열림으로
-                    tgt = gc.qpos.clone()
-                    tgt[i] = up
-                    gc.set_drive_targets(tgt)
+                    self._open_gripper(i)
+                elif k == "R-a'":
+                    # G-PRE T2 (pilot/GPRE_T2T3_prereg.md): 그리퍼만 연다. 물체 자세·속도와 과제 래치는 복원값 그대로
+                    self._open_gripper(i)
                 elif k == "R-b":
                     ac = u.agent.controller.controllers["arm"]
                     tp = ac._target_pose.raw_pose.clone()
