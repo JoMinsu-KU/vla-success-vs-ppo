@@ -30,7 +30,8 @@ import common as C  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--run-id", required=True)
-ap.add_argument("--arm", required=True, choices=["A3", "A2p"])
+ap.add_argument("--arm", required=True, choices=["A3", "A2p", "A3s", "A2pm"])
+ap.add_argument("--iters", type=int, default=1, help="A2±: 라운드당 전체 롤아웃 반복 수 (명세 3.5절 {1, 2})")
 ap.add_argument("--seed", type=int, required=True)
 ap.add_argument("--rounds", type=int, required=True)
 ap.add_argument("--numerics", required=True, choices=["math", "default"])
@@ -126,9 +127,11 @@ def a3_update(ad, batch, r, probe):
         return o
     ppo.advantages_and_returns = aar
     t0 = time.time()
+    reward_kind = "potential" if a.arm == "A3s" else "terminal"  # A3ˢ = 원 잠재함수 보상 (명세 3.3절, C5)
     try:
         upd = ppo.ppo_update(ad, batch, ppo.PPOConfig(order_seed=1000 + r, chunk=a.chunk, recompute_old=True,
-                                                      max_steps=a.smoke_steps or None), log=step_log)
+                                                      max_steps=a.smoke_steps or None, reward_kind=reward_kind),
+                             log=step_log)
     finally:
         ppo.advantages_and_returns = orig_aar
     torch.cuda.synchronize()
@@ -203,6 +206,62 @@ def a2p_update(ad, batch, r, probe):
                 rolled_back_first_step=rolled_first, kl_probe_round_end=probe.kl(policy)), finite_all
 
 
+def a2pm_update(ad, batch, r, probe):
+    """A2± (명세 3.3절): 라운드 롤아웃 전체, 궤적 가중치 w_i = (Y_i − b₋ᵢ)/Ȳ (core.a2pm_weights).
+    손실 = Σ w·(−log π/7) / 스텝 전이 수 (A2⁺의 성공 전이 평균 NLL과 같은 스케일, 1.4절).
+    스텝 계획: 반복(--iters)마다 전체 전이를 시드 20,000 + r + 100,000·반복 순서로 8 × 누적 20씩 훑는다 (반복 1이면 32스텝).
+    KL 장치·되돌림·발산 규칙은 A2⁺와 같다. Ȳ ∈ {0, 1}이면 업데이트하지 않는다."""
+    Y = batch.Y()
+    w_traj = core.a2pm_weights(Y)
+    if not np.any(w_traj != 0):
+        return dict(opt_steps=0, update_s=0.0, zero_weight_round=True, steps=[], rolled_back_first_step=False), True
+    N, T = batch.N, batch.T
+    w_tr = np.tile(w_traj, T)  # 전이 인덱스 t·N + i의 가중치 = w_i
+    plan = plans.a2pm_step_plan(T * N, a.iters, r, C.CFG["minibatch"], C.CFG["accum"])
+    if a.smoke_steps:
+        plan = plan[:a.smoke_steps]
+    params = list(ad.params_policy)
+    steps, finite_all, rolled_first = [], True, False
+    t0 = time.time()
+    for s, idx_step in enumerate(plan):
+        n_tr = len(idx_step)
+        snap = snapshot()
+        ad.train_mode()
+        ad.opt_policy.zero_grad(set_to_none=True)
+        ad.opt_value.zero_grad(set_to_none=True)
+        tot = 0.0
+        for j in range(0, n_tr, a.chunk):
+            idx = idx_step[j:j + a.chunk]
+            lp, _v = ad.evaluate(idx)
+            wt = torch.as_tensor(w_tr[idx], dtype=lp.dtype, device=lp.device).reshape(-1, *([1] * (lp.dim() - 1)))
+            loss = (-wt * lp / 7.0).sum() / n_tr
+            loss.backward()
+            tot += float(loss)
+        gn = float(torch.nn.utils.clip_grad_norm_(params, C.CFG["grad_clip"]))
+        finite = math.isfinite(gn) and math.isfinite(tot)
+        if not finite:
+            steps.append(dict(step=s, n=n_tr, loss=tot, grad_norm=gn, finite=False))
+            finite_all = False
+            break
+        ad.opt_policy.step()
+        kl = probe.kl(policy)
+        rec = dict(step=s, n=n_tr, loss=tot, grad_norm=gn, finite=True, kl_probe=kl, rolled_back=False)
+        if kl > a.kl_max:
+            restore(snap)
+            rec["rolled_back"] = True
+            rolled_first = s == 0
+            steps.append(rec)
+            break
+        steps.append(rec)
+        del snap
+    torch.cuda.synchronize()
+    applied = sum(1 for x in steps if x.get("finite") and not x.get("rolled_back"))
+    return dict(opt_steps=applied, update_s=round(time.time() - t0, 1), zero_weight_round=False, steps=steps,
+                rolled_back_first_step=rolled_first, kl_probe_round_end=probe.kl(policy),
+                weights=dict(pos=float(w_traj[w_traj > 0][0]) if np.any(w_traj > 0) else None,
+                             neg=float(w_traj[w_traj < 0][0]) if np.any(w_traj < 0) else None)), finite_all
+
+
 # ---------------------------------------------------------------- 라운드
 status = "running"
 for r in range(start, a.rounds):
@@ -220,8 +279,10 @@ for r in range(start, a.rounds):
     ent = entropy_of(probe.ref)
     if state["entropy_warmup"] is None:
         state["entropy_warmup"] = ent
-    if a.arm == "A3":
+    if a.arm in ("A3", "A3s"):
         upd, finite = a3_update(ad, batch, r, probe)
+    elif a.arm == "A2pm":
+        upd, finite = a2pm_update(ad, batch, r, probe)
     else:
         upd, finite = a2p_update(ad, batch, r, probe)
     dt = time.time() - t_round

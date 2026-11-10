@@ -136,6 +136,81 @@ def test_gmid_endpoint():
     assert gmid.primary_endpoint(rows) == 50.0
 
 
+def test_select_tuning_aux_rules():
+    import select_tuning as S
+    pm = [dict(cand="c0", lr=1e-4, iters=1, score=60.0), dict(cand="c1", lr=3e-4, iters=1, score=61.0),
+          dict(cand="c2", lr=1e-4, iters=2, score=61.5), dict(cand="c3", lr=3e-4, iters=2, score=65.0)]
+    assert S.choose("A2pm", pm, 2.0)["cand"] == "c3"
+    pm[3]["score"] = 61.9
+    assert S.choose("A2pm", pm, 2.0)["cand"] == "c0"           # 작은 lr → 반복 1
+    pm[0]["score"] = None
+    assert S.choose("A2pm", pm, 2.0)["cand"] == "c2"           # 제외 뒤 작은 lr
+    a3s = [dict(cand="c0", lr=5e-5, vh_lr=1e-3, score=50.0), dict(cand="c1", lr=5e-5, vh_lr=3e-3, score=50.0)]
+    assert S.choose("A3s", a3s, 2.0)["cand"] == "c1"           # A3⁰와 같은 규칙
+
+
+def test_a2pm_step_plan_and_weights():
+    sys.path.insert(0, str(C.REPO / "pilot" / "learner"))
+    import core
+    import plans
+    for iters in (1, 2):
+        p = plans.a2pm_step_plan(5120, iters, 7, 8, 20)
+        assert len(p) == 32 * iters and all(len(x) == 160 for x in p)
+        for k in range(iters):
+            assert np.array_equal(np.sort(np.concatenate(p[32 * k:32 * (k + 1)])), np.arange(5120))
+    assert not np.array_equal(plans.a2pm_step_plan(5120, 1, 7, 8, 20)[0], plans.a2pm_step_plan(5120, 1, 8, 8, 20)[0])
+    Y = np.array([1, 0, 0, 1] + [0] * 60)
+    w = core.a2pm_weights(Y)
+    assert np.isclose(w[0], (1 - 1 / 63) / (2 / 64)) and np.isclose(w[1], (0 - 2 / 63) / (2 / 64))
+    assert not np.any(core.a2pm_weights(np.zeros(64, int))) and not np.any(core.a2pm_weights(np.ones(64, int)))
+
+
+def test_phase2_plan_structure_and_blinding():
+    with tempfile.TemporaryDirectory() as d:
+        os.environ["VLA_MAIN_WORK"] = d
+        import runner
+        W = C.work_dir()
+        C.ensure_dirs(W)
+        p1 = runner.make_plan(False)
+        C.write_json(W / "sealed" / "plan.json", p1)
+        C.write_json(W / "public" / "runs_index.json", runner.public_index(p1))
+        try:
+            runner.make_plan_phase2(False, W)
+            raise AssertionError("gmid 없이 2단계 계획이 만들어졌다")
+        except SystemExit:
+            pass
+        C.write_json(W / "public" / "gmid.json", dict(n=10))
+        plan = runner.make_plan_phase2(False, W)
+        jobs = plan["jobs"]
+        e1 = [j for j in jobs if j["kind"] == "e1_train"]
+        assert sorted({j["seed"] for j in e1}) == [5, 6, 7, 8, 9, 10] and len(e1) == 12
+        assert all(j["sel_file"] == "tuning_selection.json" and j["numerics"] == "math" for j in e1)
+        assert all(j["save_rounds"] == C.CFG[f"e1_save_rounds_{j['arm']}"] for j in e1)
+        tune = [j for j in jobs if j["kind"] == "tune_train"]
+        assert len(tune) == 8 and {j["arm"] for j in tune} == {"A2pm", "A3s"}
+        assert all(j["seed"] == C.CFG["tune_seed"] and j["numerics"] == "default" for j in tune)
+        assert {j["hp"].get("iters") for j in tune if j["arm"] == "A2pm"} == {1, 2}
+        aux = [j for j in jobs if j["kind"] == "e1_aux_train"]
+        assert len(aux) == 6 and sorted({j["seed"] for j in aux}) == [1, 2, 3]
+        assert all(j["episode_tag"] == f"e1-seed{j['seed']}" and j["numerics"] == "math" for j in aux)
+        kinds = [j["kind"] for j in jobs]
+        assert kinds.index("select") > max(i for i, k in enumerate(kinds) if k == "tune_train")
+        assert kinds.index("select") < min(i for i, k in enumerate(kinds) if k == "e1_aux_train")
+        assert max(i for i, k in enumerate(kinds) if k == "e1_train") < min(i for i, k in enumerate(kinds) if k == "tune_train")
+        rids = [j["run_id"] for j in jobs if "run_id" in j and j["kind"] != "eval"]
+        assert len(rids) == len(set(rids)) and not set(rids) & set(runner.public_index(p1))
+        idx = runner.public_index(plan)
+        assert all(set(v) == {"kind", "seed"} for v in idx.values())
+        # 스모크: 동등성 검사가 1단계 E1 실행 둘을 참조
+        p1s = runner.make_plan(True)
+        C.write_json(W / "sealed" / "plan.json", p1s)
+        ps = runner.make_plan_phase2(True, W)
+        eq = [j for j in ps["jobs"] if j["kind"] == "equiv_check"]
+        refs = {j["run_id"]: j for j in p1s["jobs"] if j["kind"] == "e1_train"}
+        assert len(eq) == 2 and all(j["ref_run_id"] in refs and j["arm"] == refs[j["ref_run_id"]]["arm"] for j in eq)
+        assert all(j[k] == refs[j["ref_run_id"]][k] for j in eq for k in ("seed", "rounds", "numerics", "episode_tag", "save_rounds"))
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for f in fns:

@@ -7,7 +7,12 @@
 - 본 실행은 태그 gpre가 HEAD의 조상이고 study/gpre_config.json이 태그 이후 바뀌지 않았을 때만 시작한다.
   --smoke는 태그 없이 <W>/smoke에서 축소 설정으로 전체 흐름과 재시작·결정성을 확인한다 (약 2시간).
 
-사용: python study/runner.py [--smoke] [--dry-run]
+2단계 (--phase 2, 1단계 G-mid 뒤): 핵심 갈래(A3⁰·A2⁺) 나머지 시드 5~n (n = public/gmid.json) → 보조 갈래(A2±·A3ˢ)
+  튜닝 4후보씩 + 선택 → 보조 갈래 E1 시드 1~3. 계획은 <W>/sealed/plan_phase2.json, 설정은 study/phase2_config.json.
+  --phase 2 --smoke는 <W>/smoke(1단계 스모크 결과 필요)에서 축소 흐름 + 동등성 검사(새 학습기가 A3⁰·A2⁺를 1단계 스모크와
+  비트 단위로 같게 학습하는지)를 한다.
+
+사용: python study/runner.py [--phase 1|2] [--smoke] [--dry-run]
 """
 from __future__ import annotations
 
@@ -86,10 +91,62 @@ def make_plan(smoke: bool) -> dict:
     return dict(created=C.now(), smoke=smoke, repo_head=git("rev-parse", "HEAD")[1], jobs=jobs)
 
 
+P2 = json.loads((STUDY / "phase2_config.json").read_text(encoding="utf-8"))
+
+
+def make_plan_phase2(smoke: bool, W: Path) -> dict:
+    cfg = C.CFG
+    gm = C.read_json(W / "public" / "gmid.json")
+    if not gm:
+        raise SystemExit("1단계 G-mid 결과(public/gmid.json)가 없다. 2단계는 1단계가 끝난 뒤 시작한다")
+    used = set(C.read_json(W / "public" / "runs_index.json", {}))
+    jobs = []
+    # (a) 핵심 갈래 나머지 시드 (보호 대상, 먼저)
+    core_seeds = list(range(P2["core_first_new_seed"], int(gm["n"]) + 1))
+    if smoke:
+        core_seeds = core_seeds[:1]
+    for s in core_seeds:
+        for arm in P2["core_arms"]:
+            rid = new_id(used)
+            jobs.append(dict(kind="e1_train", run_id=rid, arm=arm, seed=s, rounds=2 if smoke else cfg["rounds_e1"],
+                             numerics=cfg["numerics_train_e1"], episode_tag=f"e1-seed{s}",
+                             save_rounds=[1, 2] if smoke else cfg[f"e1_save_rounds_{arm}"], sel_file="tuning_selection.json"))
+            jobs.append(dict(kind="eval", run_id=rid, suite="e1", name="final", ckpt="final.pt"))
+    # (b) 보조 갈래 튜닝 (1단계와 같은 튜닝 시드·과제 표본·단축 예산·선택 라운드)
+    tune_rounds = 2 if smoke else cfg["rounds_tune"]
+    sel_rounds = [2] if smoke else cfg["tune_select_rounds"]
+    for arm in P2["aux_arms"]:
+        cands = P2["aux_tune_candidates"][arm][:1] if smoke else P2["aux_tune_candidates"][arm]
+        for c in cands:
+            rid = new_id(used)
+            jobs.append(dict(kind="tune_train", run_id=rid, arm=arm, cand=c["cand"], hp={k: v for k, v in c.items() if k != "cand"},
+                             seed=cfg["tune_seed"], rounds=tune_rounds, numerics=cfg["numerics_tune"],
+                             episode_tag=f"tune-seed{cfg['tune_seed']}", save_rounds=sel_rounds))
+            for r in sel_rounds:
+                jobs.append(dict(kind="eval", run_id=rid, suite="idval", name=f"r{r:03d}", ckpt=f"r{r:03d}.pt"))
+    jobs.append(dict(kind="select", select_rounds=sel_rounds, arms=P2["aux_arms"], out_name="tuning_selection_phase2.json"))
+    # (c) 보조 갈래 E1 (시드 1~3, 같은 시드의 핵심 갈래와 같은 과제 표본, 결정적 경로 = 안 A⁻)
+    aux_seeds = P2["aux_seeds"][:1] if smoke else P2["aux_seeds"]
+    for s in aux_seeds:
+        for arm in P2["aux_arms"]:
+            rid = new_id(used)
+            jobs.append(dict(kind="e1_aux_train", run_id=rid, arm=arm, seed=s, rounds=2 if smoke else cfg["rounds_e1"],
+                             numerics=cfg["numerics_train_e1"], episode_tag=f"e1-seed{s}",
+                             save_rounds=[1, 2] if smoke else P2[f"e1_save_rounds_{arm}"], sel_file="tuning_selection_phase2.json"))
+            jobs.append(dict(kind="eval", run_id=rid, suite="e1", name="final", ckpt="final.pt"))
+    if smoke:  # 새 학습기의 A3⁰·A2⁺ 경로가 1단계 스모크 실행과 비트 단위로 같은지
+        p1 = C.read_json(W / "sealed" / "plan.json")
+        for ref in [j for j in p1["jobs"] if j["kind"] == "e1_train"]:
+            jobs.insert(0, dict(kind="equiv_check", run_id=new_id(used), ref_run_id=ref["run_id"], arm=ref["arm"], seed=ref["seed"],
+                                rounds=ref["rounds"], numerics=ref["numerics"], episode_tag=ref["episode_tag"],
+                                save_rounds=ref["save_rounds"], sel_file="tuning_selection.json"))
+    return dict(created=C.now(), phase=2, smoke=smoke, repo_head=git("rev-parse", "HEAD")[1], gmid_n=int(gm["n"]), jobs=jobs)
+
+
 def public_index(plan: dict) -> dict:
     idx = {}
     for j in plan["jobs"]:
-        if j["kind"] in ("tune_train", "e1_train", "resume_check"):
+        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "resume_check", "equiv_check"):
             idx[j["run_id"]] = dict(kind=j["kind"], seed=j["seed"])
     return idx
 
@@ -108,7 +165,7 @@ def train_cmd(j: dict, hp: dict, smoke: bool, extra: list | None = None) -> list
     cmd = [PY, str(STUDY / "train.py"), "--run-id", j["run_id"], "--arm", j["arm"], "--seed", str(j["seed"]),
            "--rounds", str(j["rounds"]), "--numerics", j["numerics"], "--episode-tag", j["episode_tag"],
            "--save-rounds", ",".join(str(x) for x in j["save_rounds"])]
-    for k, flag in (("lr", "--lr"), ("vh_lr", "--vh-lr"), ("update", "--update")):
+    for k, flag in (("lr", "--lr"), ("vh_lr", "--vh-lr"), ("update", "--update"), ("iters", "--iters")):
         if k in hp:
             cmd += [flag, str(hp[k])]
     if smoke:
@@ -124,19 +181,20 @@ def eval_status(W: Path, j: dict) -> str:
     return C.read_json(W / "public" / "evals" / f"{j['run_id']}_{j['suite']}_{j['name']}.json", {}).get("status", "new")
 
 
-def selected_hp(W: Path, arm: str) -> dict:
-    sel = C.read_json(W / "public" / "tuning_selection.json")
+def selected_hp(W: Path, arm: str, sel_file: str = "tuning_selection.json") -> dict:
+    sel = C.read_json(W / "public" / sel_file)
     if not sel:
         raise SystemExit("튜닝 선택 결과가 없다")
     return sel[arm]["hp"]
 
 
 def resume_check(W: Path, j: dict, env: dict, smoke: bool) -> bool:
-    """1라운드 뒤 멈췄다가 이어 간 실행이 끊김 없는 실행과 비트 단위로 같은지 (결정적 경로 + 재시작)."""
+    """resume_check: 1라운드 뒤 멈췄다가 이어 간 실행이 끊김 없는 실행(ref)과 비트 단위로 같은지 (결정적 경로 + 재시작).
+    equiv_check: 현재 코드로 끊김 없이 다시 돈 실행이 ref(1단계 코드의 스모크 실행)와 비트 단위로 같은지."""
     import torch
-    hp = selected_hp(W, j["arm"])
+    hp = selected_hp(W, j["arm"], j.get("sel_file", "tuning_selection.json"))
     if run_status(W, j["run_id"]) not in ("done",):
-        if run_status(W, j["run_id"]) == "new":
+        if run_status(W, j["run_id"]) == "new" and j["kind"] == "resume_check":
             if run_cmd(W, j["run_id"], train_cmd(j, hp, smoke, ["--stop-after", "1"]), env) != 0:
                 return False
         if run_cmd(W, j["run_id"], train_cmd(j, hp, smoke), env) != 0:
@@ -149,7 +207,7 @@ def resume_check(W: Path, j: dict, env: dict, smoke: bool) -> bool:
     keys = ("Y_per_episode", "losses", "kl_probe_round_end", "entropy_probe")
     same_rounds = len(ra) == len(rb) and all(x.get(k) == y.get(k) for x, y in zip(ra, rb) for k in keys)
     ok = bool(same_params and same_rounds)
-    C.write_json(W / "public" / "resume_check.json", dict(lora_bitwise_equal=bool(same_params), round_records_equal=bool(same_rounds),
+    C.write_json(W / "public" / ("resume_check.json" if j["kind"] == "resume_check" else f"equiv_check_{j['ref_run_id']}.json"), dict(lora_bitwise_equal=bool(same_params), round_records_equal=bool(same_rounds),
                                                           passed=ok, checked=C.now()))
     return ok
 
@@ -158,6 +216,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--dry-run", action="store_true", help="계획만 만들고 보여 준다")
+    ap.add_argument("--phase", type=int, default=1, choices=[1, 2])
     a = ap.parse_args()
     if a.smoke:
         os.environ["VLA_MAIN_WORK"] = str(C.work_dir() / "smoke")
@@ -165,14 +224,17 @@ def main():
         check_gpre_tag()
     W = C.work_dir()
     C.ensure_dirs(W)
-    plan_f = W / "sealed" / "plan.json"
+    sfx = "" if a.phase == 1 else "_phase2"
+    plan_f = W / "sealed" / f"plan{sfx}.json"
     plan = C.read_json(plan_f)
     if plan is None:
-        plan = make_plan(a.smoke)
+        plan = make_plan(a.smoke) if a.phase == 1 else make_plan_phase2(a.smoke, W)
         C.write_json(plan_f, plan)
-        (W / "public" / "plan_sha256.txt").write_text(C.sha256_file(plan_f) + "\n")
-        C.write_json(W / "public" / "runs_index.json", public_index(plan))
-        C.public_log(W, f"plan created: {len(plan['jobs'])} jobs, smoke={a.smoke}, head={plan['repo_head'][:10]}")
+        (W / "public" / f"plan{sfx}_sha256.txt").write_text(C.sha256_file(plan_f) + "\n")
+        idx = C.read_json(W / "public" / "runs_index.json", {}) if a.phase == 2 else {}
+        idx.update(public_index(plan))
+        C.write_json(W / "public" / "runs_index.json", idx)
+        C.public_log(W, f"plan{sfx} created: {len(plan['jobs'])} jobs, smoke={a.smoke}, head={plan['repo_head'][:10]}")
     if a.dry_run:
         kinds = {}
         for j in plan["jobs"]:
@@ -182,10 +244,10 @@ def main():
     env = dict(os.environ)
     for i, j in enumerate(plan["jobs"]):
         tag = f"[{i + 1}/{len(plan['jobs'])}] {j['kind']} {j.get('run_id', '')} {j.get('name', '')}".strip()
-        if j["kind"] in ("tune_train", "e1_train"):
+        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train"):
             if run_status(W, j["run_id"]) in ("done", "diverged_nonfinite", "diverged_kl"):
                 continue
-            hp = j["hp"] if j["kind"] == "tune_train" else selected_hp(W, j["arm"])
+            hp = j["hp"] if j["kind"] == "tune_train" else selected_hp(W, j["arm"], j.get("sel_file", "tuning_selection.json"))
             C.public_log(W, f"{tag} start")
             for attempt in range(3):
                 rc = run_cmd(W, j["run_id"], train_cmd(j, hp, a.smoke), env)
@@ -217,13 +279,15 @@ def main():
                 sys.exit(1)
             C.public_log(W, f"{tag} done")
         elif j["kind"] == "select":
-            if C.read_json(W / "public" / "tuning_selection.json"):
+            out_name = j.get("out_name", "tuning_selection.json")
+            if C.read_json(W / "public" / out_name):
                 continue
             import select_tuning
-            pub = select_tuning.main(W, plan, j["select_rounds"])
+            pub = select_tuning.main(W, plan, j["select_rounds"], arms=tuple(j.get("arms", ("A2p", "A3"))), out_name=out_name)
             C.public_log(W, f"{tag} {json.dumps(pub, ensure_ascii=False)}")
-        elif j["kind"] == "resume_check":
-            if C.read_json(W / "public" / "resume_check.json", {}).get("passed"):
+        elif j["kind"] in ("resume_check", "equiv_check"):
+            pf = "resume_check.json" if j["kind"] == "resume_check" else f"equiv_check_{j['ref_run_id']}.json"
+            if C.read_json(W / "public" / pf, {}).get("passed"):
                 continue
             ok = resume_check(W, j, env, a.smoke)
             C.public_log(W, f"{tag} passed={ok}")
@@ -235,7 +299,7 @@ def main():
             import gmid
             out = gmid.main(W, C.read_json(W / "public" / "runs_index.json"), j["seeds"])
             C.public_log(W, f"{tag} {json.dumps(out, ensure_ascii=False)}")
-    C.public_log(W, "PHASE 1 DONE" + (" (smoke)" if a.smoke else ""))
+    C.public_log(W, f"PHASE {a.phase} DONE" + (" (smoke)" if a.smoke else ""))
 
 
 if __name__ == "__main__":
