@@ -197,6 +197,10 @@ def test_phase2_plan_structure_and_blinding():
         assert kinds.index("select") > max(i for i, k in enumerate(kinds) if k == "tune_train")
         assert kinds.index("select") < min(i for i, k in enumerate(kinds) if k == "e1_aux_train")
         assert max(i for i, k in enumerate(kinds) if k == "e1_train") < min(i for i, k in enumerate(kinds) if k == "tune_train")
+        a1 = [j for j in jobs if j["kind"] == "a1_train"]
+        assert sorted(j["seed"] for j in a1) == [1, 2, 3] and all(j["steps"] == 60000 for j in a1)
+        assert min(i for i, k in enumerate(kinds) if k == "a1_train") > max(i for i, k in enumerate(kinds) if k == "e1_aux_train")
+        assert all(any(e["kind"] == "eval" and e["run_id"] == j["run_id"] and e["suite"] == "e1" for e in jobs) for j in a1)
         rids = [j["run_id"] for j in jobs if "run_id" in j and j["kind"] != "eval"]
         assert len(rids) == len(set(rids)) and not set(rids) & set(runner.public_index(p1))
         idx = runner.public_index(plan)
@@ -209,6 +213,27 @@ def test_phase2_plan_structure_and_blinding():
         refs = {j["run_id"]: j for j in p1s["jobs"] if j["kind"] == "e1_train"}
         assert len(eq) == 2 and all(j["ref_run_id"] in refs and j["arm"] == refs[j["ref_run_id"]]["arm"] for j in eq)
         assert all(j[k] == refs[j["ref_run_id"]][k] for j in eq for k in ("seed", "rounds", "numerics", "episode_tag", "save_rounds"))
+        a1s = [j for j in ps["jobs"] if j["kind"] == "a1_train"]
+        rc = [j for j in ps["jobs"] if j["kind"] == "a1_resume_check"]
+        assert len(a1s) == 1 and a1s[0]["steps"] == 20 and len(rc) == 1 and rc[0]["ref_run_id"] == a1s[0]["run_id"]
+
+
+def test_a1_prepare_rules():
+    import a1_prepare as P
+    files = [f"f{k:05d}.npz" for k in range(16400)]
+    sp = P.split_files(files)
+    assert sp["train"] == files[:16384] and sp["val"] == files[16384:16400]
+    stats = dict(q01=[-0.1] * 6 + [0.0], q99=[0.1] * 6 + [1.0], mask=[True] * 6 + [False])
+    acts = np.array([[0.0, 0.05, -0.05, 0.1, -0.1, 0.3, 1.0], [0.01, -0.02, 0.0, 0.0, 0.0, -0.3, -1.0]])
+    tok = P.tokenize(acts, stats)
+    assert tok.min() >= 31744 and tok.max() <= 31999
+    back = P.detokenize(tok, stats)
+    assert np.all(np.abs(back[:, :5] - acts[:, :5]) <= 0.2 / 255 / 2 + 1e-9)          # 범위 안: 반 bin 이내
+    assert np.allclose(back[:, 5], [0.1 * (1 - 1 / 255), -0.1 * (1 - 1 / 255)], atol=1e-3)  # 범위 밖은 끝 bin으로
+    assert list((back[:, 6] > 0.5)) == [True, False]                                     # 그리퍼 열림/닫힘 보존
+    m = P.filter_small_actions(np.array([[0, 0, 0, 0, 0, 0, 1], [0.02, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, -1],
+                                         [0, 0, 0, 0, 0, 0.1, -1], [0.001, 0, 0, 0, 0, 0, -1]], float))
+    assert list(m) == [False, True, True, True, False]
 
 
 if __name__ == "__main__":

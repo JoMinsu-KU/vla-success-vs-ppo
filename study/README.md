@@ -60,7 +60,11 @@ nohup setsid bash ~/vla_main_code/study/run_phase1.sh >> ~/vla_main/main_console
 
 ## 2b. 2단계 (1단계 G-mid 뒤)
 
-2단계 = 핵심 갈래(A3⁰·A2⁺) 나머지 시드 5~n (n은 `public/gmid.json`) → 보조 갈래(A2±·A3ˢ) 튜닝 4후보씩(1단계와 같은 튜닝 시드·과제 표본·150라운드·선택 규칙) → 보조 갈래 E1 시드 1~3 (결정적 경로, 같은 시드의 핵심 갈래와 같은 과제 표본). 설정은 [phase2_config.json](phase2_config.json) (명세 3.3·3.5절 값 그대로). A1·E2·E3·E4-b는 이후에 추가한다.
+2단계 = 핵심 갈래(A3⁰·A2⁺) 나머지 시드 5~n (n은 `public/gmid.json`) → 보조 갈래(A2±·A3ˢ) 튜닝 4후보씩(1단계와 같은 튜닝 시드·과제 표본·150라운드·선택 규칙) → 보조 갈래 E1 시드 1~3 (결정적 경로, 같은 시드의 핵심 갈래와 같은 과제 표본). 설정은 [phase2_config.json](phase2_config.json) (명세 3.3·3.5절 값 그대로). 이어서 **A1 시연 SFT 재학습** 시드 1~3 (설계는 [A1_design.md](A1_design.md), 60,000스텝, 결정적 경로) → E1 평가. E2·E3·E4-b는 이후에 추가한다.
+
+**A1 데이터 준비 (CPU, 1단계와 함께 가능):**
+1. 시연 생성: `~/vla_main_data/collect_a1.sh` (원 명령, 프로세스 4개, 메모리 감시 포함, 약 7시간). 컨테이너 메모리 상한이 26 GiB라 프로세스를 늘리지 않는다 (2026-11-10 16개로 돌렸다가 컨테이너가 재시작됨).
+2. 전처리: `python study/a1_prepare.py ~/vla_main_data/mp_collect/PutOnPlateInScene25Main-v3/16400/data ~/vla_main_data/a1 $VLA_W1_CKPT --procs 4` → `~/vla_main_data/a1/train/meta.json`의 해시를 기록한다 (약 300 GB).
 
 1단계가 끝나면 (`PHASE 1 DONE`):
 
@@ -89,6 +93,7 @@ nohup setsid bash ~/vla_main_code/study/run_phase1.sh >> ~/vla_main/main_console
 |---|---|
 | `run_phase1.sh`, `run_phase2.sh` | 환경 설정 → preflight → runner (1단계 / 2단계) |
 | `runner.py` | 계획 생성(1단계 `--phase 1`, 2단계 `--phase 2`)·순차 실행·재시작·재시도, 태그 확인 |
+| `train_a1.py`, `a1_prepare.py` | A1 시연 SFT 학습 1회, 시연 전처리 (A1_design.md) |
 | `train.py` | 학습 1회 (A3⁰·A3ˢ PPO, A2⁺ U-prop/U-fix, A2± 가중 NLL, 우도 갈래 KL 되돌림, 결정적/기본 경로) |
 | `evaluate.py` | ID 검증(512) 또는 16조건 × 192 평가 |
 | `select_tuning.py` | 140·145·150라운드 ID 검증 평균으로 후보 선택 |

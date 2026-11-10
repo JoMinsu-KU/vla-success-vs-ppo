@@ -134,6 +134,14 @@ def make_plan_phase2(smoke: bool, W: Path) -> dict:
                              numerics=cfg["numerics_train_e1"], episode_tag=f"e1-seed{s}",
                              save_rounds=[1, 2] if smoke else P2[f"e1_save_rounds_{arm}"], sel_file="tuning_selection_phase2.json"))
             jobs.append(dict(kind="eval", run_id=rid, suite="e1", name="final", ckpt="final.pt"))
+    # (d) A1 시연 SFT 재학습 (study/A1_design.md), 시드 1~3
+    a1_seeds = P2["a1_seeds"][:1] if smoke else P2["a1_seeds"]
+    for s in a1_seeds:
+        rid = new_id(used)
+        jobs.append(dict(kind="a1_train", run_id=rid, seed=s, steps=20 if smoke else P2["a1_steps"]))
+        jobs.append(dict(kind="eval", run_id=rid, suite="e1", name="final", ckpt="final.pt"))
+        if smoke:
+            jobs.append(dict(kind="a1_resume_check", run_id=new_id(used), ref_run_id=rid, seed=s, steps=20))
     if smoke:  # 새 학습기의 A3⁰·A2⁺ 경로가 1단계 스모크 실행과 비트 단위로 같은지
         p1 = C.read_json(W / "sealed" / "plan.json")
         for ref in [j for j in p1["jobs"] if j["kind"] == "e1_train"]:
@@ -146,7 +154,7 @@ def make_plan_phase2(smoke: bool, W: Path) -> dict:
 def public_index(plan: dict) -> dict:
     idx = {}
     for j in plan["jobs"]:
-        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "resume_check", "equiv_check"):
+        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "resume_check", "equiv_check", "a1_train", "a1_resume_check"):
             idx[j["run_id"]] = dict(kind=j["kind"], seed=j["seed"])
     return idx
 
@@ -171,6 +179,40 @@ def train_cmd(j: dict, hp: dict, smoke: bool, extra: list | None = None) -> list
     if smoke:
         cmd += ["--smoke-steps", "2", "--latest-every", "1"]
     return cmd + (extra or [])
+
+
+def a1_data() -> Path:
+    d = Path(os.environ.get("VLA_A1_DATA", P2["a1_data_default"])).expanduser()
+    if not (d / "meta.json").exists():
+        raise SystemExit(f"A1 데이터가 없다: {d} (study/A1_design.md 1절, a1_prepare.py)")
+    return d
+
+
+def a1_cmd(j: dict, smoke: bool, extra: list | None = None) -> list:
+    cmd = [PY, str(STUDY / "train_a1.py"), "--run-id", j["run_id"], "--seed", str(j["seed"]), "--data", str(a1_data()),
+           "--steps", str(j["steps"]), "--numerics", C.CFG["numerics_train_e1"]]
+    if smoke:
+        cmd += ["--latest-every", "10", "--log-every", "5"]
+    return cmd + (extra or [])
+
+
+def a1_resume_check(W: Path, j: dict, env: dict, smoke: bool) -> bool:
+    """A1: 10스텝에서 멈췄다 이어 간 실행이 끊김 없는 실행(ref)과 LoRA·손실 기록이 비트 단위로 같은지."""
+    import torch
+    if run_status(W, j["run_id"]) != "done":
+        if run_status(W, j["run_id"]) == "new" and run_cmd(W, j["run_id"], a1_cmd(j, smoke, ["--stop-after", "10"]), env) != 0:
+            return False
+        if run_cmd(W, j["run_id"], a1_cmd(j, smoke), env) != 0:
+            return False
+    a = torch.load(W / "runs" / j["ref_run_id"] / "ckpt" / "final.pt", map_location="cpu")
+    b = torch.load(W / "runs" / j["run_id"] / "ckpt" / "final.pt", map_location="cpu")
+    same_params = all(torch.equal(a["params"][k], b["params"][k]) for k in a["params"])
+    la = [r["loss"] for r in C.read_jsonl(W / "blinded" / j["ref_run_id"] / "a1_loss.jsonl")]
+    lb = [r["loss"] for r in C.read_jsonl(W / "blinded" / j["run_id"] / "a1_loss.jsonl")]
+    ok = bool(same_params and la == lb and len(la) > 0)
+    C.write_json(W / "public" / "a1_resume_check.json", dict(lora_bitwise_equal=bool(same_params), loss_records_equal=la == lb,
+                                                             passed=ok, checked=C.now()))
+    return ok
 
 
 def run_status(W: Path, rid: str) -> str:
@@ -259,6 +301,27 @@ def main():
                 C.public_log(W, f"{tag} FAILED - 멈춤. logs/{j['run_id']}.log 확인")
                 sys.exit(1)
             C.public_log(W, f"{tag} {run_status(W, j['run_id'])}")
+        elif j["kind"] == "a1_train":
+            if run_status(W, j["run_id"]) in ("done", "diverged_nonfinite"):
+                continue
+            C.public_log(W, f"{tag} start")
+            for attempt in range(3):
+                rc = run_cmd(W, j["run_id"], a1_cmd(j, a.smoke), env)
+                if rc == 0 and run_status(W, j["run_id"]) in ("done", "diverged_nonfinite"):
+                    break
+                C.public_log(W, f"{tag} exit {rc}, retry {attempt + 1}")
+                time.sleep(30)
+            else:
+                C.public_log(W, f"{tag} FAILED - 멈춤. logs/{j['run_id']}.log 확인")
+                sys.exit(1)
+            C.public_log(W, f"{tag} {run_status(W, j['run_id'])}")
+        elif j["kind"] == "a1_resume_check":
+            if C.read_json(W / "public" / "a1_resume_check.json", {}).get("passed"):
+                continue
+            ok = a1_resume_check(W, j, env, a.smoke)
+            C.public_log(W, f"{tag} passed={ok}")
+            if not ok:
+                sys.exit(1)
         elif j["kind"] == "eval":
             if eval_status(W, j) == "done":
                 continue
