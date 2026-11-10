@@ -60,9 +60,11 @@ nohup setsid bash ~/vla_main_code/study/run_phase1.sh >> ~/vla_main/main_console
 
 ## 2b. 2단계 (1단계 G-mid 뒤)
 
-2단계 = 핵심 갈래(A3⁰·A2⁺) 나머지 시드 5~n (n은 `public/gmid.json`) → 보조 갈래(A2±·A3ˢ) 튜닝 4후보씩(1단계와 같은 튜닝 시드·과제 표본·150라운드·선택 규칙) → 보조 갈래 E1 시드 1~3 (결정적 경로, 같은 시드의 핵심 갈래와 같은 과제 표본). 설정은 [phase2_config.json](phase2_config.json) (명세 3.3·3.5절 값 그대로). 이어서 **A1 시연 SFT 재학습** 시드 1~3 (설계는 [A1_design.md](A1_design.md), 60,000스텝, 결정적 경로) → E1 평가. E2·E3·E4-b는 이후에 추가한다.
+2단계 = 핵심 갈래(A3⁰·A2⁺) 나머지 시드 5~n (n은 `public/gmid.json`) → 보조 갈래(A2±·A3ˢ) 튜닝 4후보씩(1단계와 같은 튜닝 시드·과제 표본·150라운드·선택 규칙) → 보조 갈래 E1 시드 1~3 (결정적 경로, 같은 시드의 핵심 갈래와 같은 과제 표본). 설정은 [phase2_config.json](phase2_config.json) (명세 3.3·3.5절 값 그대로). **3단계** (`run_phase3.sh`, E1 핵심 갈래가 모두 끝난 뒤): E2-a 진단([E2a_design.md](E2a_design.md)) → E2-b 분기(계보 8 × 지점 3 × 규칙 4) → W2 만들기([W2_design.md](W2_design.md)) → E3(A2⁺·A3⁰ × 시드 5, 출발 W2). E1·E2-b·E3의 모든 최종 체크포인트는 E4-b([E4b_design.md](E4b_design.md))로도 평가한다. 조건부 A3⁰₊는 `--a3plus`.
 
-**A1 데이터 준비 (CPU, 1단계와 함께 가능):**
+2단계에서는 이어서 **A1 시연 SFT 재학습** 시드 1~3 (설계는 [A1_design.md](A1_design.md), 60,000스텝, 결정적 경로) → E1 평가. E2·E3·E4-b는 이후에 추가한다.
+
+**데이터 준비 (CPU, 1단계와 함께 가능): `bash study/data_pipeline.sh`** — A1 시연 → W2 시연 → A1 전처리 → W2 사다리 전처리를 차례로 하고 끝난 단계는 건너뛴다 (로그 `~/vla_main_data/data_pipeline.log`). 세부:
 1. 시연 생성: `~/vla_main_data/collect_a1.sh` (원 명령, 프로세스 4개, 메모리 감시 포함, 약 7시간). 컨테이너 메모리 상한이 26 GiB라 프로세스를 늘리지 않는다 (2026-11-10 16개로 돌렸다가 컨테이너가 재시작됨).
 2. 전처리: `python study/a1_prepare.py ~/vla_main_data/mp_collect/PutOnPlateInScene25Main-v3/16400/data ~/vla_main_data/a1 $VLA_W1_CKPT --procs 4` → `~/vla_main_data/a1/train/meta.json`의 해시를 기록한다 (약 300 GB).
 

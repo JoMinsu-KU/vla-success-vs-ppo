@@ -279,6 +279,14 @@ def test_phase3_e2b_plan():
         assert len(e2a_jobs) == 24 and all(j["sizes"] == "1,2,4,8" and j["lineage_ckpt"].endswith(f"r{j['point'] - 1:03d}.pt") for j in e2a_jobs)
         kinds = [j["kind"] for j in p3["jobs"]]
         assert kinds[0] == "e2a"
+        kinds3 = [j["kind"] for j in p3["jobs"]]
+        assert kinds3.count("w2_build") == 1 and kinds3.index("w2_build") < kinds3.index("e3_train")
+        e3 = [j for j in p3["jobs"] if j["kind"] == "e3_train"]
+        assert len(e3) == 10 and {j["arm"] for j in e3} == {"A3", "A2p"} and sorted({j["seed"] for j in e3}) == [1, 2, 3, 4, 5]
+        assert all(j["base"] == "W2" and j["episode_tag"] == f"e3-seed{j['seed']}" and j["numerics"] == "math" for j in e3)
+        e3ids = {j["run_id"] for j in e3}
+        assert all(j.get("base") == "W2" for j in p3["jobs"] if j["kind"] in ("eval", "e4b") and j["run_id"] in e3ids)
+        assert len([j for j in p3["jobs"] if j["kind"] == "e4b" and j["run_id"] in e3ids]) == 10
         p3b = runner.make_plan_phase3(False, W, True)
         plus = [j for j in p3b["jobs"] if j.get("variant") == "A3plus"]
         assert len(plus) == 5 and all(j["extra"] == ["--adv-rule", "gae_masked"] and j["rounds"] == 390 for j in plus)

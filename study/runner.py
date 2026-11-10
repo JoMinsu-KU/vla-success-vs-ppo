@@ -203,6 +203,15 @@ def make_plan_phase3(smoke: bool, W: Path, a3plus: bool) -> dict:
                                  episode_tag=lin["episode_tag"], save_rounds=[], lineage=lin["run_id"], point=p, rule=name,
                                  extra=extra, sel_file="tuning_selection.json"))
                 jobs.append(dict(kind="eval", run_id=rid, suite="e2b", name="final", ckpt="final.pt"))
+    # W2 강화 웜업과 E3 (study/W2_design.md, D-MAIN-1)
+    jobs.append(dict(kind="w2_build"))
+    for s in ([1] if smoke else P2["e3_seeds"]):
+        for arm in P2["e3_arms"]:
+            rid = new_id(used)
+            jobs.append(dict(kind="e3_train", run_id=rid, arm=arm, seed=s, rounds=2 if smoke else cfg["rounds_e1"],
+                             numerics=cfg["numerics_train_e1"], episode_tag=f"e3-seed{s}", save_rounds=[2] if smoke else [390],
+                             sel_file="tuning_selection.json", base="W2"))
+            jobs.append(dict(kind="eval", run_id=rid, suite="e1", name="final", ckpt="final.pt", base="W2"))
     if a3plus:
         for s in ([1] if smoke else P2["a3plus_seeds"]):
             rid = new_id(used)
@@ -217,7 +226,7 @@ def public_index(plan: dict) -> dict:
     idx = {}
     for j in plan["jobs"]:
         if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "resume_check", "equiv_check", "a1_train", "a1_resume_check",
-                         "e2b_train"):
+                         "e2b_train", "e3_train"):
             idx[j["run_id"]] = dict(kind=j["kind"], seed=j["seed"])
     return idx
 
@@ -242,6 +251,23 @@ def train_cmd(j: dict, hp: dict, smoke: bool, extra: list | None = None) -> list
     if smoke:
         cmd += ["--smoke-steps", "2", "--latest-every", "1"]
     return cmd + (extra or [])
+
+
+def resolve_base(W: Path, base: str) -> str:
+    """작업의 출발 모델: "" = W1 (기본), "W2" = public/w2_selection.json의 선택 결과."""
+    if not base:
+        return ""
+    if base == "W2":
+        sel = C.read_json(W / "public" / "w2_selection.json")
+        if not sel:
+            raise SystemExit("W2가 아직 없다 (w2_build 먼저)")
+        return sel["w2_dir"]
+    return base
+
+
+def env_for(W: Path, j: dict, env: dict) -> dict:
+    b = resolve_base(W, j.get("base", ""))
+    return {**env, "VLA_W1_CKPT": b} if b else env
 
 
 def a1_data() -> Path:
@@ -351,13 +377,13 @@ def main():
     env = dict(os.environ)
     for i, j in enumerate(plan["jobs"]):
         tag = f"[{i + 1}/{len(plan['jobs'])}] {j['kind']} {j.get('run_id', '')} {j.get('name', '')}".strip()
-        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "e2b_train"):
+        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "e2b_train", "e3_train"):
             if run_status(W, j["run_id"]) in ("done", "diverged_nonfinite", "diverged_kl"):
                 continue
             hp = j["hp"] if j["kind"] == "tune_train" else selected_hp(W, j["arm"], j.get("sel_file", "tuning_selection.json"))
             C.public_log(W, f"{tag} start")
             for attempt in range(3):
-                rc = run_cmd(W, j["run_id"], train_cmd(j, hp, a.smoke, j.get("extra")), env)
+                rc = run_cmd(W, j["run_id"], train_cmd(j, hp, a.smoke, j.get("extra")), env_for(W, j, env))
                 if rc == 0 and run_status(W, j["run_id"]) in ("done", "diverged_nonfinite", "diverged_kl"):
                     break
                 C.public_log(W, f"{tag} exit {rc}, retry {attempt + 1}")
@@ -366,6 +392,19 @@ def main():
                 C.public_log(W, f"{tag} FAILED - 멈춤. logs/{j['run_id']}.log 확인")
                 sys.exit(1)
             C.public_log(W, f"{tag} {run_status(W, j['run_id'])}")
+        elif j["kind"] == "w2_build":
+            if C.read_json(W / "public" / "w2_selection.json"):
+                continue
+            data = Path(os.environ.get("VLA_W2_DATA", P2["w2_data_default"])).expanduser()
+            if not (data / "n256" / "meta.json").exists():
+                raise SystemExit(f"W2 시연 전처리가 없다: {data} (study/W2_design.md 1절)")
+            C.public_log(W, f"{tag} start")
+            out_w2 = Path(P2["w2_out_default"]).expanduser() / ("smoke" if a.smoke else "")
+            cmd = [PY, str(STUDY / "build_w2.py"), "--data", str(data), "--out", str(out_w2)]
+            if run_cmd(W, "w2_build", cmd + (["--smoke"] if a.smoke else []), env) != 0 or not C.read_json(W / "public" / "w2_selection.json"):
+                C.public_log(W, f"{tag} FAILED - 멈춤. logs/w2_build.log 확인")
+                sys.exit(1)
+            C.public_log(W, f"{tag} done {json.dumps(C.read_json(W / 'public' / 'w2_selection.json'), ensure_ascii=False)}")
         elif j["kind"] == "e4b":
             pf = W / "public" / "e4b" / f"{j['run_id']}_final.json"
             if C.read_json(pf, {}).get("status") == "done":
@@ -376,7 +415,7 @@ def main():
                 continue
             C.public_log(W, f"{tag} start")
             cmd = [PY, str(STUDY / "e4b.py"), "--run-id", j["run_id"], "--ckpt", str(ck), "--name", "final"]
-            cmd += (["--base-ckpt", j["base"]] if j.get("base") else []) + (["--smoke"] if a.smoke else [])
+            cmd += (["--base-ckpt", resolve_base(W, j["base"])] if j.get("base") else []) + (["--smoke"] if a.smoke else [])
             for attempt in range(3):
                 if run_cmd(W, f"e4b_{j['run_id']}", cmd, env) == 0 and C.read_json(pf, {}).get("status") == "done":
                     break
@@ -435,7 +474,7 @@ def main():
             if a.smoke:
                 cmd += ["--batches", "1"] + (["--conds", ",".join(["ID"] + C.EXEC_CONDS)] if j["suite"] in ("e1", "e2b") else [])
             for attempt in range(3):
-                if run_cmd(W, f"eval_{j['run_id']}_{j['name']}", cmd, env) == 0 and eval_status(W, j) == "done":
+                if run_cmd(W, f"eval_{j['run_id']}_{j['name']}", cmd, env_for(W, j, env)) == 0 and eval_status(W, j) == "done":
                     break
                 time.sleep(30)
             else:

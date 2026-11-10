@@ -11,6 +11,7 @@
 출력 (<out>/<split>/): frames.u8 (memmap [M,480,640,3]), tokens.npy [M,7] int64, ep.npy [M] int32, instr.json (에피소드별),
   files.json, meta.json (프레임 수, 제거 수, SHA-256: 토큰·프레임·파일 목록)
 사용: python study/a1_prepare.py <npz 폴더> <출력 폴더> <W1 체크포인트> [--procs 4] [--split train|val|both]
+      W2 사다리 (study/W2_design.md): ... --subset 256,512,1024,2048 → <출력>/n<N>/ (파일 이름 정렬 → 시드 0 순열 → 앞 N개, 같은 전처리)
 """
 from __future__ import annotations
 
@@ -140,6 +141,13 @@ def build(files: list, out: Path, stats: dict, procs: int):
     return meta
 
 
+def subset_files(files: list, n: int, seed: int = 0) -> list:
+    """W2 사다리: 정렬된 파일 목록의 시드 고정 순열에서 앞 n개 (작은 집합이 큰 집합에 포함)."""
+    perm = np.random.default_rng(seed).permutation(len(files))
+    assert n <= len(files), (n, len(files))
+    return [files[k] for k in perm[:n]]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("npz_dir")
@@ -147,9 +155,14 @@ def main():
     ap.add_argument("w1_ckpt")
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--split", default="both", choices=["train", "val", "both"])
+    ap.add_argument("--subset", default="", help="W2 사다리: 쉼표 구분 N 목록")
     a = ap.parse_args()
     stats = json.loads((Path(a.w1_ckpt) / "config.json").read_text())["norm_stats"]["bridge_orig"]["action"]
     files = sorted(glob.glob(str(Path(a.npz_dir) / "*.npz")))
+    if a.subset:
+        for n in [int(x) for x in a.subset.split(",")]:
+            build(subset_files(files, n), Path(a.out_dir) / f"n{n}", stats, a.procs)
+        return
     sp = split_files(files)
     for name in (["train", "val"] if a.split == "both" else [a.split]):
         build(sp[name], Path(a.out_dir) / name, stats, a.procs)
