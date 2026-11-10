@@ -1,6 +1,6 @@
 {
-  "_status": "G-PRE 초안 값. 태그 gpre가 붙은 커밋의 이 파일만 본실험에 쓴다 (runner가 확인).",
-  "_source": "docs/GPRE_draft.md 0절, pilot/stats/GPRE_simulation_v3.md, pilot/GPRE_T2T3_results.md",
+  "_status": "G-PRE 확정 값 (연구자 승인 2026-11-10, 명세 v0.13). 태그 gpre가 붙은 커밋의 이 파일만 본실험에 쓴다 (runner가 확인).",
+  "_source": "docs/GPRE_draft.md(확정) 0절, pilot/stats/GPRE_simulation_v3.md, pilot/GPRE_T2T3_results.md",
   "delta_pp": 5.0,
   "alpha_one_sided": 0.04,
   "n_min": 8,

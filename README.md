@@ -6,12 +6,13 @@
 
 ## 현재 상태
 
-- 연구 명세: [docs/vla_rl_decomposition_package_v0_12.md](docs/vla_rl_decomposition_package_v0_12.md) (최신, 6차 외부 검토 반영). 이전 판 v0.8~v0.11도 같은 폴더에 있다.
+- 연구 명세: [docs/vla_rl_decomposition_package_v0_13.md](docs/vla_rl_decomposition_package_v0_13.md) (최신, G-PRE 고정 반영). 이전 판 v0.8~v0.12도 같은 폴더에 있다.
 - 외부 검토: 요청서 [docs/review_request_v0_11.md](docs/review_request_v0_11.md), 대응표는 명세 부록 E-8. 신규성 확인 [pilot/G0_check_2026-10-19.md](pilot/G0_check_2026-10-19.md).
 - 단계: G1 통과 (조건부, 2026-10-19) = G2 진입 승인 (본실험 착수 승인은 G-PRE). 종합 보고 [pilot/G1_report.md](pilot/G1_report.md), 이탈 기록 [pilot/deviations.md](pilot/deviations.md).
 - G2 시험 명세: [docs/G2_H200_test_spec.md](docs/G2_H200_test_spec.md) (H200 단계별 절차·판정·GPU시간 배정, 스크립트 `pilot/g2/`).
 - G2 완료 (2026-11-04): 판정 단계 모두 통과, A3⁰ 학습 신호 있음, 35.5 / 60 GPU시간. 결과 [pilot/G2_results.md](pilot/G2_results.md), G-PRE 입력 [pilot/G2_gpre_inputs.md](pilot/G2_gpre_inputs.md).
-- 다음: G-PRE 사전 고정 — 초안 [docs/GPRE_draft.md](docs/GPRE_draft.md) (T1~T4 완료, 연구자 결정 대기) → 본실험 1단계 (H200 1개, 실행기 [study/](study/README.md)).
+- G-PRE 고정 (2026-11-10, 태그 `gpre`): [docs/GPRE_draft.md](docs/GPRE_draft.md) (확정, 연구자 승인). 스모크 시험 통과 (2026-11-06).
+- 진행: 본실험 1단계 (튜닝 → E1 시드 1~4 → G-mid, H200 1개, 실행기 [study/](study/README.md)). 진행 상황은 공개 정보만 기록한다.
 
 ## 사전 고정 기록
 
