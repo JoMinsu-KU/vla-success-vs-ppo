@@ -174,6 +174,10 @@ def make_plan_phase3(smoke: bool, W: Path, a3plus: bool) -> dict:
             raise SystemExit(f"계보 시드 {s}의 A3⁰ 실행이 1개가 아니다 ({len(lin)})")
         lin = lin[0]
         for p in points:
+            jid = "e" + secrets.token_hex(3)
+            jobs.append(dict(kind="e2a", job_id=jid, seed=s, point=p, lineage=lin["run_id"],
+                             lineage_ckpt=str(W / "runs" / lin["run_id"] / "ckpt" / f"r{p - 1:03d}.pt"),
+                             sizes="1,2" if smoke else "1,2,4,8", ood="Position" if smoke else ",".join(C.EXEC_CONDS)))
             for name, rule in P2["e2_rules"].items():
                 rid = new_id(used)
                 ck = W / "runs" / lin["run_id"] / "ckpt"
@@ -347,6 +351,23 @@ def main():
                 C.public_log(W, f"{tag} FAILED - 멈춤. logs/{j['run_id']}.log 확인")
                 sys.exit(1)
             C.public_log(W, f"{tag} {run_status(W, j['run_id'])}")
+        elif j["kind"] == "e2a":
+            pf = W / "public" / "e2a" / f"{j['job_id']}.json"
+            if C.read_json(pf, {}).get("status") == "done":
+                continue
+            C.public_log(W, f"{tag} e2a {j['job_id']} start")
+            cmd = [PY, str(STUDY / "e2a.py"), "--job-id", j["job_id"], "--lineage-ckpt", j["lineage_ckpt"], "--seed", str(j["seed"]),
+                   "--point", str(j["point"]), "--sizes", j["sizes"], "--ood", j["ood"]] + (["--smoke"] if a.smoke else [])
+            for attempt in range(2):
+                if run_cmd(W, f"e2a_{j['job_id']}", cmd, env) == 0 and C.read_json(pf, {}).get("status") == "done":
+                    break
+                if C.read_json(pf, {}).get("status") == "failed":  # 분해 검사 실패는 다시 돌리지 않는다
+                    break
+                time.sleep(30)
+            st = C.read_json(pf, {})
+            C.public_log(W, f"{tag} e2a {j['job_id']} {st.get('status')} decomposition_passed={st.get('decomposition_passed')}")
+            if st.get("status") != "done":
+                sys.exit(1)
         elif j["kind"] == "a1_train":
             if run_status(W, j["run_id"]) in ("done", "diverged_nonfinite"):
                 continue

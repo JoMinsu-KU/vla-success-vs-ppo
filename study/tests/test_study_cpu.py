@@ -267,9 +267,45 @@ def test_phase3_e2b_plan():
             assert ("--check-ckpt" in j["extra"]) == (j["rule"] == "C±")
             assert j["point"] - 1 in C.CFG["e1_save_rounds_A3"] and j["point"] in C.CFG["e1_save_rounds_A3"]
         assert len([j for j in p3["jobs"] if j["kind"] == "eval" and j["suite"] == "e2b"]) == len(br)
+        e2a_jobs = [j for j in p3["jobs"] if j["kind"] == "e2a"]
+        assert len(e2a_jobs) == 24 and all(j["sizes"] == "1,2,4,8" and j["lineage_ckpt"].endswith(f"r{j['point'] - 1:03d}.pt") for j in e2a_jobs)
+        kinds = [j["kind"] for j in p3["jobs"]]
+        assert kinds[0] == "e2a"
         p3b = runner.make_plan_phase3(False, W, True)
         plus = [j for j in p3b["jobs"] if j.get("variant") == "A3plus"]
         assert len(plus) == 5 and all(j["extra"] == ["--adv-rule", "gae_masked"] and j["rounds"] == 390 for j in plus)
+
+
+def test_e2a_affine_decomposition_premise():
+    sys.path.insert(0, str(C.REPO / "pilot" / "learner"))
+    import ppo
+    rng = np.random.default_rng(3)
+    T, m = 80, 3
+    recs = []
+    for b in range(m):
+        succ = np.zeros((T, 64), bool)
+        succ[-1] = rng.random(64) < 0.4
+        recs.append(dict(actions=np.zeros((T, 64, 7), np.int64), lp_gen=np.zeros((T, 64), np.float32), v_gen=np.zeros((T, 64), np.float32),
+                         success=succ, grasp_latch=succ.copy(), consec_latch=succ.copy(), v=rng.normal(0, 0.3, (T, 64)).astype(np.float32)))
+    cat = lambda k: np.concatenate([r[k] for r in recs], axis=1)  # noqa: E731
+    rb = ppo.RoundBatch(actions=cat("actions"), logprob_gen=cat("lp_gen"), value_gen=cat("v_gen"), success=cat("success"),
+                        grasp_latch=cat("grasp_latch"), consec_latch=cat("consec_latch"))
+    v = cat("v")
+    raw = np.concatenate([ppo.advantages_and_returns(ppo.RoundBatch(actions=r["actions"], logprob_gen=r["lp_gen"], value_gen=r["v_gen"],
+                                                                     success=r["success"], grasp_latch=r["grasp_latch"],
+                                                                     consec_latch=r["consec_latch"]), r["v"], "terminal", "gae")[1][:, :, 0]
+                          - r["v"] for r in recs], axis=1)
+    Y = np.broadcast_to(rb.Y().astype(np.float64)[None, :], (T, 64 * m))
+
+    def fit(adv, u):
+        A = np.stack([u.reshape(-1), np.ones(u.size)], 1)
+        c, *_ = np.linalg.lstsq(A, adv.reshape(-1).astype(np.float64), rcond=None)
+        return float(np.abs(A @ c - adv.reshape(-1)).max())
+    get = lambda rule: ppo.advantages_and_returns(rb, v, "terminal", rule)[0][:, :, 0]  # noqa: E731
+    assert fit(get("gae"), raw) < 1e-4                 # 배치별 GAE(정규화 전)를 합친 버퍼의 공식 C± = 1차식
+    assert fit(get("outcome"), Y) < 1e-4
+    assert fit(get("outcome_masked"), Y) < 1e-4       # O⁺ = 성공에만 양의 상수
+    assert fit(get("gae_masked"), raw) > 1e-2          # C⁺는 1차식이 아니다 → 직접 계산
 
 
 if __name__ == "__main__":
