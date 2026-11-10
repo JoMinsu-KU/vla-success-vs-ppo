@@ -46,6 +46,10 @@ ap.add_argument("--chunk", type=int, default=8)
 ap.add_argument("--n-envs", type=int, default=C.CFG["n_envs"])
 ap.add_argument("--smoke-steps", type=int, default=0, help="시험용: 라운드당 optimizer 스텝을 앞 몇 개로 제한")
 ap.add_argument("--stop-after", type=int, default=0, help="시험용: 이 라운드 수까지만 하고 멈춤 (재시작 검사)")
+ap.add_argument("--adv-rule", default="gae", choices=["gae", "gae_masked", "outcome", "outcome_masked"],
+                help="A3 계열 advantage 규칙 (E2-b 변형 C±·C⁺·O±·O⁺, 조건부 A3⁰₊ = gae_masked). 기본 gae = A3⁰")
+ap.add_argument("--init-ckpt", default="", help="E2-b: latest가 없을 때 이 체크포인트(LoRA + optimizer + 라운드 수)에서 출발")
+ap.add_argument("--check-ckpt", default="", help="E2-b: 첫 라운드 뒤 파라미터·optimizer 상태를 이 체크포인트와 비트 단위 비교")
 a = ap.parse_args()
 
 W = C.work_dir()
@@ -87,11 +91,16 @@ def save_ckpt(path: Path, extra: dict):
 attn = "sdpa" if a.numerics == "math" else "flash_attention_2"
 policy = G.build_policy(C.w1_ckpt(), C.CFG["unnorm_key"], attn=attn, seed=a.seed, lr=a.lr, vh_lr=a.vh_lr)
 G.set_top_k(policy, C.CFG["top_k"])
-state = dict(rounds_done=0, gpu_s=0.0, kl_first_rollback_streak=0, zero_success_streak=0, entropy_warmup=None)
+state = dict(rounds_done=0, gpu_s=0.0, kl_first_rollback_streak=0, zero_success_streak=0, entropy_warmup=None, init_round=0)
 latest = RUN / "ckpt" / "latest.pt"
 if latest.exists():
     ex = L.load_trainable(latest, policy, load_optim=True)
     state.update({k: ex[k] for k in state if k in ex})
+elif a.init_ckpt:
+    ex = L.load_trainable(Path(a.init_ckpt), policy, load_optim=True)
+    state.update({k: ex[k] for k in state if k in ex})
+    state["gpu_s"] = 0.0
+    state["init_round"] = int(ex["rounds_done"])
 start = int(state["rounds_done"])
 for f in ("rounds.jsonl", "cost.jsonl"):  # 이어 가는 라운드 이후 기록 지우기
     rows = [r for r in C.read_jsonl(BL / f) if r["round"] <= start]
@@ -130,7 +139,8 @@ def a3_update(ad, batch, r, probe):
     reward_kind = "potential" if a.arm == "A3s" else "terminal"  # A3ˢ = 원 잠재함수 보상 (명세 3.3절, C5)
     try:
         upd = ppo.ppo_update(ad, batch, ppo.PPOConfig(order_seed=1000 + r, chunk=a.chunk, recompute_old=True,
-                                                      max_steps=a.smoke_steps or None, reward_kind=reward_kind),
+                                                      max_steps=a.smoke_steps or None, reward_kind=reward_kind,
+                                                      adv_rule=a.adv_rule),
                              log=step_log)
     finally:
         ppo.advantages_and_returns = orig_aar
@@ -308,6 +318,16 @@ for r in range(start, a.rounds):
         save_ckpt(RUN / "ckpt" / f"r{r + 1:03d}.pt", dict(state))
     if (r + 1) % a.latest_every == 0 or (r + 1) == a.rounds or status != "running":
         save_ckpt(latest, dict(state))
+    if a.check_ckpt and r == state["init_round"]:  # E2-b 분기 검사: C±의 첫 라운드 = 계보의 다음 체크포인트
+        import torch as _t
+        ref = _t.load(a.check_ckpt, map_location="cpu")
+        named = {n: p_ for n, p_ in policy.vla.named_parameters() if p_.requires_grad}
+        same_p = all(_t.equal(named[n].detach().cpu(), t_) for n, t_ in ref["params"].items())
+        so, ro = policy.vla_optimizer.state_dict()["state"], ref["opt_vla"]["state"]
+        same_o = len(so) == len(ro) and all(_t.equal(so[k][f].cpu(), ro[k][f]) for k in ro for f in ro[k] if _t.is_tensor(ro[k][f]))
+        C.write_json(W / "public" / "branch_checks" / f"{a.run_id}.json",
+                     dict(run_id=a.run_id, adv_rule=a.adv_rule, round=r + 1, params_bitwise_equal=bool(same_p),
+                          adam_state_bitwise_equal=bool(same_o), checked=C.now()))
     pub(status, r + 1)
     del ad, batch, rec, probe
     torch.cuda.empty_cache()

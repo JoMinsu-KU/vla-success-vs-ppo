@@ -5,6 +5,7 @@
           튜닝·E1 학습에 쓰는 초기 상태(episode_id mod ltt)와 겹치는 것은 건너뛴다 (명세 3.5절).
   e1    : 평가 조건 16개 × 192 에피소드 (조건마다 64 × 3). 모든 갈래·시드·체크포인트가 같은 고정 집합 (명세 3.8절).
           G2 S4 집합과 다른 새 태그(main-eval-…)로 만든다 (G-PRE 초안 8절).
+  e2b   : E2-b 분기 평가 (명세 3.6절): 학습 조건(ID)과 실행 3과제, 조건당 128 에피소드 = E1 고정 집합의 앞 128개 (64 × 2).
 칸 배정: 에피소드 k → 배치 ⌊k/64⌋, 칸 k mod 64, 샘플링 시드 1000 + 배치 (G2 S4·T3와 같음).
 맹검: 에피소드별 결과는 <W>/blinded/<run_id>/eval_<suite>_<name>.jsonl에만. 공개는 진행 상태만.
 재시작: 이미 기록된 (조건, 배치)는 건너뛴다.
@@ -23,7 +24,7 @@ import common as C  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--run-id", required=True)
-ap.add_argument("--suite", required=True, choices=["idval", "e1"])
+ap.add_argument("--suite", required=True, choices=["idval", "e1", "e2b"])
 ap.add_argument("--ckpt", required=True, help="학습 상태 .pt 경로 또는 W1 (학습 전)")
 ap.add_argument("--name", required=True, help="체크포인트 이름 (예: r150, final)")
 ap.add_argument("--conds", default="", help="쉼표 구분 조건 이름만 (시험용)")
@@ -69,6 +70,9 @@ def main():
     if a.suite == "idval":
         conds = [("IDval", C.CFG["train_env"], C.CFG["train_obj_set"], "idval")]
         n_ep = C.CFG["idval_episodes"]
+    elif a.suite == "e2b":
+        conds = [tuple(c) for c in C.CFG["eval_conditions"] if c[0] == "ID" or c[3] == "execution"]
+        n_ep = 128
     else:
         conds = [tuple(c) for c in C.CFG["eval_conditions"]]
         n_ep = C.CFG["eval_episodes_per_cond"]
@@ -96,7 +100,7 @@ def main():
             if a.suite == "idval":
                 sets[lab], info[lab] = idval_ids(env, n_ep)
             else:
-                sets[lab] = [G.episode_id_for(f"main-eval-{lab}-{env_id}-{split}", k) for k in range(n_ep)]
+                sets[lab] = [G.episode_id_for(f"main-eval-{lab}-{env_id}-{split}", k) for k in range(n_ep)]  # e2b: E1 집합의 앞 128개
             C.write_json(W / "public" / "eval_sets" / f"{a.suite}_{lab}.json",
                          dict(sha256=hashlib.sha256(json.dumps(sets[lab]).encode()).hexdigest(), n=len(sets[lab]), **info.get(lab, {})))
         eids = sets[lab][64 * b:64 * (b + 1)]

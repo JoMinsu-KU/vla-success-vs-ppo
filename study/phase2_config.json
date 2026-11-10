@@ -74,5 +74,35 @@
   ],
   "a1_steps": 60000,
   "a1_data_default": "~/vla_main_data/a1/train",
-  "_a1": "A1 설계: study/A1_design.md (학습 전 고정). 데이터 폴더는 환경 변수 VLA_A1_DATA로 바꿀 수 있다."
+  "_a1": "A1 설계: study/A1_design.md (학습 전 고정). 데이터 폴더는 환경 변수 VLA_A1_DATA로 바꿀 수 있다.",
+  "e2_lineage_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "e2_branch_points": [
+    20,
+    150,
+    300
+  ],
+  "e2_branch_rounds": 20,
+  "e2_rules": {
+    "C±": "gae",
+    "C⁺": "gae_masked",
+    "O±": "outcome",
+    "O⁺": "outcome_masked"
+  },
+  "a3plus_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "_e2": "3단계 E2-b (명세 3.6절): 계보 = E1 A3⁰ 시드 1~8, 분기 지점 p에서 r(p−1) 체크포인트로 출발해 계보의 p번째 라운드 배치(같은 과제 표본·시드)로 첫 업데이트, 이후 19라운드. C±의 첫 라운드는 계보 r(p)와 비트 단위 비교. A3⁰₊(gae_masked, 390라운드)는 E2-b 판정(|D_C| ≥ 5%p) 뒤 --a3plus로만 계획한다."
 }

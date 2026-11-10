@@ -151,10 +151,54 @@ def make_plan_phase2(smoke: bool, W: Path) -> dict:
     return dict(created=C.now(), phase=2, smoke=smoke, repo_head=git("rev-parse", "HEAD")[1], gmid_n=int(gm["n"]), jobs=jobs)
 
 
+def make_plan_phase3(smoke: bool, W: Path, a3plus: bool) -> dict:
+    """3단계: E2-b 분기 (+ 조건부 A3⁰₊). 계보 = E1 A3⁰ 실행 (봉인 계획에서 찾는다). E1 핵심 갈래가 모두 끝난 뒤에만 만든다."""
+    cfg = C.CFG
+    lineage_jobs = []
+    for f in ("plan.json", "plan_phase2.json"):
+        pl = C.read_json(W / "sealed" / f)
+        if pl:
+            lineage_jobs += [j for j in pl["jobs"] if j["kind"] == "e1_train"]
+    if not smoke:
+        not_done = [j["run_id"] for j in lineage_jobs if run_status(W, j["run_id"]) not in ("done", "diverged_nonfinite", "diverged_kl")]
+        if not_done or not lineage_jobs:
+            raise SystemExit(f"E1 핵심 갈래가 끝나지 않았다 ({len(not_done)}개 남음). 3단계는 E1 핵심 갈래가 모두 끝난 뒤 계획한다")
+    seeds = [1] if smoke else P2["e2_lineage_seeds"]
+    points = [2] if smoke else P2["e2_branch_points"]
+    n_br = 1 if smoke else P2["e2_branch_rounds"]
+    used = set(C.read_json(W / "public" / "runs_index.json", {}))
+    jobs = []
+    for s in seeds:
+        lin = [j for j in lineage_jobs if j["arm"] == "A3" and j["seed"] == s]
+        if len(lin) != 1:
+            raise SystemExit(f"계보 시드 {s}의 A3⁰ 실행이 1개가 아니다 ({len(lin)})")
+        lin = lin[0]
+        for p in points:
+            for name, rule in P2["e2_rules"].items():
+                rid = new_id(used)
+                ck = W / "runs" / lin["run_id"] / "ckpt"
+                extra = ["--init-ckpt", str(ck / f"r{p - 1:03d}.pt"), "--adv-rule", rule]
+                if name == "C±":
+                    extra += ["--check-ckpt", str(ck / f"r{p:03d}.pt")]
+                jobs.append(dict(kind="e2b_train", run_id=rid, arm="A3", seed=s, rounds=p - 1 + n_br, numerics=cfg["numerics_train_e1"],
+                                 episode_tag=lin["episode_tag"], save_rounds=[], lineage=lin["run_id"], point=p, rule=name,
+                                 extra=extra, sel_file="tuning_selection.json"))
+                jobs.append(dict(kind="eval", run_id=rid, suite="e2b", name="final", ckpt="final.pt"))
+    if a3plus:
+        for s in ([1] if smoke else P2["a3plus_seeds"]):
+            rid = new_id(used)
+            jobs.append(dict(kind="e1_aux_train", run_id=rid, arm="A3", seed=s, rounds=2 if smoke else cfg["rounds_e1"],
+                             numerics=cfg["numerics_train_e1"], episode_tag=f"e1-seed{s}", save_rounds=[390] if not smoke else [2],
+                             extra=["--adv-rule", "gae_masked"], sel_file="tuning_selection.json", variant="A3plus"))
+            jobs.append(dict(kind="eval", run_id=rid, suite="e1", name="final", ckpt="final.pt"))
+    return dict(created=C.now(), phase=3, smoke=smoke, repo_head=git("rev-parse", "HEAD")[1], a3plus=a3plus, jobs=jobs)
+
+
 def public_index(plan: dict) -> dict:
     idx = {}
     for j in plan["jobs"]:
-        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "resume_check", "equiv_check", "a1_train", "a1_resume_check"):
+        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "resume_check", "equiv_check", "a1_train", "a1_resume_check",
+                         "e2b_train"):
             idx[j["run_id"]] = dict(kind=j["kind"], seed=j["seed"])
     return idx
 
@@ -258,7 +302,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--dry-run", action="store_true", help="계획만 만들고 보여 준다")
-    ap.add_argument("--phase", type=int, default=1, choices=[1, 2])
+    ap.add_argument("--phase", type=int, default=1, choices=[1, 2, 3])
+    ap.add_argument("--a3plus", action="store_true", help="3단계: 조건부 A3⁰₊ (E2-b 판정 뒤에만)")
     a = ap.parse_args()
     if a.smoke:
         os.environ["VLA_MAIN_WORK"] = str(C.work_dir() / "smoke")
@@ -266,14 +311,15 @@ def main():
         check_gpre_tag()
     W = C.work_dir()
     C.ensure_dirs(W)
-    sfx = "" if a.phase == 1 else "_phase2"
+    sfx = {1: "", 2: "_phase2", 3: "_phase3"}[a.phase]
     plan_f = W / "sealed" / f"plan{sfx}.json"
     plan = C.read_json(plan_f)
     if plan is None:
-        plan = make_plan(a.smoke) if a.phase == 1 else make_plan_phase2(a.smoke, W)
+        plan = (make_plan(a.smoke) if a.phase == 1 else make_plan_phase2(a.smoke, W) if a.phase == 2
+                else make_plan_phase3(a.smoke, W, a.a3plus))
         C.write_json(plan_f, plan)
         (W / "public" / f"plan{sfx}_sha256.txt").write_text(C.sha256_file(plan_f) + "\n")
-        idx = C.read_json(W / "public" / "runs_index.json", {}) if a.phase == 2 else {}
+        idx = C.read_json(W / "public" / "runs_index.json", {}) if a.phase >= 2 else {}
         idx.update(public_index(plan))
         C.write_json(W / "public" / "runs_index.json", idx)
         C.public_log(W, f"plan{sfx} created: {len(plan['jobs'])} jobs, smoke={a.smoke}, head={plan['repo_head'][:10]}")
@@ -286,13 +332,13 @@ def main():
     env = dict(os.environ)
     for i, j in enumerate(plan["jobs"]):
         tag = f"[{i + 1}/{len(plan['jobs'])}] {j['kind']} {j.get('run_id', '')} {j.get('name', '')}".strip()
-        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train"):
+        if j["kind"] in ("tune_train", "e1_train", "e1_aux_train", "e2b_train"):
             if run_status(W, j["run_id"]) in ("done", "diverged_nonfinite", "diverged_kl"):
                 continue
             hp = j["hp"] if j["kind"] == "tune_train" else selected_hp(W, j["arm"], j.get("sel_file", "tuning_selection.json"))
             C.public_log(W, f"{tag} start")
             for attempt in range(3):
-                rc = run_cmd(W, j["run_id"], train_cmd(j, hp, a.smoke), env)
+                rc = run_cmd(W, j["run_id"], train_cmd(j, hp, a.smoke, j.get("extra")), env)
                 if rc == 0 and run_status(W, j["run_id"]) in ("done", "diverged_nonfinite", "diverged_kl"):
                     break
                 C.public_log(W, f"{tag} exit {rc}, retry {attempt + 1}")
@@ -332,7 +378,7 @@ def main():
             C.public_log(W, f"{tag} start")
             cmd = [PY, str(STUDY / "evaluate.py"), "--run-id", j["run_id"], "--suite", j["suite"], "--ckpt", str(ck), "--name", j["name"]]
             if a.smoke:
-                cmd += ["--batches", "1"] + (["--conds", ",".join(["ID"] + C.EXEC_CONDS)] if j["suite"] == "e1" else [])
+                cmd += ["--batches", "1"] + (["--conds", ",".join(["ID"] + C.EXEC_CONDS)] if j["suite"] in ("e1", "e2b") else [])
             for attempt in range(3):
                 if run_cmd(W, f"eval_{j['run_id']}_{j['name']}", cmd, env) == 0 and eval_status(W, j) == "done":
                     break

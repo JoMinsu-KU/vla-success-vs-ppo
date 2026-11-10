@@ -236,6 +236,42 @@ def test_a1_prepare_rules():
     assert list(m) == [False, True, True, True, False]
 
 
+def test_phase3_e2b_plan():
+    with tempfile.TemporaryDirectory() as d:
+        os.environ["VLA_MAIN_WORK"] = d
+        import runner
+        W = C.work_dir()
+        C.ensure_dirs(W)
+        p1 = runner.make_plan(False)
+        C.write_json(W / "sealed" / "plan.json", p1)
+        C.write_json(W / "public" / "runs_index.json", runner.public_index(p1))
+        C.write_json(W / "public" / "gmid.json", dict(n=8))
+        p2 = runner.make_plan_phase2(False, W)
+        C.write_json(W / "sealed" / "plan_phase2.json", p2)
+        try:
+            runner.make_plan_phase3(False, W, False)
+            raise AssertionError("E1이 끝나기 전에 3단계 계획이 만들어졌다")
+        except SystemExit:
+            pass
+        core = [j for pl in (p1, p2) for j in pl["jobs"] if j["kind"] == "e1_train"]
+        for j in core:
+            C.write_json(W / "public" / "runs" / f"{j['run_id']}.json", dict(status="done"))
+        p3 = runner.make_plan_phase3(False, W, False)
+        br = [j for j in p3["jobs"] if j["kind"] == "e2b_train"]
+        assert len(br) == 8 * 3 * 4
+        a3 = {j["seed"]: j for j in core if j["arm"] == "A3"}
+        for j in br:
+            lin = a3[j["seed"]]
+            assert j["lineage"] == lin["run_id"] and j["episode_tag"] == lin["episode_tag"] and j["numerics"] == "math"
+            assert j["rounds"] == j["point"] - 1 + 20 and f"r{j['point'] - 1:03d}.pt" in j["extra"][1]
+            assert ("--check-ckpt" in j["extra"]) == (j["rule"] == "C±")
+            assert j["point"] - 1 in C.CFG["e1_save_rounds_A3"] and j["point"] in C.CFG["e1_save_rounds_A3"]
+        assert len([j for j in p3["jobs"] if j["kind"] == "eval" and j["suite"] == "e2b"]) == len(br)
+        p3b = runner.make_plan_phase3(False, W, True)
+        plus = [j for j in p3b["jobs"] if j.get("variant") == "A3plus"]
+        assert len(plus) == 5 and all(j["extra"] == ["--adv-rule", "gae_masked"] and j["rounds"] == 390 for j in plus)
+
+
 if __name__ == "__main__":
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     for f in fns:
