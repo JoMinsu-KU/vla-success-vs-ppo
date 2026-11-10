@@ -197,11 +197,19 @@ def test_phase2_plan_structure_and_blinding():
         assert kinds.index("select") > max(i for i, k in enumerate(kinds) if k == "tune_train")
         assert kinds.index("select") < min(i for i, k in enumerate(kinds) if k == "e1_aux_train")
         assert max(i for i, k in enumerate(kinds) if k == "e1_train") < min(i for i, k in enumerate(kinds) if k == "tune_train")
+        e4 = [j for j in jobs if j["kind"] == "e4b"]
+        p1_e1 = [j["run_id"] for j in p1["jobs"] if j["kind"] == "e1_train"]
+        assert [j["run_id"] for j in e4[:len(p1_e1)]] == p1_e1 and kinds[:len(p1_e1)] == ["e4b"] * len(p1_e1)
+        finals = [j["run_id"] for j in jobs if j["kind"] == "eval" and j["suite"] == "e1"]
+        assert {j["run_id"] for j in e4} == set(p1_e1) | set(finals)
+        for i, j in enumerate(jobs):
+            if j["kind"] == "eval" and j["suite"] == "e1":
+                assert jobs[i + 1]["kind"] == "e4b" and jobs[i + 1]["run_id"] == j["run_id"]
         a1 = [j for j in jobs if j["kind"] == "a1_train"]
         assert sorted(j["seed"] for j in a1) == [1, 2, 3] and all(j["steps"] == 60000 for j in a1)
         assert min(i for i, k in enumerate(kinds) if k == "a1_train") > max(i for i, k in enumerate(kinds) if k == "e1_aux_train")
         assert all(any(e["kind"] == "eval" and e["run_id"] == j["run_id"] and e["suite"] == "e1" for e in jobs) for j in a1)
-        rids = [j["run_id"] for j in jobs if "run_id" in j and j["kind"] != "eval"]
+        rids = [j["run_id"] for j in jobs if "run_id" in j and j["kind"] not in ("eval", "e4b")]
         assert len(rids) == len(set(rids)) and not set(rids) & set(runner.public_index(p1))
         idx = runner.public_index(plan)
         assert all(set(v) == {"kind", "seed"} for v in idx.values())

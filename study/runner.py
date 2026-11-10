@@ -94,6 +94,16 @@ def make_plan(smoke: bool) -> dict:
 P2 = json.loads((STUDY / "phase2_config.json").read_text(encoding="utf-8"))
 
 
+def with_e4b(jobs: list) -> list:
+    """E1·E2-b 최종 평가 뒤에 같은 체크포인트의 E4-b를 붙인다 (study/E4b_design.md)."""
+    out = []
+    for j in jobs:
+        out.append(j)
+        if j["kind"] == "eval" and j["suite"] in ("e1", "e2b") and j["name"] == "final":
+            out.append(dict(kind="e4b", run_id=j["run_id"], ckpt="final.pt", base=j.get("base", "")))
+    return out
+
+
 def make_plan_phase2(smoke: bool, W: Path) -> dict:
     cfg = C.CFG
     gm = C.read_json(W / "public" / "gmid.json")
@@ -101,6 +111,11 @@ def make_plan_phase2(smoke: bool, W: Path) -> dict:
         raise SystemExit("1단계 G-mid 결과(public/gmid.json)가 없다. 2단계는 1단계가 끝난 뒤 시작한다")
     used = set(C.read_json(W / "public" / "runs_index.json", {}))
     jobs = []
+    # (0) 1단계 E1 실행(시드 1~4)의 E4-b (1단계 실행기에는 없었다)
+    p1 = C.read_json(W / "sealed" / "plan.json") or {"jobs": []}
+    for j in p1["jobs"]:
+        if j["kind"] == "e1_train":
+            jobs.append(dict(kind="e4b", run_id=j["run_id"], ckpt="final.pt", base=""))
     # (a) 핵심 갈래 나머지 시드 (보호 대상, 먼저)
     core_seeds = list(range(P2["core_first_new_seed"], int(gm["n"]) + 1))
     if smoke:
@@ -148,7 +163,7 @@ def make_plan_phase2(smoke: bool, W: Path) -> dict:
             jobs.insert(0, dict(kind="equiv_check", run_id=new_id(used), ref_run_id=ref["run_id"], arm=ref["arm"], seed=ref["seed"],
                                 rounds=ref["rounds"], numerics=ref["numerics"], episode_tag=ref["episode_tag"],
                                 save_rounds=ref["save_rounds"], sel_file="tuning_selection.json"))
-    return dict(created=C.now(), phase=2, smoke=smoke, repo_head=git("rev-parse", "HEAD")[1], gmid_n=int(gm["n"]), jobs=jobs)
+    return dict(created=C.now(), phase=2, smoke=smoke, repo_head=git("rev-parse", "HEAD")[1], gmid_n=int(gm["n"]), jobs=with_e4b(jobs))
 
 
 def make_plan_phase3(smoke: bool, W: Path, a3plus: bool) -> dict:
@@ -195,7 +210,7 @@ def make_plan_phase3(smoke: bool, W: Path, a3plus: bool) -> dict:
                              numerics=cfg["numerics_train_e1"], episode_tag=f"e1-seed{s}", save_rounds=[390] if not smoke else [2],
                              extra=["--adv-rule", "gae_masked"], sel_file="tuning_selection.json", variant="A3plus"))
             jobs.append(dict(kind="eval", run_id=rid, suite="e1", name="final", ckpt="final.pt"))
-    return dict(created=C.now(), phase=3, smoke=smoke, repo_head=git("rev-parse", "HEAD")[1], a3plus=a3plus, jobs=jobs)
+    return dict(created=C.now(), phase=3, smoke=smoke, repo_head=git("rev-parse", "HEAD")[1], a3plus=a3plus, jobs=with_e4b(jobs))
 
 
 def public_index(plan: dict) -> dict:
@@ -351,6 +366,25 @@ def main():
                 C.public_log(W, f"{tag} FAILED - 멈춤. logs/{j['run_id']}.log 확인")
                 sys.exit(1)
             C.public_log(W, f"{tag} {run_status(W, j['run_id'])}")
+        elif j["kind"] == "e4b":
+            pf = W / "public" / "e4b" / f"{j['run_id']}_final.json"
+            if C.read_json(pf, {}).get("status") == "done":
+                continue
+            ck = W / "runs" / j["run_id"] / "ckpt" / j["ckpt"]
+            if not ck.exists():
+                C.public_log(W, f"{tag} skip: checkpoint {j['ckpt']} 없음")
+                continue
+            C.public_log(W, f"{tag} start")
+            cmd = [PY, str(STUDY / "e4b.py"), "--run-id", j["run_id"], "--ckpt", str(ck), "--name", "final"]
+            cmd += (["--base-ckpt", j["base"]] if j.get("base") else []) + (["--smoke"] if a.smoke else [])
+            for attempt in range(3):
+                if run_cmd(W, f"e4b_{j['run_id']}", cmd, env) == 0 and C.read_json(pf, {}).get("status") == "done":
+                    break
+                time.sleep(30)
+            else:
+                C.public_log(W, f"{tag} FAILED - 멈춤")
+                sys.exit(1)
+            C.public_log(W, f"{tag} done")
         elif j["kind"] == "e2a":
             pf = W / "public" / "e2a" / f"{j['job_id']}.json"
             if C.read_json(pf, {}).get("status") == "done":
