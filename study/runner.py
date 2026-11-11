@@ -101,6 +101,8 @@ def with_e4b(jobs: list) -> list:
         out.append(j)
         if j["kind"] == "eval" and j["suite"] in ("e1", "e2b") and j["name"] == "final":
             out.append(dict(kind="e4b", run_id=j["run_id"], ckpt="final.pt", base=j.get("base", "")))
+        if j["kind"] == "eval" and j["suite"] == "e1" and j["name"] == "final":  # E4-a: E1·E3만 (study/E4a_design.md)
+            out.append(dict(kind="e4a", run_id=j["run_id"], ckpt="final.pt", base=j.get("base", "")))
     return out
 
 
@@ -116,6 +118,7 @@ def make_plan_phase2(smoke: bool, W: Path) -> dict:
     for j in p1["jobs"]:
         if j["kind"] == "e1_train":
             jobs.append(dict(kind="e4b", run_id=j["run_id"], ckpt="final.pt", base=""))
+            jobs.append(dict(kind="e4a", run_id=j["run_id"], ckpt="final.pt", base=""))
     # (a) 핵심 갈래 나머지 시드 (보호 대상, 먼저)
     core_seeds = list(range(P2["core_first_new_seed"], int(gm["n"]) + 1))
     if smoke:
@@ -405,6 +408,24 @@ def main():
                 C.public_log(W, f"{tag} FAILED - 멈춤. logs/w2_build.log 확인")
                 sys.exit(1)
             C.public_log(W, f"{tag} done {json.dumps(C.read_json(W / 'public' / 'w2_selection.json'), ensure_ascii=False)}")
+        elif j["kind"] == "e4a":
+            pf = W / "public" / "e4a" / f"{j['run_id']}_final.json"
+            if C.read_json(pf, {}).get("status") == "done":
+                continue
+            ck = W / "runs" / j["run_id"] / "ckpt" / j["ckpt"]
+            if not ck.exists():
+                C.public_log(W, f"{tag} skip: checkpoint {j['ckpt']} 없음")
+                continue
+            C.public_log(W, f"{tag} start")
+            cmd = [PY, str(STUDY / "e4a.py"), "--run-id", j["run_id"], "--ckpt", str(ck), "--name", "final"] + (["--batches", "1"] if a.smoke else [])
+            for attempt in range(3):
+                if run_cmd(W, f"e4a_{j['run_id']}", cmd, env_for(W, j, env)) == 0 and C.read_json(pf, {}).get("status") == "done":
+                    break
+                time.sleep(30)
+            else:
+                C.public_log(W, f"{tag} FAILED - 멈춤")
+                sys.exit(1)
+            C.public_log(W, f"{tag} done")
         elif j["kind"] == "e4b":
             pf = W / "public" / "e4b" / f"{j['run_id']}_final.json"
             if C.read_json(pf, {}).get("status") == "done":

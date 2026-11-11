@@ -60,7 +60,7 @@ nohup setsid bash ~/vla_main_code/study/run_phase1.sh >> ~/vla_main/main_console
 
 ## 2b. 2단계 (1단계 G-mid 뒤)
 
-2단계 = 핵심 갈래(A3⁰·A2⁺) 나머지 시드 5~n (n은 `public/gmid.json`) → 보조 갈래(A2±·A3ˢ) 튜닝 4후보씩(1단계와 같은 튜닝 시드·과제 표본·150라운드·선택 규칙) → 보조 갈래 E1 시드 1~3 (결정적 경로, 같은 시드의 핵심 갈래와 같은 과제 표본). 설정은 [phase2_config.json](phase2_config.json) (명세 3.3·3.5절 값 그대로). **3단계** (`run_phase3.sh`, E1 핵심 갈래가 모두 끝난 뒤): E2-a 진단([E2a_design.md](E2a_design.md)) → E2-b 분기(계보 8 × 지점 3 × 규칙 4) → W2 만들기([W2_design.md](W2_design.md)) → E3(A2⁺·A3⁰ × 시드 5, 출발 W2). E1·E2-b·E3의 모든 최종 체크포인트는 E4-b([E4b_design.md](E4b_design.md))로도 평가한다. 조건부 A3⁰₊는 `--a3plus`.
+2단계 = 핵심 갈래(A3⁰·A2⁺) 나머지 시드 5~n (n은 `public/gmid.json`) → 보조 갈래(A2±·A3ˢ) 튜닝 4후보씩(1단계와 같은 튜닝 시드·과제 표본·150라운드·선택 규칙) → 보조 갈래 E1 시드 1~3 (결정적 경로, 같은 시드의 핵심 갈래와 같은 과제 표본). 설정은 [phase2_config.json](phase2_config.json) (명세 3.3·3.5절 값 그대로). **3단계** (`run_phase3.sh`, E1 핵심 갈래가 모두 끝난 뒤): E2-a 진단([E2a_design.md](E2a_design.md)) → E2-b 분기(계보 8 × 지점 3 × 규칙 4) → W2 만들기([W2_design.md](W2_design.md)) → E3(A2⁺·A3⁰ × 시드 5, 출발 W2). E1·E2-b·E3의 모든 최종 체크포인트는 E4-b([E4b_design.md](E4b_design.md))로, E1·E3의 최종 체크포인트는 E4-a([E4a_design.md](E4a_design.md))로도 평가한다 (1단계 실행분은 2단계 계획 앞에서). 조건부 A3⁰₊는 `--a3plus`.
 
 2단계에서는 이어서 **A1 시연 SFT 재학습** 시드 1~3 (설계는 [A1_design.md](A1_design.md), 60,000스텝, 결정적 경로) → E1 평가. E2·E3·E4-b는 이후에 추가한다.
 

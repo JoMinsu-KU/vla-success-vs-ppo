@@ -199,9 +199,10 @@ def test_phase2_plan_structure_and_blinding():
         assert max(i for i, k in enumerate(kinds) if k == "e1_train") < min(i for i, k in enumerate(kinds) if k == "tune_train")
         e4 = [j for j in jobs if j["kind"] == "e4b"]
         p1_e1 = [j["run_id"] for j in p1["jobs"] if j["kind"] == "e1_train"]
-        assert [j["run_id"] for j in e4[:len(p1_e1)]] == p1_e1 and kinds[:len(p1_e1)] == ["e4b"] * len(p1_e1)
+        assert [j["run_id"] for j in e4[:len(p1_e1)]] == p1_e1 and kinds[:2 * len(p1_e1)] == ["e4b", "e4a"] * len(p1_e1)
         finals = [j["run_id"] for j in jobs if j["kind"] == "eval" and j["suite"] == "e1"]
         assert {j["run_id"] for j in e4} == set(p1_e1) | set(finals)
+        assert {j["run_id"] for j in jobs if j["kind"] == "e4a"} == set(p1_e1) | set(finals)
         for i, j in enumerate(jobs):
             if j["kind"] == "eval" and j["suite"] == "e1":
                 assert jobs[i + 1]["kind"] == "e4b" and jobs[i + 1]["run_id"] == j["run_id"]
@@ -209,7 +210,7 @@ def test_phase2_plan_structure_and_blinding():
         assert sorted(j["seed"] for j in a1) == [1, 2, 3] and all(j["steps"] == 60000 for j in a1)
         assert min(i for i, k in enumerate(kinds) if k == "a1_train") > max(i for i, k in enumerate(kinds) if k == "e1_aux_train")
         assert all(any(e["kind"] == "eval" and e["run_id"] == j["run_id"] and e["suite"] == "e1" for e in jobs) for j in a1)
-        rids = [j["run_id"] for j in jobs if "run_id" in j and j["kind"] not in ("eval", "e4b")]
+        rids = [j["run_id"] for j in jobs if "run_id" in j and j["kind"] not in ("eval", "e4b", "e4a")]
         assert len(rids) == len(set(rids)) and not set(rids) & set(runner.public_index(p1))
         idx = runner.public_index(plan)
         assert all(set(v) == {"kind", "seed"} for v in idx.values())
@@ -287,6 +288,8 @@ def test_phase3_e2b_plan():
         e3ids = {j["run_id"] for j in e3}
         assert all(j.get("base") == "W2" for j in p3["jobs"] if j["kind"] in ("eval", "e4b") and j["run_id"] in e3ids)
         assert len([j for j in p3["jobs"] if j["kind"] == "e4b" and j["run_id"] in e3ids]) == 10
+        e4a3 = [j for j in p3["jobs"] if j["kind"] == "e4a"]
+        assert {j["run_id"] for j in e4a3} == e3ids and all(j["base"] == "W2" for j in e4a3)   # E2-b에는 E4-a 없음
         p3b = runner.make_plan_phase3(False, W, True)
         plus = [j for j in p3b["jobs"] if j.get("variant") == "A3plus"]
         assert len(plus) == 5 and all(j["extra"] == ["--adv-rule", "gae_masked"] and j["rounds"] == 390 for j in plus)
